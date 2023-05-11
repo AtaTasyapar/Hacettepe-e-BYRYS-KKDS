@@ -71,6 +71,11 @@ require_once("config-students.php");
                 oninput="sanitizePassword()">
             <span id="password-error" style="display:none; color:red;">Şifre en az 6 karakter uzunluğunda
                 olmalıdır.</span>
+            <p class="passwordlabel">Şifreyi Tekrar Girin</p>
+            <input type="password" name="confirm-password" id="confirm-password" required placeholder="Şifreyi Tekrar Girin"
+               minlength="6" oninput="checkPasswordMatch()">
+            <span id="confirm-password-error" style="display:none; color:red;">Şifreler eşleşmiyor.</span>
+
                 <input type="submit" name="submit" id="register" value="Kayıt Ol">
                 <a href="main.php" class="lower-buttons" style="padding-top:10px"><i class="gg-arrow-left-o"
                         style="margin: 0; margin-right: 20px;"></i>Ana Sayfaya Dön</a>
@@ -223,6 +228,17 @@ require_once("config-students.php");
       }
     }
   });
+}
+function checkPasswordMatch() {
+  var password = document.getElementById("password").value;
+  var confirmPassword = document.getElementById("confirm-password").value;
+  var confirmError = document.getElementById("confirm-password-error");
+
+  if (password != confirmPassword) {
+    confirmError.style.display = "block";
+  } else {
+    confirmError.style.display = "none";
+  }
 }
     </script>
     <script>
