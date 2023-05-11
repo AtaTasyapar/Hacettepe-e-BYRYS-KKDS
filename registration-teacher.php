@@ -68,7 +68,7 @@ require_once("config-students.php");
 
             <p class="passwordlabel">Şifre</p>
             <input type="password" name="password" id="password" required placeholder="Şifre Giriniz" minlength="6"
-                oninput="sanitizePassword()">
+                oninput="checkPasswordMatch(); sanitizePassword()">
             <span id="password-error" style="display:none; color:red;">Şifre en az 6 karakter uzunluğunda
                 olmalıdır.</span>
             <p class="passwordlabel">Şifreyi Tekrar Girin</p>
