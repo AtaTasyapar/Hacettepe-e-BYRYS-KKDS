@@ -79,6 +79,7 @@ require_once("config-students.php");
                 <input type="submit" name="submit" id="register" value="Kayıt Ol">
                 <a href="main.php" class="lower-buttons" style="padding-top:10px"><i class="gg-arrow-left-o"
                         style="margin: 0; margin-right: 20px;"></i>Ana Sayfaya Dön</a>
+            
         </form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -233,11 +234,14 @@ function checkPasswordMatch() {
   var password = document.getElementById("password").value;
   var confirmPassword = document.getElementById("confirm-password").value;
   var confirmError = document.getElementById("confirm-password-error");
+  var submitButton = document.getElementById("register");
 
   if (password != confirmPassword) {
     confirmError.style.display = "block";
+    submitButton.disabled = true;
   } else {
     confirmError.style.display = "none";
+    submitButton.disabled = false;
   }
 }
     </script>
