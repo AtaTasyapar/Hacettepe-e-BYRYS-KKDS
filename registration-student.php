@@ -237,11 +237,14 @@ function checkPasswordMatch() {
   var password = document.getElementById("password").value;
   var confirmPassword = document.getElementById("confirm-password").value;
   var confirmError = document.getElementById("confirm-password-error");
+  var submitButton = document.getElementById("register");
 
-  if (password != confirmPassword) {
-    confirmError.style.display = "block";
-  } else {
+  if (password === confirmPassword && password !== "" && confirmPassword !== "") {
     confirmError.style.display = "none";
+    submitButton.disabled = false;
+  } else {
+    confirmError.style.display = "block";
+    submitButton.disabled = true;
   }
 }
     </script>
