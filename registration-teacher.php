@@ -135,17 +135,17 @@ require_once("config-students.php");
                                             password: password
                                         },
                                         success: function(data) {
-                                            alert("registration successfull")
+                                            alert("Kayıt Başarılı")
                                             window.location.href= './login-teacher.php';
                                         },
                                         error: function(data) {
                                             console.log("Resgitration was not complete",data)
-                                            alert("Could not be registered!");
+                                            alert("Kayıt Başarısız");
                                         }
                                     })
                                                     } 
                                                     else {
-                                                        alert("codes do not match")
+                                                        alert("Kodlar Eşleşmşiyor")
                                                     };
                                                     
                                             })
@@ -164,7 +164,7 @@ require_once("config-students.php");
 
         $("#sendEmail").click(function (e) { 
             e.preventDefault();
-            alert("Code sent again, check your email!") 
+            alert("Kod tekrar gönderildi, Lütfen mailinizi kontrol ediniz!") 
             sendEmail();
         });
 
