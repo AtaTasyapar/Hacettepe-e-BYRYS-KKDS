@@ -70,9 +70,14 @@ require_once("config-students.php");
 
                 <p class="passwordlabel">Şifre</p>
                 <input type="password" name="password" id="password" required placeholder="Şifre Giriniz" minlength="6"
-                    oninput="sanitizePassword()">
+                  oninput="checkPasswordMatch(); sanitizePassword()">
                 <span id="password-error" style="display:none; color:red;">Şifre en az 6 karakter uzunluğunda
                     olmalıdır.</span>
+                <p class="passwordlabel">Şifreyi Tekrar Girin</p>
+                <input type="password" name="confirm-password" id="confirm-password" required placeholder="Şifreyi Tekrar Girin"
+                    minlength="6" oninput="checkPasswordMatch()">
+                <span id="confirm-password-error" style="display:none; color:red;">Şifreler eşleşmiyor.</span>
+
 
                 <input type="submit" name="submit" id="register" value="Kayıt Ol">
                 <a href="main.php" class="lower-buttons" style="padding-top:10px"><i class="gg-arrow-left-o"
@@ -172,7 +177,7 @@ require_once("config-students.php");
         function isEmailExist(email, callback) {
             $.ajax({
                 type: "POST",
-                url: "checkEmailStudent.php",
+                url: "checkEmailTeacher.php",
                 data: {
                 email: email,
                 },
@@ -187,7 +192,7 @@ require_once("config-students.php");
             }
 
     </script>
-      <script>
+    <script>
     function sanitizePassword() {
   var passwordInput = document.getElementById("password");
   passwordInput.value = passwordInput.value.replace(/[^a-zA-Z0-9_-]/g, '');
@@ -228,9 +233,20 @@ require_once("config-students.php");
     }
   });
 }
+function checkPasswordMatch() {
+  var password = document.getElementById("password").value;
+  var confirmPassword = document.getElementById("confirm-password").value;
+  var confirmError = document.getElementById("confirm-password-error");
+
+  if (password != confirmPassword) {
+    confirmError.style.display = "block";
+  } else {
+    confirmError.style.display = "none";
+  }
+}
     </script>
     <script>
-   function sanitizeEmail() {
+    function sanitizeEmail() {
   var emailInput = document.getElementById("email");
   emailInput.value = emailInput.value.replace(/[^a-zA-Z0-9@._-]/g, '');
   var emailError = document.getElementById("email-error");
@@ -275,6 +291,7 @@ require_once("config-students.php");
     }
    
 </script>
+
 </body>
 
 </html>
