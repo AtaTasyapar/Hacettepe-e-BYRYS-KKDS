@@ -58,7 +58,8 @@ if (isset($_GET['logout'])) {
                 </div>
                 <div class="navigation-right" id="navigation-right">
                     <div class="nav-items-wrapper">
-                        <a href="formlar-teacher.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i class="fa fa-table me-2 "></i>Öğrenciler</a>
+                        <a href="formlar-teacher.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i
+                                class="fa fa-table me-2 "></i>Öğrenciler</a>
 
                         <a href="vaka-upload.php" class="nav-link nav-items btn-success">
                             <i class="fa fa-th me-2"></i>Vakalar</a>
@@ -75,12 +76,10 @@ if (isset($_GET['logout'])) {
                         <a class="black" href="teacher-main.php?logout=true">Çıkış Yap</a>
 
                     </div>
-                    <div>
+
+                    <!-- <div>
                         <a href="delete-account.php?type=teacher" id="deleteAccount" class="nav-link btn" style="background-color:red;"> <i class="fa fa-table me-2 "></i>silmek</a>
-                    </div>
-                    <div>
-                        <a href="delete-account.php?type=teacher" id="deleteAccount" class="nav-link btn" style="background-color:red;"> <i class="fa fa-table me-2 "></i>silmek</a>
-                    </div>
+                    </div> -->
                     <span class=' closehamburger' id='closeBtn'>&laquo;</span>
                 </div>
 
@@ -100,68 +99,68 @@ if (isset($_GET['logout'])) {
 
         </div>
         <script>
-            function hamburger() {
+        function hamburger() {
 
-                const hamburger = document.getElementById('stu-hamburger');
-                console.log(hamburger);
-                hamburger.classList.remove("d-block");
-                hamburger.classList.add("d-none-resp");
+            const hamburger = document.getElementById('stu-hamburger');
+            console.log(hamburger);
+            hamburger.classList.remove("d-block");
+            hamburger.classList.add("d-none-resp");
 
-                const navright = document.getElementById('navigation-right');
-                console.log(navright);
-                navright.classList.remove("d-none");
-                navright.classList.add("d-block-resp");
+            const navright = document.getElementById('navigation-right');
+            console.log(navright);
+            navright.classList.remove("d-none");
+            navright.classList.add("d-block-resp");
 
-                const navleft = document.getElementById('navigation-left');
-                console.log(navleft);
-                navleft.classList.add("d-none");
-                navleft.classList.remove("d-block-resp");
+            const navleft = document.getElementById('navigation-left');
+            console.log(navleft);
+            navleft.classList.add("d-none");
+            navleft.classList.remove("d-block-resp");
 
-                const closebtn = document.getElementById('closeBtn');
-                console.log(closebtn)
-                closebtn.classList.remove("d-none");
-                closebtn.classList.add("d-block-resp");
-            };
-            $("#closeBtn").on("click", function(e) {
-                const hamburger = document.getElementById('stu-hamburger');
-                console.log(hamburger);
-                hamburger.classList.add("d-block");
-                hamburger.classList.remove("d-none-resp");
+            const closebtn = document.getElementById('closeBtn');
+            console.log(closebtn)
+            closebtn.classList.remove("d-none");
+            closebtn.classList.add("d-block-resp");
+        };
+        $("#closeBtn").on("click", function(e) {
+            const hamburger = document.getElementById('stu-hamburger');
+            console.log(hamburger);
+            hamburger.classList.add("d-block");
+            hamburger.classList.remove("d-none-resp");
 
-                const navright = document.getElementById('navigation-right');
-                console.log(navright);
-                navright.classList.add("d-none");
-                navright.classList.remove("d-block-resp");
+            const navright = document.getElementById('navigation-right');
+            console.log(navright);
+            navright.classList.add("d-none");
+            navright.classList.remove("d-block-resp");
 
 
-                const navleft = document.getElementById('navigation-left');
-                console.log(navleft);
-                navleft.classList.remove("d-none");
-                navleft.classList.add("d-block-resp");
+            const navleft = document.getElementById('navigation-left');
+            console.log(navleft);
+            navleft.classList.remove("d-none");
+            navleft.classList.add("d-block-resp");
 
-                const closebtn = document.getElementById('closeBtn');
-                console.log(closebtn)
-                closebtn.classList.add("d-none");
-                closebtn.classList.remove("d-block-resp");
-            })
+            const closebtn = document.getElementById('closeBtn');
+            console.log(closebtn)
+            closebtn.classList.add("d-none");
+            closebtn.classList.remove("d-block-resp");
+        })
         </script>
         <script>
+        $(function() {
+            $.ajaxSetup({
+                cache: false
+            }); // disable caching for all requests.
+
+            // RAW Text/Html data from a file
+            $("#content").load("formlar-teacher.php");
+
             $(function() {
-                $.ajaxSetup({
-                    cache: false
-                }); // disable caching for all requests.
-
-                // RAW Text/Html data from a file
-                $("#content").load("formlar-teacher.php");
-
-                $(function() {
-                    $("a.nav-items").on("click", function(e) {
-                        e.preventDefault();
-                        $("#content").load(this.href);
-                    })
+                $("a.nav-items").on("click", function(e) {
+                    e.preventDefault();
+                    $("#content").load(this.href);
                 })
+            })
 
-            });
+        });
         </script>
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
