@@ -918,4 +918,14 @@ input[type=file]::file-selector-button:hover {
     .deleteacc {
         font-size: 12px !important;
     }
+
+    .girisimler-p,
+    .girisimler-span,
+    .girisimler-score {
+        font-size: 12px !important;
+    }
+
+    .girisimler-header {
+        font-size: 14px !important;
+    }
 }
