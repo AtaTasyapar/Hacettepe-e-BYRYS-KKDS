@@ -712,14 +712,14 @@ input[type=file]::file-selector-button:hover {
 }
 
 .deleteacc {
-    background-color: #ff5e5e;
+    background-color: #ff5e5e !important;
     color: white !important;
-    height: 20px;
-    display: flex;
-    margin: unset;
+    height: 20px !important;
+    display: flex !important;
+    margin: unset !important;
     padding: unset !important;
-    justify-content: center;
-    margin-top: 10px;
+    justify-content: center !important;
+    margin-top: 10px !important;
 }
 
 .logout {
