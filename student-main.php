@@ -61,10 +61,8 @@ if (isset($_GET['logout'])) {
                 </div>
                 <div class="navigation-right" id="navigation-right">
                     <div class="nav-items-wrapper">
-                        <a href="formlar-student.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i
-                                class="fa fa-table me-2 "></i>Formlar</a>
-                        <a href="hastalar-student.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i
-                                class="fa fa-table me-2 "></i>Hastalar</a>
+                        <a href="formlar-student.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i class="fa fa-table me-2 "></i>Formlar</a>
+                        <a href="hastalar-student.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i class="fa fa-table me-2 "></i>Hastalar</a>
 
                     </div>
                     <div>
@@ -77,8 +75,7 @@ if (isset($_GET['logout'])) {
 
                         <a class="black logout" href="student-main.php?logout=true">Çıkış Yap</a>
 
-                        <a href="delete-account.php?type=student" id="deleteAccount" class="deleteacc nav-link btn"
-                            style="background-color:red; color:white">Sil</a>
+                        <a href="delete-account.php?type=student" id="deleteAccount" class="deleteacc  btn" style="background-color:red; color:white">Sil</a>
 
                     </div>
 
@@ -103,67 +100,67 @@ if (isset($_GET['logout'])) {
 
         </div>
         <script>
-        function hamburger() {
+            function hamburger() {
 
-            const hamburger = document.getElementById('stu-hamburger');
-            console.log(hamburger);
-            hamburger.classList.remove("d-block");
-            hamburger.classList.add("d-none-resp");
+                const hamburger = document.getElementById('stu-hamburger');
+                console.log(hamburger);
+                hamburger.classList.remove("d-block");
+                hamburger.classList.add("d-none-resp");
 
-            const navright = document.getElementById('navigation-right');
-            console.log(navright);
-            navright.classList.remove("d-none");
-            navright.classList.add("d-block-resp");
+                const navright = document.getElementById('navigation-right');
+                console.log(navright);
+                navright.classList.remove("d-none");
+                navright.classList.add("d-block-resp");
 
-            const navleft = document.getElementById('navigation-left');
-            console.log(navleft);
-            navleft.classList.add("d-none");
-            navleft.classList.remove("d-block-resp");
+                const navleft = document.getElementById('navigation-left');
+                console.log(navleft);
+                navleft.classList.add("d-none");
+                navleft.classList.remove("d-block-resp");
 
-            const closebtn = document.getElementById('closeBtn');
-            console.log(closebtn)
-            closebtn.classList.remove("d-none");
-            closebtn.classList.add("d-block-resp");
-        };
-        $("#closeBtn").on("click", function(e) {
-            const hamburger = document.getElementById('stu-hamburger');
-            console.log(hamburger);
-            hamburger.classList.add("d-block");
-            hamburger.classList.remove("d-none-resp");
+                const closebtn = document.getElementById('closeBtn');
+                console.log(closebtn)
+                closebtn.classList.remove("d-none");
+                closebtn.classList.add("d-block-resp");
+            };
+            $("#closeBtn").on("click", function(e) {
+                const hamburger = document.getElementById('stu-hamburger');
+                console.log(hamburger);
+                hamburger.classList.add("d-block");
+                hamburger.classList.remove("d-none-resp");
 
-            const navright = document.getElementById('navigation-right');
-            console.log(navright);
-            navright.classList.add("d-none");
-            navright.classList.remove("d-block-resp");
+                const navright = document.getElementById('navigation-right');
+                console.log(navright);
+                navright.classList.add("d-none");
+                navright.classList.remove("d-block-resp");
 
 
-            const navleft = document.getElementById('navigation-left');
-            console.log(navleft);
-            navleft.classList.remove("d-none");
-            navleft.classList.add("d-block-resp");
+                const navleft = document.getElementById('navigation-left');
+                console.log(navleft);
+                navleft.classList.remove("d-none");
+                navleft.classList.add("d-block-resp");
 
-            const closebtn = document.getElementById('closeBtn');
-            console.log(closebtn)
-            closebtn.classList.add("d-none");
-            closebtn.classList.remove("d-block-resp");
-        })
+                const closebtn = document.getElementById('closeBtn');
+                console.log(closebtn)
+                closebtn.classList.add("d-none");
+                closebtn.classList.remove("d-block-resp");
+            })
         </script>
         <script>
-        $(function() {
-            $.ajaxSetup({
-                cache: false
-            }); // disable caching for all requests.
-            $("#content").load("hastalar-student.php");
-
-            // RAW Text/Html data from a file
             $(function() {
-                $("a.nav-items").on("click", function(e) {
-                    e.preventDefault();
-                    $("#content").load(this.href);
-                })
-            })
+                $.ajaxSetup({
+                    cache: false
+                }); // disable caching for all requests.
+                $("#content").load("hastalar-student.php");
 
-        });
+                // RAW Text/Html data from a file
+                $(function() {
+                    $("a.nav-items").on("click", function(e) {
+                        e.preventDefault();
+                        $("#content").load(this.href);
+                    })
+                })
+
+            });
         </script>
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -176,9 +173,9 @@ if (isset($_GET['logout'])) {
         <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
         <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
         <script>
-        $(window).on('load', function() {
-            $("body").removeClass("preload");
-        });
+            $(window).on('load', function() {
+                $("body").removeClass("preload");
+            });
         </script>
 
         <!-- Template Javascript -->
