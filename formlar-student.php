@@ -44,7 +44,7 @@ $(window).on('load', function() {
         <?php
         require_once('config-students.php');
         $userid = $_SESSION['userlogin']['id'];
-        $student_group = $_SESSION['userlogin']['student_group'];
+        $student_group = $_SESSION['userlogin']['student_group'];  
         //echo $userid;
         $sql = "SELECT * FROM  patients  WHERE id =" . $userid;
         $smtmselect = $db->prepare($sql);
@@ -72,17 +72,18 @@ $(window).on('load', function() {
 
 
         </div>
-        <div class=" patients-save">
+        <div class="patients-save">
             <form action="" method="POST" class="patients-save-fields">
                 <div class="patient-info">
                     <div class="patient-info-left">
                         <p class="usernamelabel">Hasta Adı</p>
                         <input type="text" class="form-control" required name="name" id="name"
-                            placeholder="Hasta Adı Giriniz">
+                            placeholder="Hasta Adı Giriniz" maxlength="25">
+                            
 
                         <p class="usernamelabel">Hasta Soyadı</p>
                         <input type="text" class="form-control" required name="surname" id="surname"
-                            placeholder="Hasta Soyadı Giriniz">
+                            placeholder="Hasta Soyadı Giriniz" maxlength="25">
 
                         <p class="usernamelabel">Hasta Yaşı</p>
                         <input type="number" class="form-control" required name="age" id="age"
@@ -92,7 +93,7 @@ $(window).on('load', function() {
 
                         <p class="usernamelabel">Notlar</p>
                         <input type="text" class="form-control not" required name="not" id="not"
-                            placeholder="Not giriniz">
+                            placeholder="Not giriniz" maxlength="250">
                     </div>
                 </div>
                 <h1 class="braden-header">Vaka Seçiniz </h1>

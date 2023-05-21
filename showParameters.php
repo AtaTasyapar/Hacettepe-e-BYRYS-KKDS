@@ -48,7 +48,6 @@ if (isset($_GET['patient_id'])) {
 
     <!-- Favicon -->
 
-    <link href="style.css" rel="stylesheet">
 
 
 
@@ -71,7 +70,7 @@ if (isset($_GET['patient_id'])) {
                         $fileLoc = strpos($basePath, 'vakalar');
                         $filePath = substr($basePath, $fileLoc);
                         if (file_exists($filePath)) {
-                            echo "<iframe id='iframepdf' class='iframepdf' runat='server' src=" . $filePath . " title=''></iframe>";
+                           echo "<iframe id='iframepdf' class='iframepdf' runat='server' src=" . $filePath . " title=''></iframe>";
                         }
                     } else {
                         echo 'Hata';
@@ -399,23 +398,9 @@ if (isset($_GET['patient_id'])) {
                     }
 
                     echo "
-                    <span class='close" . $value['patient_id'] . " closeBtn' id='close" . $value['patient_id'] . "'>&times;</span>
 
                                                                 <p>Not:" . $notlar . "</p>";
-                    foreach ($vakalar as $vaka) {
-                        if ($vaka['id'] == $value['fileid']) {
-                            $vakapdf = $vaka["filename"];
-
-
-                            $basePath = $vakapdf;
-                            $fileLoc = strpos($basePath, 'vakalar');
-                            $filePath = substr($basePath, $fileLoc);
-                            if (file_exists($filePath)) {
-                                echo "                    <iframe id='iframepdf' class='iframepdf' runat='server' src=" . $filePath . " title=''></iframe>
-                                                                            ";
-                            }
-                        }
-                    }
+              
                     echo "
                                                                 <h1 class='braden-header'>Braden Parametreleri</h1>
                                                                 <div class='girisimler'>
@@ -453,23 +438,7 @@ if (isset($_GET['patient_id'])) {
                     
                                                         </div>
                                                     </tr>
-                                                    <script>
-                                               
-                        
-                                                       
-                                                        // Get the <span> element that closes the modal
-                                                        var span" . $value['patient_id'] . " = document.getElementById('close" . $value['patient_id'] . "');
-                                                       
-                                                        
-                                                        
-                                                        span" . $value['patient_id'] . ".onclick = function() {
-                                                            modal" . $value['patient_id'] . ".classList.remove('block');
-                                                            modal" . $value['patient_id'] . ".classList.add('none');
-                                                        }
-                                            
-                                                      
-                                                        
-                                                    </script>";
+                                                 ";
                     ?>
 
 

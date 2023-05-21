@@ -1,8 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION['userlogin'])) {
-    header("Location: student-main.php");
+if (!isset($_SESSION['userlogin'])) {
+    header("Location: main.php");
 }
+$type = isset($_GET['type']) ? $_GET['type'] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,15 +32,8 @@ if (isset($_SESSION['userlogin'])) {
         <form action="" method="post">
             <div class="login-box login-login">
                 <h1 class="header">e-BYRYS-KKDS</h1>
-                <h2 class="login">Öğrenci Girişi</h2>
-
-                <p class="labels">Mail</p>
-                <input type="text" required name="email" id="email" placeholder="Mail Giriniz">
-                <p class="labels">Şifre</p>
-                <input type="password" name="password" id="password" required placeholder="Şifre Giriniz">
-                <input type="submit" name="submit" id="login" value="Giriş Yap">
-                
-                <div style="display: flex;"><a class="btn btn-primary"  href="recoverPasswordStudent.php" >şifremi unuttum</a>
+                <p class="labels">Permanently delete account? </p>
+                <input type="submit" name="submit" id="delete" value="delete">
                 <a href="main.php" class="lower-buttons"><i class="gg-arrow-left-o"
                 style="margin: 0; margin-right: 20px;"></i>Ana Sayfaya Dön</a></div>
             </div>
@@ -53,26 +47,21 @@ if (isset($_SESSION['userlogin'])) {
 
 
     $(function() {
-        $('#login').click(function(e) {
-            var valid = this.form.checkValidity();
-
-            if (valid) {
-                var email = $('#email').val();
-                var password = $('#password').val();
-            }
+        $('#delete').click(function(e) {
+            
             e.preventDefault();
-
             $.ajax({
                 type: 'POST',
-                url: 'process-login-student.php',
+                url: 'process-delete.php',
                 data: {
-                    email: email,
-                    password: password
+                    id: "<?php echo $_SESSION["userlogin"]["id"]?>",
+                    email: "<?php echo $_SESSION["userlogin"]["email"]?>", 
+                    type: "<?php echo $type?>", 
                 },
                 success: function(data) {
                     alert(data)
                     if ($.trim(data) === "Başarılı") {
-                        setTimeout('window.location.href = "student-main.php"', 1000);
+                        setTimeout('window.location.href = "main.php"', 600);
                     }
                 },
                 error: function(data) {
@@ -83,19 +72,6 @@ if (isset($_SESSION['userlogin'])) {
         })
     })
     </script>
-    <script>
-        $(function() {
-            $("#change-password").click(function (e) { 
-                e.preventDefault();
-                
-            });
-
-
-          })
-
-    </script>
-
-
 
 </body>
 

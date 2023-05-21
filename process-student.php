@@ -7,6 +7,9 @@ if (isset($_POST)) {
     $surname = $_POST['surname'];
     $email = $_POST['email'];
     $password = sha1(($_POST['password']));
+    
+
+
 
     $sql = "INSERT INTO students (name, surname, email, password) VALUES(?,?,?,?)";
     $smtminsert = $db->prepare($sql);
