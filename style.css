@@ -928,4 +928,9 @@ input[type=file]::file-selector-button:hover {
     .girisimler-header {
         font-size: 14px !important;
     }
+
+    .girisimler-p {
+        max-width: unset;
+        min-width: unset;
+    }
 }
