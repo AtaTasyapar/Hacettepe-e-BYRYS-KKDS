@@ -801,6 +801,10 @@ input[type=file]::file-selector-button:hover {
         width: 100% !important;
     }
 
+    .nav-center {
+        width: 100%;
+    }
+
     .stu-hamburger {
         display: block;
         display: flex;
@@ -896,5 +900,16 @@ input[type=file]::file-selector-button:hover {
 
     .form-check {
         padding: 0;
+    }
+
+    .username-wrapper {
+        padding: 0 !important;
+    }
+
+    .username,
+    .status,
+    .logout,
+    .deleteacc {
+        font-size: 12px !important;
     }
 }
