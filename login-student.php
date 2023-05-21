@@ -38,20 +38,18 @@ if (isset($_SESSION['userlogin'])) {
                 <p class="labels">Şifre</p>
                 <input type="password" name="password" id="password" required placeholder="Şifre Giriniz">
                 <input type="submit" name="submit" id="login" value="Giriş Yap">
-                
-                <div style="display: flex;"><a class="btn btn-primary"  href="recoverPasswordStudent.php" >şifremi unuttum</a>
-                <a href="main.php" class="lower-buttons"><i class="gg-arrow-left-o"
-                style="margin: 0; margin-right: 20px;"></i>Ana Sayfaya Dön</a></div>
+
+                <div style="display: flex;"><a class="btn btn-primary" href="recoverPasswordStudent.php">Şifremi
+                        unuttum</a>
+                    <a href="main.php" class="lower-buttons"><i class="gg-arrow-left-o"
+                            style="margin: 0; margin-right: 20px;"></i>Ana Sayfaya Dön</a>
+                </div>
             </div>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>,
     <script>
-
-        
-
-
     $(function() {
         $('#login').click(function(e) {
             var valid = this.form.checkValidity();
@@ -84,15 +82,14 @@ if (isset($_SESSION['userlogin'])) {
     })
     </script>
     <script>
-        $(function() {
-            $("#change-password").click(function (e) { 
-                e.preventDefault();
-                
-            });
+    $(function() {
+        $("#change-password").click(function(e) {
+            e.preventDefault();
+
+        });
 
 
-          })
-
+    })
     </script>
 
 

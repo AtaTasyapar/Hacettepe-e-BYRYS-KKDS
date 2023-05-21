@@ -48,6 +48,7 @@ if (isset($_GET['patient_id'])) {
 
     <!-- Favicon -->
 
+    <link rel="stylesheet" href="style.css">
 
 
 
@@ -70,7 +71,7 @@ if (isset($_GET['patient_id'])) {
                         $fileLoc = strpos($basePath, 'vakalar');
                         $filePath = substr($basePath, $fileLoc);
                         if (file_exists($filePath)) {
-                           echo "<iframe id='iframepdf' class='iframepdf' runat='server' src=" . $filePath . " title=''></iframe>";
+                            echo "<iframe id='iframepdf' class='iframepdf' runat='server' src=" . $filePath . " title=''></iframe>";
                         }
                     } else {
                         echo 'Hata';
@@ -400,7 +401,7 @@ if (isset($_GET['patient_id'])) {
                     echo "
 
                                                                 <p>Not:" . $notlar . "</p>";
-              
+
                     echo "
                                                                 <h1 class='braden-header'>Braden Parametreleri</h1>
                                                                 <div class='girisimler'>

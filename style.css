@@ -771,6 +771,9 @@ input[type=file]::file-selector-button:hover {
         margin-left: 12px !important;
     }
 
+    .girisimler {
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width: 768px) {
