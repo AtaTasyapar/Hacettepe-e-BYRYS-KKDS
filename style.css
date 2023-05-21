@@ -711,7 +711,25 @@ input[type=file]::file-selector-button:hover {
     cursor: pointer;
 }
 
+.deleteacc {
+    background-color: #ff5e5e;
+    color: white !important;
+    height: 20px;
+    display: flex;
+    margin: unset;
+    padding: unset !important;
+    justify-content: center;
+    margin-top: 10px;
+}
 
+.logout {
+    color: #ff4242 !important;
+    margin-left: 5px;
+}
+
+.username-wrapper {
+    padding: 0 !important;
+}
 
 @media screen and (max-width: 1000px) {
     .nav-items {

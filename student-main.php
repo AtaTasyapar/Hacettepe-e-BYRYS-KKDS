@@ -69,15 +69,15 @@ if (isset($_GET['logout'])) {
                     </div>
                     <div>
 
-                        <a href="#" class="nav-link " data-bs-toggle="dropdown">
+                        <a href="#" class="nav-link username-wrapper" data-bs-toggle="dropdown">
                             <span class=" d-lg-inline-flex username"><?php
                                                                         echo '' . $_SESSION['userlogin']['name'] . ' ' . $_SESSION['userlogin']['surname'] . '';
                                                                         ?></span></a>
                         <span class="status">Öğrenci</span>
 
-                        <a class="black" href="student-main.php?logout=true">Çıkış Yap</a>
+                        <a class="black logout" href="student-main.php?logout=true">Çıkış Yap</a>
 
-                        <a href="delete-account.php?type=student" id="deleteAccount" class="nav-link btn"
+                        <a href="delete-account.php?type=student" id="deleteAccount" class="deleteacc nav-link btn"
                             style="background-color:red; color:white">Sil</a>
 
                     </div>
