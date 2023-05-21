@@ -530,6 +530,9 @@ input[type="email"] {
     max-width: 1480px;
     margin: 0;
     padding: 20px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
 }
 
 .butunluknot {
@@ -789,6 +792,7 @@ input[type=file]::file-selector-button:hover {
         display: none;
         margin: 0;
         padding: 30px;
+        width: 100%;
     }
 
     .navigation-left {
@@ -803,6 +807,7 @@ input[type=file]::file-selector-button:hover {
 
     .nav-center {
         width: 100%;
+        justify-content: unset;
     }
 
     .stu-hamburger {
