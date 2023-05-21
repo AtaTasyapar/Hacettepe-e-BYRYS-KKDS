@@ -77,13 +77,13 @@ if (isset($_GET['logout'])) {
 
                         <a class="black" href="student-main.php?logout=true">Çıkış Yap</a>
 
-                    </div>
-
-
-                    <div>
                         <a href="delete-account.php?type=student" id="deleteAccount" class="nav-link btn"
-                            style="background-color:red;"> <i class="fa fa-table me-2 "></i>Sil</a>
+                            style="background-color:red; color:white">Sil</a>
+
                     </div>
+
+
+
                     <span class=' closehamburger' id='closeBtn'>&laquo;</span>
                 </div>
 
