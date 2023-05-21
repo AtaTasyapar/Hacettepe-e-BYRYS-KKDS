@@ -88,15 +88,13 @@ if (isset($_GET['logout'])) {
                             <div class="checkbox-wrapper">
                                 <div class="checkboxes">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="student_group"
-                                            id="student_group" value="kontrol" checked>
+                                        <input class="form-check-input" type="radio" name="student_group" id="student_group" value="kontrol" checked>
                                         <label class="form-check-label" for="student_group">
                                             <span class="checkbox-header"> Kontrol Grubu</span>
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="student_group"
-                                            id="student_group" value="mudahale">
+                                        <input class="form-check-input" type="radio" name="student_group" id="student_group" value="mudahale">
                                         <label class="form-check-label" for="student_group">
                                             <span class="checkbox-header"> Müdahale Grubu </span>
 
@@ -106,8 +104,7 @@ if (isset($_GET['logout'])) {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" id="submit" class="form-control butunluknot submit pdf-upload-btn"
-                                    name="submit" value="Kaydet">
+                                <input type="submit" id="submit" class="form-control butunluknot submit pdf-upload-btn" name="submit" value="Kaydet">
                             </div>
                         </div>
 
@@ -229,105 +226,105 @@ if (isset($_GET['logout'])) {
         </div>
 
         <script>
-        $(function() {
-            const url = new URL("C:\wamp\www\Hacettepe-e-BYRYS-KKDS\vakalar\1677970467_Biometrik.jpeg")
-            console.log("pathh");
-            console.log(url);
+            $(function() {
+                const url = new URL("C:\wamp\www\Hacettepe-e-BYRYS-KKDS\vakalar\1677970467_Biometrik.jpeg")
+                console.log("pathh");
+                console.log(url);
 
-            const re = new RegExp()
-            const file = re.exec(url);
-            console.log(file);
+                const re = new RegExp()
+                const file = re.exec(url);
+                console.log(file);
 
-            $(document).ready(function() {
-                $('#pdffile').on('change', function() {
-                    for (var i = 0; i < $(this).get(0).files.length; ++i) {
-                        var file1 = $(this).get(0).files[i].size;
-                        if (file1) {
-                            var file_size = $(this).get(0).files[i].size;
-                            if (file_size > 1000000) {
-                                $('#error-message').html("File upload size is larger than 2MB");
-                                $('#error-message').css("display", "block");
-                                $('#error-message').css("color", "red");
-                                $('#submit').css("display", "none");
+                $(document).ready(function() {
+                    $('#pdffile').on('change', function() {
+                        for (var i = 0; i < $(this).get(0).files.length; ++i) {
+                            var file1 = $(this).get(0).files[i].size;
+                            if (file1) {
+                                var file_size = $(this).get(0).files[i].size;
+                                if (file_size > 1000000) {
+                                    $('#error-message').html("File upload size is larger than 2MB");
+                                    $('#error-message').css("display", "block");
+                                    $('#error-message').css("color", "red");
+                                    $('#submit').css("display", "none");
 
-                            } else {
-                                $('#error-message').css("display", "none");
+                                } else {
+                                    $('#error-message').css("display", "block");
+                                }
                             }
                         }
-                    }
+                    });
                 });
-            });
-            $('#submit').click(function(e) {
+                $('#submit').click(function(e) {
 
 
-                var valid = this.form.checkValidity();
+                    var valid = this.form.checkValidity();
 
-                if (valid) {
-                    console.log("aaaaaaaaaa");
-                    var fup = document.getElementById('pdffile');
-                    var fileName = fup.value;
-                    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
-                    if (ext == "pdf") {
-                        var id = <?php
+                    if (valid) {
+                        console.log("aaaaaaaaaa");
+                        var fup = document.getElementById('pdffile');
+                        var fileName = fup.value;
+                        var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+                        if (ext == "pdf") {
+                            var id = <?php
 
                                         $userid = $_SESSION['userlogin']['id'];
                                         echo $userid
                                         ?>;
-                        var ele = document.getElementsByName('student_group');
+                            var ele = document.getElementsByName('student_group');
 
-                        for (i = 0; i < ele.length; i++) {
-                            if (ele[i].checked)
-                                var student_group = ele[i].value;
+                            for (i = 0; i < ele.length; i++) {
+                                if (ele[i].checked)
+                                    var student_group = ele[i].value;
 
+                            }
+                            console.log(student_group);
+
+                            var pdffile = document.getElementById("pdffile").files[0];
+                            var uploadData = new FormData();
+                            uploadData.append("file", pdffile);
+                            uploadData.append("student_group", student_group)
+                            // console.log($("#pdffile"));
+                            // console.log(pdffile);
+
+
+                            e.preventDefault()
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'vaka-db.php',
+                                data: uploadData,
+
+
+
+                                success: function(data) {
+                                    console.log(data);
+                                    console.log(name);
+                                    location.reload(true)
+                                },
+                                error: function(data) {
+                                    Swal.fire({
+                                        'title': 'Hata',
+                                        'text': 'Hata',
+                                        'type': 'error'
+                                    })
+                                },
+                                processData: false,
+                                contentType: false
+                            })
+
+                            return true;
+                        } else {
+                            alert("Lütfen PDF uzantılı dosya yükleyin");
+                            fup.focus();
+                            return false;
                         }
-                        console.log(student_group);
-
-                        var pdffile = document.getElementById("pdffile").files[0];
-                        var uploadData = new FormData();
-                        uploadData.append("file", pdffile);
-                        uploadData.append("student_group", student_group)
-                        // console.log($("#pdffile"));
-                        // console.log(pdffile);
-
-
-                        e.preventDefault()
-
-                        $.ajax({
-                            type: 'POST',
-                            url: 'vaka-db.php',
-                            data: uploadData,
 
 
 
-                            success: function(data) {
-                                console.log(data);
-                                console.log(name);
-                                location.reload(true)
-                            },
-                            error: function(data) {
-                                Swal.fire({
-                                    'title': 'Hata',
-                                    'text': 'Hata',
-                                    'type': 'error'
-                                })
-                            },
-                            processData: false,
-                            contentType: false
-                        })
-
-                        return true;
-                    } else {
-                        alert("Lütfen PDF uzantılı dosya yükleyin");
-                        fup.focus();
-                        return false;
                     }
+                })
 
-
-
-                }
-            })
-
-        });
+            });
         </script>
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

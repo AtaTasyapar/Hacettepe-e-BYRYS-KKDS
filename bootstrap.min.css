@@ -7143,9 +7143,6 @@ fieldset:disabled .btn {
     display: inline-block !important
 }
 
-.d-block {
-    display: block !important
-}
 
 .d-grid {
     display: grid !important
@@ -7163,17 +7160,13 @@ fieldset:disabled .btn {
     display: table-cell !important
 }
 
-.d-flex {
-    display: flex !important
-}
+
 
 .d-inline-flex {
     display: inline-flex !important
 }
 
-.d-none {
-    display: none !important
-}
+
 
 .shadow {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important

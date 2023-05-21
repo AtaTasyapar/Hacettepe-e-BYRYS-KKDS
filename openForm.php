@@ -321,7 +321,7 @@ if (isset($_GET['patient_id'])) {
                                 </div>
                             </div>
                         </div>
-                        <input type="submit" class="form-control m-auto" name="update" id="update" value="Update">
+                        <input type="submit" class="form-control m-auto" name="update" id="update" value="Güncelle">
                     </form>
                 </div>
 
@@ -413,7 +413,7 @@ if (isset($_GET['patient_id'])) {
         });
     </script>
 
-    </script>";
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

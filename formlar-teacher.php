@@ -90,7 +90,7 @@ if (isset($_GET['logout'])) {
                                 <th scope="col">Soyisim</th>
                                 <th scope="col">E-mail</th>
                                 <th scope="col">Hastalar</th>
-
+                                <th scope="col">Detay</th>
 
                             </tr>
                         </thead>

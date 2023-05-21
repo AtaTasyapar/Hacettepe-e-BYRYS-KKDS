@@ -57,8 +57,8 @@ session_start()
                 <p class="usernamelabel">Soyisim</p>
                 <input type="text" required name="surname" id="surname" placeholder="Soyisim Giriniz">
 
-                <p class="usernamelabel">E-mail</p>
-                <input type="email" required name="email" id="email" placeholder="E-mail Giriniz">
+                <p class="usernamelabel">E-Posta</p>
+                <input type="email" required name="email" id="email" placeholder="E-Posta Giriniz">
 
                 <p class="passwordlabel">Şifre</p>
                 <input type="password" name="password" id="password" required placeholder="Şifre Giriniz">

@@ -42,7 +42,7 @@ if (isset($_GET['logout'])) {
 
 <body style="background-color:white">
     <div id='formCloser'>
-        <div id='openFormContainer' style='padding: 50px;'>
+        <div id='openFormContainer' style='padding: 10px;'>
             <div id="contentContainer" class="model-content"></div>
         </div>
     </div>
@@ -139,63 +139,63 @@ if (isset($_GET['logout'])) {
             </div>
         </div>
         <script>
-        $("#formCloser").css('display', 'none');
-        $("#closeOpenForm").css('display', 'none');
-        $(function() {
-            $.ajaxSetup({
-                cache: false
-            }); // disable caching for all requests.
-
-            // RAW Text/Html data from a file
-            $(function() {
-                $("a.nav-items").on("click", function(e) {
-                    e.preventDefault();
-                    $(".send-patient").css('display', 'none');
-                    $("#formCloser").css('display', 'block');
-                    $("#closeOpenForm").css('display', 'block');
-                    $('#contentContainer').load(this.href);
-                })
-            })
-
-        });
-
-        $(function() {
-            const deleteButtons = document.querySelectorAll('#delete-patient');
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    var patient_id = e.target.value;
-                    e.preventDefault();
-                    $.ajax({
-                        type: "POST",
-                        url: "./deletePatient.php",
-                        data: {
-                            patient_id: patient_id
-                        },
-                        success: function(response) {
-                            alert("Hasta başarıyla silindi")
-                            location.reload()
-                        },
-                        failure: function(response) {
-                            console.log(response)
-                            alert("Hata");
-                        }
-
-                    });
-                })
-            })
-        })
-
-        $('#formCloser').click(function(e) {
-            e.preventDefault();
-            $(".send-patient").css('display', 'block');
             $("#formCloser").css('display', 'none');
-        });
+            $("#closeOpenForm").css('display', 'none');
+            $(function() {
+                $.ajaxSetup({
+                    cache: false
+                }); // disable caching for all requests.
+
+                // RAW Text/Html data from a file
+                $(function() {
+                    $("a.nav-items").on("click", function(e) {
+                        e.preventDefault();
+                        $(".send-patient").css('display', 'none');
+                        $("#formCloser").css('display', 'block');
+                        $("#closeOpenForm").css('display', 'block');
+                        $('#contentContainer').load(this.href);
+                    })
+                })
+
+            });
+
+            $(function() {
+                const deleteButtons = document.querySelectorAll('#delete-patient');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        var patient_id = e.target.value;
+                        e.preventDefault();
+                        $.ajax({
+                            type: "POST",
+                            url: "./deletePatient.php",
+                            data: {
+                                patient_id: patient_id
+                            },
+                            success: function(response) {
+                                alert("Hasta başarıyla silindi")
+                                location.reload()
+                            },
+                            failure: function(response) {
+                                console.log(response)
+                                alert("Hata");
+                            }
+
+                        });
+                    })
+                })
+            })
+
+            $('#formCloser').click(function(e) {
+                e.preventDefault();
+                $(".send-patient").css('display', 'block');
+                $("#formCloser").css('display', 'none');
+            });
         </script>
         <script>
-        $(window).on('load', function() {
-            $("body").removeClass("preload");
-            $("#openFormContainer").removeClass("preload");
-        });
+            $(window).on('load', function() {
+                $("body").removeClass("preload");
+                $("#openFormContainer").removeClass("preload");
+            });
         </script>
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
