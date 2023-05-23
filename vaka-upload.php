@@ -123,6 +123,7 @@ if (isset($_GET['logout'])) {
 
                                 <th scope="col">Vaka No</th>
                                 <th scope="col">Vaka</th>
+                                <th scope="col">Öğrenci Grubu</th>
                                 <th scope="col">Detay</th>
 
 
@@ -153,7 +154,8 @@ if (isset($_GET['logout'])) {
                                     color: black; font-size: 18px;'>" . $vaka["id"] . "</td>
                                     <td style='
                                     color: black; font-size: 18px;'>" . $vaka["filename"] . "</td>
-                                    
+                                    <td style='
+                                    color: black; font-size: 18px;'>" . $vaka["student_group"] . "</td>
                                     <td style='
                                     color: black; font-size: 18px;
                                     '> <button type='button' id = '" . $vaka['id'] . "' class='btn btn-success'>Detay</button> </td>
