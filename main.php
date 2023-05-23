@@ -21,8 +21,10 @@
 
 
     <div class="login-box">
-
-
+        <div class="hacettepelogo-wrapper">
+            <object class="hacettepelogo" data="hacettepelogo.svg" width="300" height="300"> </object>
+            <p class="hemsire-fakulte">Hemşirelik Fakültesi</p>
+        </div>
         <h1 class="header">e-BYRYS-KKDS</h1>
 
         <div class="buttons-wrapper">

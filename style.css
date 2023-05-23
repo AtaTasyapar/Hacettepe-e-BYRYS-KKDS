@@ -56,8 +56,10 @@ a {
     color: white !important;
 }
 
+
 .login-box {
-    width: 360px;
+    max-width: 599px;
+    width: 90%;
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
     top: 50%;
@@ -67,8 +69,14 @@ a {
     box-sizing: border-box;
     padding: 40px 30px;
     border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.buttons-wrapper {
+    width: 100%;
+}
 
 .buttons {
 
@@ -216,7 +224,7 @@ a {
 }
 
 .login-box p {
-    margin-top: 20px !important;
+    margin-bottom: 10px !important;
     font-weight: bold !important;
 }
 
@@ -737,6 +745,12 @@ input[type=file]::file-selector-button:hover {
 
 .username-wrapper {
     padding: 0 !important;
+}
+
+.hacettepelogo {
+    height: 110px;
+    width: 160px;
+    margin-top: -20px;
 }
 
 @media screen and (max-width: 1000px) {

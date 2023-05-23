@@ -134,16 +134,16 @@ require_once("config-students.php");
                         },
                         success: function(data) {
 
-                            alert("registration successfull")
+                            alert("Kayıt Başarılı")
                             window.location.href = './login-student.php';
                         },
                         error: function(data) {
                             console.log("Resgitration was not complete", data)
-                            alert("Could not be registered!");
+                            alert("Kayıt başarısız!");
                         }
                     })
                 } else {
-                    alert("codes do not match")
+                    alert("Kodlar eşleşmiyor!")
                 };
 
             })
