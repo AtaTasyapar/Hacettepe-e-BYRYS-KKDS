@@ -3,7 +3,6 @@ require_once("config-students.php");
 ?>
 <?php
 if (isset($_POST)) {
-    echo 'aasdafa';
     $id = $_POST['id'];
     $name = $_POST['name'];
     $surname = $_POST['surname'];
@@ -27,7 +26,7 @@ if (isset($_POST)) {
     if ($result) {
         echo 'Başarılı';
     } else {
-        echo 'Hata';
+        echo $result;
     }
 } else
     echo 'no data';
