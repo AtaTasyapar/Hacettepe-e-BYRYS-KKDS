@@ -576,6 +576,7 @@ $(window).on('load', function() {
                             location.reload(true)
                         },
                         error: function(data) {
+                            console.log(data)
                             Swal.fire({
                                 'title': 'Hata',
                                 'text': 'Hata',
