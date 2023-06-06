@@ -9,6 +9,7 @@ if (isset($_GET['logout'])) {
     unset($_SESSION);
     header("Location: main.php");
 }
+$base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/Hacettepe-e-BYRYS-KKDS';
 
 $patient_id = '';
 $notlar = '';
@@ -76,6 +77,18 @@ if (isset($_GET['patient_id'])) {
                     } else {
                         echo 'Hata';
                     }
+
+
+                    $userid = $_SESSION['userlogin']['id'];
+                    //echo $userid;
+                    $sql = "SELECT * FROM  students  WHERE id =" . $userid;
+                    $smtmselect = $db->prepare($sql);
+                    $result = $smtmselect->execute();
+                    if ($result) {
+                        $student = $smtmselect->fetchAll(PDO::FETCH_ASSOC);
+                    } else {
+                        echo 'Hata';
+                    };
 
                     ?>
                     <?php
@@ -434,7 +447,7 @@ if (isset($_GET['patient_id'])) {
                                                                 <p class='girisimler-p'><span class='girisimler-span block girisimler-header'>Önerilen Girişimler:</span>" . $girisimsurtunme . "</p>
                                                                 </div>
                     
-                                                                
+                                                                <button class='btn btn-success' id='addpatientcare'>Bakım Planı Ekle</button> </td></tr>
                                                             </div>
                     
                                                         </div>
@@ -450,6 +463,34 @@ if (isset($_GET['patient_id'])) {
         </div>
     </div>
 
+    <script>
+    $(function() {
+        $("#addpatientcare").on("click", function(e) {
+            e.preventDefault();
+            var studentgroup = "<?php echo $_SESSION['userlogin']['student_group']; ?>"
+
+            console.log(studentgroup);
+            if (studentgroup == "mudahale") {
+                let patient_id = <?php
+                                        $userid = $_GET['patient_id'];
+                                        echo $userid
+                                        ?>;
+
+                var url = "<?php echo $base_url; ?>/mudahaleform.php?patient_id=" + patient_id;
+                $("#content").load(url);
+
+            } else if (studentgroup == "kontrol") {
+                let patient_id = <?php
+                                        $userid = $_GET['patient_id'];
+                                        echo $userid
+                                        ?>;
+
+                var url = "<?php echo $base_url; ?>/kontrolform.php?patient_id=" + patient_id;
+                $("#content").load(url);
+            }
+        })
+    });
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
