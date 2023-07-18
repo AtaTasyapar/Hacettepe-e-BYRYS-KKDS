@@ -61,9 +61,7 @@ if (isset($_GET['logout'])) {
                 </div>
                 <div class="navigation-right" id="navigation-right">
                     <div class="nav-items-wrapper">
-                        <a href="formlar-student.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i class="fa fa-table me-2 "></i>Formlar</a>
-                        <a href="hastalar-student.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i class="fa fa-table me-2 "></i>Hastalar</a>
-
+                        <a href="course.php" id="course" class="nav-link nav-items formlar btn-success"> <i class="fa fa-table me-2 "></i>Course</a>
                     </div>
                     <div>
 
@@ -150,7 +148,7 @@ if (isset($_GET['logout'])) {
                 $.ajaxSetup({
                     cache: false
                 }); // disable caching for all requests.
-                $("#content").load("hastalar-student.php");
+                $("#content").load("course.php");
 
                 // RAW Text/Html data from a file
                 $(function() {
