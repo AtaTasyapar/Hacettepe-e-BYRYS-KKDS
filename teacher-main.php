@@ -33,7 +33,7 @@ if (isset($_GET['logout'])) {
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link href="style.css" rel="stylesheet">
-
+    
     <!-- Customized Bootstrap Stylesheet -->
     <link href="bootstrap.min.css" rel="stylesheet">
 
@@ -58,11 +58,11 @@ if (isset($_GET['logout'])) {
                 </div>
                 <div class="navigation-right" id="navigation-right">
                     <div class="nav-items-wrapper">
-                        <a href="formlar-teacher.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i
-                                class="fa fa-table me-2 "></i>Öğrenciler</a>
+                        <a href="students-info.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i
+                                class="fa fa-table me-2 "></i>Students</a>
 
                         <a href="vaka-upload.php" class="nav-link nav-items btn-success">
-                            <i class="fa fa-th me-2"></i>Vakalar</a>
+                            <i class="fa fa-th me-2"></i>Assign a task</a>
 
                     </div>
                     <div>
@@ -151,7 +151,7 @@ if (isset($_GET['logout'])) {
             }); // disable caching for all requests.
 
             // RAW Text/Html data from a file
-            $("#content").load("formlar-teacher.php");
+            $("#content").load("students-info.php");
 
             $(function() {
                 $("a.nav-items").on("click", function(e) {

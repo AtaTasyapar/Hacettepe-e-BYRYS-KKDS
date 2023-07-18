@@ -60,16 +60,16 @@ require_once("config-students.php");
             <input type="text" required name="surname" id="surname" placeholder="Soyisim Giriniz">
 
             <p class="usernamelabel">E-mail</p>
-            <input type="email" required name="email" id="email" placeholder="E-mail Giriniz" oninput="sanitizeEmail()">
+            <input type="email" required name="email" id="email" placeholder="E-mail Giriniz" >
             <span id="email-error" style="display:none; color:red;">Lütfen geçerli bir e-posta adresi
                 giriniz.</span>
 
             <p class="passwordlabel">Şifre</p>
-            <input type="password" name="password" id="password" required placeholder="Şifre Giriniz" minlength="6" oninput="checkPasswordMatch(); sanitizePassword()">
+            <input type="password" name="password" id="password" required placeholder="Şifre Giriniz" minlength="6" >
             <span id="password-error" style="display:none; color:red;">Şifre en az 6 karakter uzunluğunda
                 olmalıdır.</span>
             <p class="passwordlabel">Şifreyi Tekrar Girin</p>
-            <input type="password" name="confirm-password" id="confirm-password" required placeholder="Şifreyi Tekrar Girin" minlength="6" oninput="checkPasswordMatch()">
+            <input type="password" name="confirm-password" id="confirm-password" required placeholder="Şifreyi Tekrar Girin" minlength="6" >
             <span id="confirm-password-error" style="display:none; color:red;">Şifreler eşleşmiyor.</span>
 
             <input type="submit" name="submit" id="register" value="Kayıt Ol">
@@ -80,7 +80,6 @@ require_once("config-students.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.getElementById("register").style.display = 'none';
 
         var emailCode = '';
 

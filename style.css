@@ -845,6 +845,10 @@ input[type=file]::file-selector-button:hover {
 }
 
 @media screen and (max-width: 500px) {
+    * {
+        font-size: 10px !important;
+    }
+
     .nav-link {
         font-size: 12px !important;
         padding: 6px !important
@@ -865,7 +869,6 @@ input[type=file]::file-selector-button:hover {
     .fa {
         display: none;
     }
-
     .drop-container {
         position: relative;
         display: flex;
