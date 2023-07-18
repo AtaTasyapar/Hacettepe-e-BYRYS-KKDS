@@ -75,7 +75,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3" style="border-bottom: 2px solid grey;">
            <div class="w-25"><h5 class="text-left" style="text-align: left;">Name</h5></div>
         <div class="w-25"><h5 class='text-left'>Group</h5></div>
-    <div class="w-25"><h5 class='text-left'>Assign</h5></div>
+    <div class="w-25"><h5 class='text-left'>Assign Group</h5></div>
 <div class="w-25" > <h5 class='text-left'>Links</h5></div> 
 </div>
         
@@ -84,7 +84,11 @@
             echo "<div class='d-flex justify-content-between align-items-center mb-2' style='border-bottom : 0.2px solid grey' id=".$student['id'].">";
                 echo "<div class='w-25 student-info'><h6>".$student['name']." ".$student['surname']."</h6></div>";
                 echo "<div class='w-25 student-info'><h6>".$student['student_group']."</h6></div>";
-                echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign'>Assign</h6></div>";
+                if($student['student_group'] == 'unassigned'){
+                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign'>Assign</h6></div>";
+                }else{
+                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign'>Change</h6></div>";
+                }
                 echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='submissions'>Forms</h6></div>";
             echo "</div>";
         }
@@ -121,6 +125,7 @@
                     console.log(response);
                     if(response == 'success'){
                         $("#"+id).find('.student-info').eq(1).find('h6').text(group);
+                        $("#"+id).find('.student-info').eq(2).find('h6').text('change');
                         $(".overlay").toggle('');
                         $("#assignment-container").toggle('slow');
                     }
