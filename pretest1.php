@@ -1,3 +1,23 @@
+<?php
+    require_once('config-students.php');
+    session_start();
+    $student_id = $_SESSION['userlogin']['id'];
+    $sql = 'SELECT * FROM students WHERE id = :id';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':id', $student_id);
+    $result = $stmt->execute();
+    if($result){
+        $student = $stmt->fetch(PDO::FETCH_ASSOC);
+        $student_name = $student['name'] . ' ' . $student['surname'];
+        $student_email = $student['email'];
+        $student_group = $student['student_group'];
+    }
+    else{
+        echo 'error';
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,11 +42,18 @@
             display: none;
             color: red;
         }
+        #back{
+            font-weight: bold;
+            border: 1px solid grey;
+            background-color: rgb(146, 146, 246);
+            color: white;
+        }
 
     </style>
 </head>
 <body>
     <div class="container-fluid mt-5 w-75 p-4 mb-4" style="background-color: white;">
+        <button class="btn" id="back">Back</button>
         <h2 class="form-header text-center mb-3">Pretest 1</h2>
 
     <div class="input-section">
@@ -295,8 +322,11 @@
     </div>
 </body>
 
-
 <script>
+    $('#back').click(function (e) { 
+        e.preventDefault();
+     $('#content').load('course.php');
+    });
     $('#submit').click(function (e) { 
         e.preventDefault();
         //validation
@@ -442,8 +472,57 @@
         }, 500);
         return;
     }
+    var student_id = "<?php echo $student_id; ?>"; 
+    var student_name = "<?php echo $student_name; ?>";
+    var student_email = "<?php echo $student_email; ?>";
+    var student_group = "<?php echo $student_group; ?>";
+    var ulcer_prevention_confidence = $('input[ulcer_prevention_confidence]:checked').length > 0 ? $('input[ulcer_prevention_confidence]:checked') : '';
+    var ulcer_prevention_training = $('input[ulcer_prevention_training]:checked').length > 0 ? $('input[ulcer_prevention_training]:checked') : '';
+    var ulcer_prevention_difficulty = $('input[ulcer_prevention_difficulty]:checked').length > 0 ? $('input[ulcer_prevention_difficulty]:checked') : '';
+    var ulcer_prevention_attention = $('input[ulcer_prevention_attention]:checked').length > 0 ? $('input[ulcer_prevention_attention]:checked') : '';
+    var ulcer_prevention_importance = $('input[ulcer_prevention_importance]:checked').length > 0 ? $('input[ulcer_prevention_importance]:checked') : '';
+    var ulcer_prevention_priority = $('input[ulcer_prevention_priority]:checked').length > 0 ? $('input[ulcer_prevention_priority]:checked') : '';
+    var ulcer_prevention_discomfort = $('input[ulcer_prevention_discomfort]:checked').length > 0 ? $('input[ulcer_prevention_discomfort]:checked') : '';
+    var ulcer_prevention_exagerration = $('input[ulcer_prevention_exagerration]:checked').length > 0 ? $('input[ulcer_prevention_exagerration]:checked') : '';
+    var ulcer_prevention_economy = $('input[ulcer_prevention_economy]:checked').length > 0 ? $('input[ulcer_prevention_economy]:checked') : '';
+    var ulcer_prevention_responsibility = $('input[ulcer_prevention_responsibility]:checked').length > 0 ? $('input[ulcer_prevention_responsibility]:checked') : '';
+    var ulcer_prevention_role = $('input[ulcer_prevention_role]:checked').length > 0 ? $('input[ulcer_prevention_role]:checked') : '';
+    var ulcer_prevention_highrisk = $('input[ulcer_prevention_highrisk]:checked').length > 0 ? $('input[ulcer_prevention_highrisk]:checked') : '';
+    var ulcer_prevention_ability = $('input[ulcer_prevention_ability]:checked').length > 0 ? $('input[ulcer_prevention_ability]:checked') : '';
+    
+    $.ajax({
+        type: "POST",
+        url: ".submitPretest.php",
+        data: {
+            student_id: student_id,
+            student_name: student_name,
+            student_email: student_email,
+            student_group: student_group,
+            ulcer_prevention_confidence: ulcer_prevention_confidence,
+            ulcer_prevention_training: ulcer_prevention_training,
+            ulcer_prevention_difficulty: ulcer_prevention_difficulty,
+            ulcer_prevention_attention: ulcer_prevention_attention,
+            ulcer_prevention_importance: ulcer_prevention_importance,
+            ulcer_prevention_priority: ulcer_prevention_priority,
+            ulcer_prevention_discomfort: ulcer_prevention_discomfort,
+            ulcer_prevention_exagerration: ulcer_prevention_exagerration,
+            ulcer_prevention_economy: ulcer_prevention_economy,
+            ulcer_prevention_responsibility: ulcer_prevention_responsibility,
+            ulcer_prevention_role: ulcer_prevention_role,
+            ulcer_prevention_highrisk: ulcer_prevention_highrisk,
+            ulcer_prevention_ability: ulcer_prevention_ability
 
-
+        },
+        success: function (response) {
+            if(response === "success"){
+                window.alert("Pretest 1 submitted successfully");
+                $('#content').load('coruse.php');
+            } 
+             else{
+                window.alert(response);
+             }
+        }
+    });
 
 
 
