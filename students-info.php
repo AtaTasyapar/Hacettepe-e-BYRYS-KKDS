@@ -52,7 +52,7 @@
         <h6 id="student_name" class="mb-2"></h6>
         <h6 id="student_id" class="mb-2"></h6>
         <h6 id="student_group" class="mb-2"></h6>
-        <select name="group-options" id="group-options" class="mb-2">
+        <select name="group-options" id="group-options" class="mb-2" style="border: 2px solid rgb(160, 160, 239); padding: 5px;">
             <option>
                 Control group 1
             </option>
@@ -108,6 +108,7 @@
             $("#student_name").text("Student Name: "+name);
             $("#student_id").text("Student ID: "+id);
             $("#student_group").text("Current Group: "+group);
+            $('body').css('overflow', 'hidden');
         });
         $('#assign-group').click(function (e) { 
             e.preventDefault();
@@ -125,7 +126,8 @@
                     console.log(response);
                     if(response == 'success'){
                         $("#"+id).find('.student-info').eq(1).find('h6').text(group);
-                        $("#"+id).find('.student-info').eq(2).find('h6').text('change');
+                        $("#"+id).find('.student-info').eq(2).find('h6').text('Change');
+                        $('body').css('overflow', 'auto');
                         $(".overlay").toggle('');
                         $("#assignment-container").toggle('slow');
                     }
@@ -135,6 +137,8 @@
         $("#cancel").click(function (e) { 
             e.preventDefault();
             $(".overlay").toggle('');
+            $('body').css('overflow', 'hidden');
+            $('body').css('overflow', 'auto')
             $("#assignment-container").toggle('slow');
         });
     </script>
