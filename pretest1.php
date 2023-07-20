@@ -2,7 +2,12 @@
     require_once('config-students.php');
     session_start();
     $student_id = $_SESSION['userlogin']['id'];
-    $sql = 'SELECT * FROM students WHERE id = :id';
+    $type = $_SESSION['userlogin']['type'];
+    if($type === 'student'){
+        $sql = 'SELECT * FROM students WHERE id = :id';
+    }else{
+        $sql = 'SELECT * FROM teachers WHERE id = :id';
+    }
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':id', $student_id);
     $result = $stmt->execute();
@@ -52,9 +57,9 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid mt-5 w-75 p-4 mb-4" style="background-color: white;">
+    <div class="container-fluid mt-5 w-75 p-4 mb-5" style="background-color: white; border-radius: 10px;">
         <button class="btn" id="back">Back</button>
-        <h2 class="form-header text-center mb-3">Pretest 1</h2>
+        <h2 class="form-header text-center mb-3">Basınç Ülserlerini Önlemeye Yönelik Tutum Ölçeği</h2>
 
     <div class="input-section">
         <h5 class="username-label">1.Basınç ülserlerini önlemeye yönelik becerilerime güveniyorum.</h5>
@@ -436,63 +441,64 @@
 
         // Scroll to the error
         $('html, body').animate({
-            scrollTop: $('input[ulcer_prevention_responsibility="username"]').closest('.input-section').find('.error').offset().top - 200
+            scrollTop: $('input["ulcer_prevention_responsibility"]').closest('.input-section').find('.error').offset().top - 200
         }, 500);
         return;
     }
 
-    if ($('input[ulcer_prevention_role="username"]:checked').length === 0) {
-        // Find the nearest error
-        $('input[ulcer_prevention_role="username"]').closest('.input-section').find('.error').css('display', 'block');
+    if ($('input[name="ulcer_prevention_role"]:checked').length === 0) {
+    // Find the nearest error
+    $('input[name="ulcer_prevention_role"]').closest('.input-section').find('.error').css('display', 'block');
 
-        // Scroll to the error
-        $('html, body').animate({
-            ulcer_prevention_role: $('input[ulcer_prevention_role="username"]').closest('.input-section').find('.error').offset().top - 200
-        }, 500);
-        return;
-    }
+    // Scroll to the error
+    $('html, body').animate({
+        scrollTop: $('input[name="ulcer_prevention_role"]').closest('.input-section').find('.error').offset().top - 200
+    }, 500);
+    return;
+}
 
-    if ($('input[ulcer_prevention_highrisk="username"]:checked').length === 0) {
-        // Find the nearest error
-        $('input[ulcer_prevention_highrisk="username"]').closest('.input-section').find('.error').css('display', 'block');
+if ($('input[name="ulcer_prevention_highrisk"]:checked').length === 0) {
+    // Find the nearest error
+    $('input[name="ulcer_prevention_highrisk"]').closest('.input-section').find('.error').css('display', 'block');
 
-        // Scroll to the error
-        $('html, body').animate({
-            ulcer_prevention_role: $('input[ulcer_prevention_highrisk="username"]').closest('.input-section').find('.error').offset().top - 200
-        }, 500);
-        return;
-    }
+    // Scroll to the error
+    $('html, body').animate({
+        scrollTop: $('input[name="ulcer_prevention_highrisk"]').closest('.input-section').find('.error').offset().top - 200
+    }, 500);
+    return;
+}
 
-    if ($('input[ulcer_prevention_ability="username"]:checked').length === 0) {
-        // Find the nearest error
-        $('input[ulcer_prevention_ability="username"]').closest('.input-section').find('.error').css('display', 'block');
-        // Scroll to the error
-        $('html, body').animate({
-            ulcer_prevention_role: $('input[ulcer_prevention_ability="username"]').closest('.input-section').find('.error').offset().top - 200
-        }, 500);
-        return;
-    }
+if ($('input[name="ulcer_prevention_ability"]:checked').length === 0) {
+    // Find the nearest error
+    $('input[name="ulcer_prevention_ability"]').closest('.input-section').find('.error').css('display', 'block');
+    
+    // Scroll to the error
+    $('html, body').animate({
+        scrollTop: $('input[name="ulcer_prevention_ability"]').closest('.input-section').find('.error').offset().top - 200
+    }, 500);
+    return;
+}
     var student_id = "<?php echo $student_id; ?>"; 
     var student_name = "<?php echo $student_name; ?>";
     var student_email = "<?php echo $student_email; ?>";
     var student_group = "<?php echo $student_group; ?>";
-    var ulcer_prevention_confidence = $('input[ulcer_prevention_confidence]:checked').length > 0 ? $('input[ulcer_prevention_confidence]:checked') : '';
-    var ulcer_prevention_training = $('input[ulcer_prevention_training]:checked').length > 0 ? $('input[ulcer_prevention_training]:checked') : '';
-    var ulcer_prevention_difficulty = $('input[ulcer_prevention_difficulty]:checked').length > 0 ? $('input[ulcer_prevention_difficulty]:checked') : '';
-    var ulcer_prevention_attention = $('input[ulcer_prevention_attention]:checked').length > 0 ? $('input[ulcer_prevention_attention]:checked') : '';
-    var ulcer_prevention_importance = $('input[ulcer_prevention_importance]:checked').length > 0 ? $('input[ulcer_prevention_importance]:checked') : '';
-    var ulcer_prevention_priority = $('input[ulcer_prevention_priority]:checked').length > 0 ? $('input[ulcer_prevention_priority]:checked') : '';
-    var ulcer_prevention_discomfort = $('input[ulcer_prevention_discomfort]:checked').length > 0 ? $('input[ulcer_prevention_discomfort]:checked') : '';
-    var ulcer_prevention_exagerration = $('input[ulcer_prevention_exagerration]:checked').length > 0 ? $('input[ulcer_prevention_exagerration]:checked') : '';
-    var ulcer_prevention_economy = $('input[ulcer_prevention_economy]:checked').length > 0 ? $('input[ulcer_prevention_economy]:checked') : '';
-    var ulcer_prevention_responsibility = $('input[ulcer_prevention_responsibility]:checked').length > 0 ? $('input[ulcer_prevention_responsibility]:checked') : '';
-    var ulcer_prevention_role = $('input[ulcer_prevention_role]:checked').length > 0 ? $('input[ulcer_prevention_role]:checked') : '';
-    var ulcer_prevention_highrisk = $('input[ulcer_prevention_highrisk]:checked').length > 0 ? $('input[ulcer_prevention_highrisk]:checked') : '';
-    var ulcer_prevention_ability = $('input[ulcer_prevention_ability]:checked').length > 0 ? $('input[ulcer_prevention_ability]:checked') : '';
+    var ulcer_prevention_confidence = $('input[name="ulcer_prevention_confidence"]:checked').length > 0 ? $('input[name="ulcer_prevention_confidence"]:checked').val() : '';
+    var ulcer_prevention_training = $('input[name="ulcer_prevention_training"]:checked').length > 0 ? $('input[name="ulcer_prevention_training"]:checked').val() : '';
+    var ulcer_prevention_difficulty = $('input[name="ulcer_prevention_difficulty"]:checked').length > 0 ? $('input[name="ulcer_prevention_difficulty"]:checked').val() : '';
+    var ulcer_prevention_attention = $('input[name="ulcer_prevention_attention"]:checked').length > 0 ? $('input[name="ulcer_prevention_attention"]:checked').val() : '';
+    var ulcer_prevention_importance = $('input[name="ulcer_prevention_importance"]:checked').length > 0 ? $('input[name="ulcer_prevention_importance"]:checked').val() : '';
+    var ulcer_prevention_priority = $('input[name="ulcer_prevention_priority"]:checked').length > 0 ? $('input[name="ulcer_prevention_priority"]:checked').val() : '';
+    var ulcer_prevention_discomfort = $('input[name="ulcer_prevention_discomfort"]:checked').length > 0 ? $('input[name="ulcer_prevention_discomfort"]:checked').val() : '';
+    var ulcer_prevention_exagerration = $('input[name="ulcer_prevention_exagerration"]:checked').length > 0 ? $('input[name="ulcer_prevention_exagerration"]:checked').val() : '';
+    var ulcer_prevention_economy = $('input[name="ulcer_prevention_economy"]:checked').length > 0 ? $('input[name="ulcer_prevention_economy"]:checked').val() : '';
+    var ulcer_prevention_responsibility = $('input[name="ulcer_prevention_responsibility"]:checked').length > 0 ? $('input[name="ulcer_prevention_responsibility"]:checked').val() : '';
+    var ulcer_prevention_role = $('input[name="ulcer_prevention_role"]:checked').length > 0 ? $('input[name="ulcer_prevention_role"]:checked').val() : '';
+    var ulcer_prevention_highrisk = $('input[name="ulcer_prevention_highrisk"]:checked').length > 0 ? $('input[name="ulcer_prevention_highrisk"]:checked').val() : '';
+    var ulcer_prevention_ability = $('input[name="ulcer_prevention_ability"]:checked').length > 0 ? $('input[name="ulcer_prevention_ability"]:checked').val() : '';
     
     $.ajax({
         type: "POST",
-        url: ".submitPretest.php",
+        url: "./pretest1-handler.php",
         data: {
             student_id: student_id,
             student_name: student_name,
@@ -516,7 +522,7 @@
         success: function (response) {
             if(response === "success"){
                 window.alert("Pretest 1 submitted successfully");
-                $('#content').load('coruse.php');
+                $('#content').load('course.php');
             } 
              else{
                 window.alert(response);

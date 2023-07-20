@@ -61,7 +61,7 @@ if (isset($_GET['logout'])) {
                         <a href="students-info.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i
                                 class="fa fa-table me-2 "></i>Students</a>
 
-                        <a href="vaka-upload.php" class="nav-link nav-items btn-success">
+                        <a href="task-assignment.php" class="nav-link nav-items btn-success">
                             <i class="fa fa-th me-2"></i>Assign a task</a>
 
                     </div>
