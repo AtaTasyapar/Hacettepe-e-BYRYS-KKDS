@@ -72,7 +72,7 @@
         <select name="week-options w-25" id="week-options" style="border: 2px solid rgb(160, 160, 239); padding: 5px; margin-bottom: 20px;">
         </select>
         <div id="upload-pdf"  style="display: none;">
-            <input type="file">
+            <input type="file" accept="application/pdf,application/vnd.ms-excel">
         </div>
         <div class="d-flex justify-content-between mt-4">
             <button class="btn btn-success" id="assign-task">Assign</button>
@@ -132,14 +132,86 @@
 
     $('#assign-task').click(function (e) {
         e.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: "./handle-task-assignment.php",
-            data: {
-                student_group: $('#group-name').text().split(' ')[2],
-                task_name: $('#task-options').val(),
-                task_week: $('#week-options').val(),
-            },
+        const task_name = $('#task-options').val();
+        const week_name = $('#week-options').val();
+
+        if($('#task-options').val() === 'testCase'){
+            if($('input[type="file"]').val() === ''){
+                alert('Please upload a file');
+                return;
+            }
+
+                const file = $('input[type="file"]').prop('files')[0];
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+                if(fileExtension !== 'pdf'){
+                    alert('Please upload a pdf file');
+                    return;
+                }
+                const fileSize = $('input[type="file"]')[0].files[0].size;
+                    if(fileSize > 5000000){
+                        alert('File size must be less than 5MB');
+                        return;
+                    }
+                console.log(file)
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const base64data = event.target.result;
+                    const filename = $('input[type="file"]')[0].files[0].name;
+                    console.log(base64data) 
+                    $.ajax({
+                        type: "POST",
+                        url: "./upload-task-pdf.php",
+                        data: {
+                            file_name: filename,
+                            base64: base64data,
+                            student_group: $('#group-name').text().split(' ')[2] + ' ' + $('#group-name').text().split(' ')[3] + ' ' + $('#group-name').text().split(' ')[4],
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            if(response === 'success'){
+                                $.ajax({
+                                type: "POST",
+                                url: "./handle-task-assignment.php",
+                                data: {
+                                    student_group: $('#group-name').text().split(' ')[2] + ' ' + $('#group-name').text().split(' ')[3] + ' ' + $('#group-name').text().split(' ')[4],
+                                    task_name: task_name,
+                                    task_week: week_name,
+                                    assoc_file : filename,
+                                },
+                                success: function (response) {
+                                    if(response === 'success'){
+                                        alert('Task assigned successfully');
+                                    }else{
+                                        alert(response)
+                                    }
+                                },
+                            error: function (response) {
+                                alert(response);
+                            }
+                        });
+                        }
+                                            else{
+                                                alert(response)
+                                            }
+                                        },
+                                        error: function (response) {
+                                            alert(response);
+                                        }
+                                    });
+                                };  
+                                reader.readAsDataURL(file);  
+            }
+            else{
+
+                
+                $.ajax({
+                    type: "POST",
+                    url: "./handle-task-assignment.php",
+                    data: {
+                        student_group: $('#group-name').text().split(' ')[2] + ' ' + $('#group-name').text().split(' ')[3] + ' ' + $('#group-name').text().split(' ')[4],
+                        task_name: $('#task-options').val(),
+                        task_week: $('#week-options').val(),
+                    },
             success: function (response) {
                 if(response === 'success'){
                     alert('Task assigned successfully');
@@ -151,6 +223,7 @@
                 alert(response);
             }
         });
+    }
         $('body').css('overflow', 'auto');
         $('.overlay').toggle('medium');
         $('#assignment-container').toggle('medium');
