@@ -34,6 +34,22 @@
             padding: 15px;
         }
 
+        #forms-container{
+            position: absolute;
+            z-index: 1000;
+            width: 50%;
+            border: 2px solid black;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 15px;
+        }
+
+        #available-forms{
+            list-style: none;
+        }
+
         .overlay{
             background-color: rgba(0, 0, 0, 0.5);
             position: absolute;
@@ -72,6 +88,17 @@
             <button class="btn btn-danger" id="cancel">Cancel</button>
     </div>
     </div>
+    <div id="forms-container" style="display: none;">
+        <h5 class="text-center mb-3">Student Forms</h5>
+        <h6 id="student_name_forms" class="mb-2"></h6>
+        <h6 id="student_id_forms" class="mb-2"></h6>
+        <h6 id="student_group_forms" class="mb-2"></h6>
+        <ul id="available-forms">
+        </ul>
+        <div class="d-flex justify-content-between mt-4">
+            <button class="btn btn-danger" id="cancel-forms">Cancel</button>
+    </div>
+    </div>
     <div class='mt-5 w-75 p-3' style="background-color: white;">
         <div class="d-flex justify-content-between align-items-center mb-3" style="border-bottom: 2px solid grey;">
            <div class="w-25"><h5 class="text-left" style="text-align: left;">Name</h5></div>
@@ -81,16 +108,18 @@
 </div>
         
         <?php
+        $i = 0;
         foreach($students as $student){
             echo "<div class='d-flex justify-content-between align-items-center mb-2' style='border-bottom : 0.2px solid grey' id=".$student['id'].">";
                 echo "<div class='w-25 student-info'><h6>".$student['name']." ".$student['surname']."</h6></div>";
                 echo "<div class='w-25 student-info'><h6>".$student['student_group']."</h6></div>";
                 if($student['student_group'] == 'unassigned'){
-                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign'>Assign</h6></div>";
+                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign$i'>Assign</h6></div>";
                 }else{
-                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign'>Change</h6></div>";
+                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign$i'>Change</h6></div>";
                 }
-                echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='submissions'>Forms</h6></div>";
+                echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='submissions$i'>Forms</h6></div>";
+                $i++;
             echo "</div>";
         }
         ?>
@@ -98,19 +127,21 @@
 
 </body>
     <script>
-        $("#assign").click(function (e) { 
-            e.preventDefault();
-            var name = $(this).parent().parent().find('.student-info').eq(0).text();
-            var id = $(this).parent().parent().attr('id');
-            var group = $(this).parent().parent().find('.student-info').eq(1).text();
-            console.log(name, id);
-            $(".overlay").toggle('');
-            $("#assignment-container").toggle('slow');
-            $("#student_name").text("Student Name: "+name);
-            $("#student_id").text("Student ID: "+id);
-            $("#student_group").text("Current Group: "+group);
-            $('body').css('overflow', 'hidden');
-        });
+        for (i = 0; i < <?php echo $i ?>; i++){
+            $("#assign"+i).click(function (e) { 
+                e.preventDefault();
+                var name = $(this).parent().parent().find('.student-info').eq(0).text();
+                var id = $(this).parent().parent().attr('id');
+                var group = $(this).parent().parent().find('.student-info').eq(1).text();
+                console.log(name, id);
+                $(".overlay").toggle('');
+                $("#assignment-container").toggle('slow');
+                $("#student_name").text("Student Name: "+name);
+                $("#student_id").text("Student ID: "+id);
+                $("#student_group").text("Current Group: "+group);
+                $('body').css('overflow', 'hidden');
+            });
+        }
         $('#assign-group').click(function (e) { 
             e.preventDefault();
             var group = $("#group-options").val();
@@ -142,5 +173,45 @@
             $('body').css('overflow', 'auto')
             $("#assignment-container").toggle('slow');
         });
+        $("#cancel-forms").click(function (e) { 
+            e.preventDefault();
+            $(".overlay").toggle('');
+            $('body').css('overflow', 'hidden');
+            $('body').css('overflow', 'auto')
+            $("#forms-container").toggle('slow');
+        });
+        for (i = 0; i < <?php echo $i ?>; i++){
+        $("#submissions"+i).click(function (e) { 
+            e.preventDefault();
+            var id = $(this).parent().parent().attr('id');
+            var name = $(this).parent().parent().find('.student-info').eq(0).text();
+            var group = $(this).parent().parent().find('.student-info').eq(1).text();
+            $.ajax({
+                type: "POST",
+                url: "available-forms.php",
+                data: {
+                    student_id: id
+                },
+                success: function (response) {
+                    console.log(response);
+                    var forms = JSON.parse(response);
+                    console.log(forms);
+                    var html = '';
+                    for (i = 0; i < forms.length; i++){
+                        html += "<li class='mb-2 pretest_form'>"+forms[i]+"</li>";
+                    }
+                    $("#available-forms").html(html);
+                    $("#student_name_forms").text(name);
+                    $("#student_id_forms").text(id);
+                    $("#student_group_forms").text(group);
+                    $(".overlay").toggle('');
+                    $("#forms-container").toggle('slow');
+                    $('body').css('overflow', 'hidden');
+                }
+            });
+
+        });
+    }
+
     </script>
 </html>

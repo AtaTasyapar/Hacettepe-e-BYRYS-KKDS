@@ -1,8 +1,8 @@
 <?php
     require_once('config-students.php');
     session_start();
-    $student_id = $_SESSION['userlogin']['id'];
     $type = $_SESSION['userlogin']['type'];
+    $student_id = $type == 'student' ? $_SESSION['userlogin']['id'] : $_GET['student_id'];
     if($type === 'student'){
         $sql = 'SELECT * FROM students WHERE id = :id';
     }else{
@@ -341,7 +341,7 @@
     
     $('#back').click(function (e) { 
         e.preventDefault();
-     $('#content').load('student-info.php');
+     $('#content').load('course.php');
     });
     var pretest = <?php echo json_encode($pretest); ?>;
     if(pretest === ''){

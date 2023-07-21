@@ -17,6 +17,28 @@
         echo 'error';
     }
 
+    $sql = 'SELECT * FROM pretest1 WHERE student_id = :id';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':id', $student_id);
+    $result = $stmt->execute();
+
+    if($result){
+        $pretest1 = $stmt->fetch(PDO::FETCH_ASSOC);
+    }else{
+        echo 'error';
+    }
+
+    $sql = 'SELECT * FROM pretest2 WHERE student_id = :id';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':id', $student_id);
+    $result = $stmt->execute();
+
+    if($result){
+        $pretest2 = $stmt->fetch(PDO::FETCH_ASSOC);
+    }else{
+        echo 'error';
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -82,18 +104,40 @@
             </div>
             <div class="container-fluid mb-5 mt-4">            
                 <h2>Week 1: Introduction and Pre-testing</h2>
-                <div class="activity-container">
+                <div class="activity-container">';
+            
+            if (!isset($pretest1)) {
+                echo '
                     <h5 id="pretest1">Pre-test 1</h5>
                     <h6 class="completion-indicator">
                         incomplete
-                    </h6>
-                </div>
-                <div class="activity-container">
-                    <h5>Pre-test 2</h5>
+                    </h6></div>';
+            }else {
+                echo '
+                <h5 id="pretest1-comp">Pre-test 1</h5>
+                    <h6 class="completion-indicator">
+                        complete
+                    </h6></div>';
+            }
+            
+            echo '<div class="activity-container">';
+
+            if (!isset($pretest2)) {
+                echo '
+                    <h5 id="pretest2">Pre-test 2</h5>
                     <h6 class="completion-indicator">
                         incomplete
                     </h6>
-                </div>
+                </div>';
+            }else {
+                echo '
+                <h5 id="pretest2-comp">Pre-test 2</h5>
+                <h6 class="completion-indicator">
+                    complete
+                </h6>
+            </div>';
+            }
+            echo '
                 <div class="activity-container">
                     <h5>Test-Case </h5>
                     <h6 class="completion-indicator">
@@ -145,6 +189,24 @@
         e.preventDefault();
 
     $('#content').load('./pretest1.php')
+        
+    });
+    $('#pretest2').click(function (e) { 
+        e.preventDefault();
+
+    $('#content').load('./pretest2.php')
+        
+    });
+    $('#pretest1-comp').click(function (e) { 
+        e.preventDefault();
+
+    $('#content').load('./pretest1-review.php')
+        
+    });
+    $('#pretest2-comp').click(function (e) { 
+        e.preventDefault();
+
+    $('#content').load('./pretest2-review.php')
         
     });
 
