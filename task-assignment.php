@@ -111,7 +111,7 @@
             $('#task-options').append('<option value="pretest2">Pretest 2</option>');
             $('#task-options').append('<option value="testCase">Test Case</option>');
             $('#task-options').append('<option value="posttest1">Posttest 1</option>');
-            $('#task-options').append('<option value="posttest1">Posttest 1</option>');
+            $('#task-options').append('<option value="posttest2">Posttest 2</option>');
             $('#week-options').append('<option value="week1">Week 1</option>');
             $('#week-options').append('<option value="week2">Week 2</option>');
             $('#week-options').append('<option value="week3">Week 3</option>');

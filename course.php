@@ -45,6 +45,32 @@
     }else{
         echo 'error';
     }
+    $sql = 'SELECT * FROM posttest1 WHERE student_id = :id';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':id', $student_id);
+    $result = $stmt->execute();
+
+    if($result){
+        $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($rows){
+            $posttest1 = $rows;
+        }
+    }else{
+        echo 'error';
+    }
+    $sql = 'SELECT * FROM posttest2 WHERE student_id = :id';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':id', $student_id);
+    $result = $stmt->execute();
+
+    if($result){
+        $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($rows){
+            $posttest2 = $rows;
+        }
+    }else{
+        echo 'error';
+    }
 
     $sql = 'SELECT * FROM task';
     $stmt = $db->prepare($sql);
@@ -61,7 +87,6 @@
         echo 'error';
     }
 
-    echo $student_group;
 
 ?>
 
@@ -129,19 +154,19 @@
             <div class="container-fluid mb-5 mt-4">            
                 <h2>Week 1: Introduction and Pre-testing</h2>';
             foreach($tasks as $task){
-                if(strtolower($task['task_name']) == strtolower('pretest1') &&  strtolower($task['student_group']) == strtolower($student_group)){
+                if(strtolower($task['task_name']) == strtolower('pretest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week1'){
                     if (!isset($pretest1)) {
                         echo '
                         <div class="activity-container">
                         <h5 id="pretest1">Pre-test 1</h5>
-                        <h6 class="completion-indicator">
+                        <h6 class="completion-indicator" style="color: red;">
                             incomplete
                         </h6></div>';
                     }else {
                         echo '
                         <div class="activity-container">
                         <h5 id="pretest1-comp">Pre-test 1</h5>
-                        <h6 class="completion-indicator">
+                        <h6 class="completion-indicator" style="color: green;"  >
                             complete
                         </h6></div>';
                     }      
@@ -149,12 +174,12 @@
             }            
 
             foreach($tasks as $task){
-                if(strtolower($task['task_name']) == strtolower('pretest2') &&  strtolower($task['student_group']) == strtolower($student_group)){
+                if(strtolower($task['task_name']) == strtolower('pretest2') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week1'){
                     if (!isset($pretest2)) {
                         echo '
                         <div class="activity-container">
                             <h5 id="pretest2">Pre-test 2</h5>
-                            <h6 class="completion-indicator">
+                            <h6 class="completion-indicator" style="color: red;">
                                 incomplete
                             </h6>
                         </div>';
@@ -162,7 +187,49 @@
                         echo '
                         <div class="activity-container">
                             <h5 id="pretest2-comp">Pre-test 2</h5>
-                            <h6 class="completion-indicator">
+                            <h6 class="completion-indicator" style="color: green;">
+                                complete
+                            </h6>
+                        </div>';
+                    }
+        }
+    }
+            foreach($tasks as $task){
+                if(strtolower($task['task_name']) == strtolower('posttest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week1'){
+                    if (!isset($posttest1)) {
+                        echo '
+                        <div class="activity-container">
+                            <h5 id="posttest1">Post-test 1</h5>
+                            <h6 class="completion-indicator" style="color: red;">
+                                incomplete
+                            </h6>
+                        </div>';
+                    }else {
+                        echo '
+                        <div class="activity-container">
+                            <h5 id="posttest1-comp">Post-test 1</h5>
+                            <h6 class="completion-indicator" style="color: green;">
+                                complete
+                            </h6>
+                        </div>';
+                    }
+        }
+    }
+            foreach($tasks as $task){
+                if(strtolower($task['task_name']) == strtolower('posttest2') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week1'){
+                    if (!isset($posttest2)) {
+                        echo '
+                        <div class="activity-container">
+                            <h5 id="posttest2">Post-test 2</h5>
+                            <h6 class="completion-indicator" style="color: red;">
+                                incomplete
+                            </h6>
+                        </div>';
+                    }else {
+                        echo '
+                        <div class="activity-container">
+                            <h5 id="posttest2-comp">Post-test 2</h5>
+                            <h6 class="completion-indicator" style="color: green;">
                                 complete
                             </h6>
                         </div>';
@@ -176,32 +243,277 @@
                         incomplete
                     </h6>
                 </div>
-            </div>
+            </div>';
+            
+
+            echo '
             <div class="container-fluid mb-5">            
-                <h2>Week 2: Syllabus Un-announced</h2>
-                <div class="activity-container">
-                    <h6 class="completion-indicator">
-                        To be announced
-                    </h6>
-                </div>
-            </div>
-            <div class="container-fluid mb-5">            
-                <h2>Week 3: Syllabus Un-announced</h2>
-                <div class="activity-container">
-                    <h6 class="completion-indicator">
-                        To be announced
-                    </h6>
-                </div>
-            </div>
-            <div class="container-fluid mb-5">            
-                <h2>Week 4: Syllabus Un-announced</h2>
-                <div class="activity-container">
-                    <h6 class="completion-indicator">
-                        To be announced
-                    </h6>
-                </div>
+                <h2>Week 2: Intermediate Testing</h2>';
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('pretest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week2'){
+                        if (!isset($pretest1)) {
+                            echo '
+                            <div class="activity-container">
+                            <h5 id="pretest1">Pre-test 1</h5>
+                            <h6 class="completion-indicator" style="color: red;">
+                                incomplete
+                            </h6></div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                            <h5 id="pretest1-comp">Pre-test 1</h5>
+                            <h6 class="completion-indicator" style="color: green;"  >
+                                complete
+                            </h6></div>';
+                        }      
+                    }
+                }   
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('pretest2') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week2'){
+                        if (!isset($pretest2)) {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="pretest2">Pre-test 2</h5>
+                                <h6 class="completion-indicator" style="color: red;">
+                                    incomplete
+                                </h6>
+                            </div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="pretest2-comp">Pre-test 2</h5>
+                                <h6 class="completion-indicator" style="color: green;">
+                                    complete
+                                </h6>
+                            </div>';
+                        }
+            }
+        }
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('posttest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week2'){
+                        if (!isset($posttest1)) {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest1">Post-test 1</h5>
+                                <h6 class="completion-indicator" style="color: red;">
+                                    incomplete
+                                </h6>
+                            </div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest1-comp">Post-test 1</h5>
+                                <h6 class="completion-indicator" style="color: green;">
+                                    complete
+                                </h6>
+                            </div>';
+                        }
+            }
+        }
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('posttest2') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week2'){
+                        if (!isset($posttest2)) {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest2">Post-test 2</h5>
+                                <h6 class="completion-indicator" style="color: red;">
+                                    incomplete
+                                </h6>
+                            </div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest2-comp">Post-test 2</h5>
+                                <h6 class="completion-indicator" style="color: green;">
+                                    complete
+                                </h6>
+                            </div>';
+                        }
+            }
+        } 
+            echo '    
             </div>
             ';
+
+
+
+            echo '
+            <div class="container-fluid mb-5">            
+                <h2>Week 3: Syllabus Un-announced</h2>';
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('pretest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week3'){
+                        if (!isset($pretest1)) {
+                            echo '
+                            <div class="activity-container">
+                            <h5 id="pretest1">Pre-test 1</h5>
+                            <h6 class="completion-indicator" style="color: red;">
+                                incomplete
+                            </h6></div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                            <h5 id="pretest1-comp">Pre-test 1</h5>
+                            <h6 class="completion-indicator" style="color: green;"  >
+                                complete
+                            </h6></div>';
+                        }      
+                    }
+                }   
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('pretest2') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week3'){
+                        if (!isset($pretest2)) {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="pretest2">Pre-test 2</h5>
+                                <h6 class="completion-indicator" style="color: red;">
+                                    incomplete
+                                </h6>
+                            </div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="pretest2-comp">Pre-test 2</h5>
+                                <h6 class="completion-indicator" style="color: green;">
+                                    complete
+                                </h6>
+                            </div>';
+                        }
+            }
+        }
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('posttest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week3'){
+                        if (!isset($posttest1)) {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest1">Post-test 1</h5>
+                                <h6 class="completion-indicator" style="color: red;">
+                                    incomplete
+                                </h6>
+                            </div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest1-comp">Post-test 1</h5>
+                                <h6 class="completion-indicator" style="color: green;">
+                                    complete
+                                </h6>
+                            </div>';
+                        }
+            }
+        }
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('posttest2') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week3'){
+                        if (!isset($posttest2)) {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest2">Post-test 2</h5>
+                                <h6 class="completion-indicator" style="color: red;">
+                                    incomplete
+                                </h6>
+                            </div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest2-comp">Post-test 2</h5>
+                                <h6 class="completion-indicator" style="color: green;">
+                                    complete
+                                </h6>
+                            </div>';
+                        }
+            }
+        } 
+              
+            echo '</div>';
+
+
+
+            echo '
+            <div class="container-fluid mb-5">            
+                <h2>Week 4: Syllabus Un-announced</h2>';
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('pretest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week4'){
+                        if (!isset($pretest1)) {
+                            echo '
+                            <div class="activity-container">
+                            <h5 id="pretest1">Pre-test 1</h5>
+                            <h6 class="completion-indicator" style="color: red;">
+                                incomplete
+                            </h6></div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                            <h5 id="pretest1-comp">Pre-test 1</h5>
+                            <h6 class="completion-indicator" style="color: green;"  >
+                                complete
+                            </h6></div>';
+                        }      
+                    }
+                }   
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('pretest2') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week4'){
+                        if (!isset($pretest2)) {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="pretest2">Pre-test 2</h5>
+                                <h6 class="completion-indicator" style="color: red;">
+                                    incomplete
+                                </h6>
+                            </div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="pretest2-comp">Pre-test 2</h5>
+                                <h6 class="completion-indicator" style="color: green;">
+                                    complete
+                                </h6>
+                            </div>';
+                        }
+            }
+        }
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('posttest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week4'){
+                        if (!isset($posttest1)) {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest1">Post-test 1</h5>
+                                <h6 class="completion-indicator" style="color: red;">
+                                    incomplete
+                                </h6>
+                            </div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest1-comp">Post-test 1</h5>
+                                <h6 class="completion-indicator" style="color: green;">
+                                    complete
+                                </h6>
+                            </div>';
+                        }
+            }
+        }
+                foreach($tasks as $task){
+                    if(strtolower($task['task_name']) == strtolower('posttest2') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week4'){
+                        if (!isset($posttest2)) {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest2">Post-test 2</h5>
+                                <h6 class="completion-indicator" style="color: red;">
+                                    incomplete
+                                </h6>
+                            </div>';
+                        }else {
+                            echo '
+                            <div class="activity-container">
+                                <h5 id="posttest2-comp">Post-test 2</h5>
+                                <h6 class="completion-indicator" style="color: green;">
+                                    complete
+                                </h6>
+                            </div>';
+                        }
+            }
+        } 
+              
+            echo '</div>';
         }
         ?>
     </div>
@@ -228,6 +540,14 @@
 
     $('#content').load('./pretest2.php')
         
+    });
+    $('#posttest1').click(function (e) { 
+        e.preventDefault();
+        $('#content').load('./posttest1.php')
+    });
+    $('#posttest2').click(function (e) { 
+        e.preventDefault();
+        $('#content').load('./posttest2.php')
     });
     // $('#pretest1-comp').click(function (e) { 
     //     e.preventDefault();
