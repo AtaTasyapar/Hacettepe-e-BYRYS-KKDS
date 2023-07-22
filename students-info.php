@@ -44,6 +44,30 @@
             transform: translate(-50%, -50%);
             background-color: white;
             padding: 15px;
+            max-height: 90%;
+            overflow-y: scroll;
+            border-radius: 10px;
+        }
+
+        #forms-container::-webkit-scrollbar {
+        width: 10px; 
+        }
+
+        #forms-container::-webkit-scrollbar-thumb {
+        background-color: #888; 
+        border-radius: 5px; 
+        }
+
+        #forms-container::-webkit-scrollbar-thumb:hover {
+        background-color: darkcyan; 
+        }
+
+        #forms-container::-webkit-scrollbar-track {
+        background-color: #f2f2f2; 
+        }
+
+        #forms-container::-webkit-scrollbar-corner {
+        background-color: #f2f2f2; 
         }
 
         #available-forms{
@@ -89,15 +113,6 @@
     </div>
     </div>
     <div id="forms-container" style="display: none;">
-        <h5 class="text-center mb-3">Student Forms</h5>
-        <h6 id="student_name_forms" class="mb-2"></h6>
-        <h6 id="student_id_forms" class="mb-2"></h6>
-        <h6 id="student_group_forms" class="mb-2"></h6>
-        <ul id="available-forms">
-        </ul>
-        <div class="d-flex justify-content-between mt-4">
-            <button class="btn btn-danger" id="cancel-forms">Cancel</button>
-    </div>
     </div>
     <div class='mt-5 w-75 p-3' style="background-color: white;">
         <div class="d-flex justify-content-between align-items-center mb-3" style="border-bottom: 2px solid grey;">
@@ -173,16 +188,11 @@
             $('body').css('overflow', 'auto')
             $("#assignment-container").toggle('slow');
         });
-        $("#cancel-forms").click(function (e) { 
-            e.preventDefault();
-            $(".overlay").toggle('');
-            $('body').css('overflow', 'hidden');
-            $('body').css('overflow', 'auto')
-            $("#forms-container").toggle('slow');
-        });
         for (i = 0; i < <?php echo $i ?>; i++){
         $("#submissions"+i).click(function (e) { 
             e.preventDefault();
+            $('#forms-container').html('<div style="display: flex;"><h5 class="text-center mb-3">Student Forms</h5><h6 id="student_name_forms" class="mb-2"></h6><h6 id="student_id_forms" class="mb-2"></h6><h6 id="student_group_forms" class="mb-2"></h6></div><div id="available-forms" style="text-align: center;"></div><div class="d-flex justify-content-between mt-4"><button class="btn btn-danger" id="cancel-forms">Cancel</button></div>');
+
             var id = $(this).parent().parent().attr('id');
             var name = $(this).parent().parent().find('.student-info').eq(0).text();
             var group = $(this).parent().parent().find('.student-info').eq(1).text();
@@ -198,7 +208,7 @@
                     console.log(forms);
                     var html = '';
                     for (i = 0; i < forms.length; i++){
-                        html += "<li class='mb-2 pretest_form'>"+forms[i]+"</li>";
+                        html += "<button class='btn btn-success "+forms[i]+"' style='margin-left: 5px;'>"+forms[i].split('_').join(' ')+"</li>";
                     }
                     $("#available-forms").html(html);
                     $("#student_name_forms").text(name);
@@ -210,8 +220,113 @@
                 }
             });
 
+            $("#cancel-forms").click(function (e) { 
+            e.preventDefault();
+            $(".overlay").toggle('');
+            $('body').css('overflow', 'hidden');
+            $('body').css('overflow', 'auto')
+            $("#forms-container").toggle('slow');
+            });
+
+            
+            $("#available-forms").on('click', '.Pretest_1', function (e) {
+                e.preventDefault();
+                var formId = $(this).data('form-id');
+                var id = $(this).parent().parent().find('#student_id_forms').text();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "pretest1-review.php",
+                    data: {
+                    student_id: id
+                    },
+                    success: function (response) {
+                    console.log(response);
+                    $("#forms-container").html(response);
+                    },
+                    error: function () {
+                    $("#forms-container").html("Error");
+                    }
+                });
+            });
+
+            $("#available-forms").on('click', '.Pretest_2', function (e) {
+                e.preventDefault();
+                var formId = $(this).data('form-id');
+                var id = $(this).parent().parent().find('#student_id_forms').text();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "pretest2-review.php",
+                    data: {
+                    student_id: id
+                    },
+                    success: function (response) {
+                    console.log(response);
+                    $("#forms-container").html(response);
+                    },
+                    error: function () {
+                    $("#forms-container").html("Error");
+                    }
+                });
+            });
+
+            $("#available-forms").on('click', '.Posttest_1', function (e) {
+                e.preventDefault();
+                var formId = $(this).data('form-id');
+                var id = $(this).parent().parent().find('#student_id_forms').text();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "posttest1-review.php",
+                    data: {
+                    student_id: id
+                    },
+                    success: function (response) {
+                    console.log(response);
+                    $("#forms-container").html(response);
+                    },
+                    error: function () {
+                    $("#forms-container").html("Error");
+                    }
+                });
+            });
+
+            $("#available-forms").on('click', '.Posttest_2', function (e) {
+                e.preventDefault();
+                var formId = $(this).data('form-id');
+                var id = $(this).parent().parent().find('#student_id_forms').text();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "posttest2-review.php",
+                    data: {
+                    student_id: id
+                    },
+                    success: function (response) {
+                    console.log(response);
+                    $("#forms-container").html(response);
+                    },
+                    error: function () {
+                    $("#forms-container").html("Error");
+                    }
+                });
+            });
+
         });
     }
 
+    $(".overlay").click(function (e) { 
+        e.preventDefault();
+        $(".overlay").toggle('');
+        $('body').css('overflow', 'hidden');
+        $('body').css('overflow', 'auto');
+        if ($('#assignment-container').css('display') != 'none'){
+            $("#assignment-container").toggle('slow');
+        }
+        if ($('#forms-container').css('display') != 'none'){
+            $("#forms-container").toggle('slow');
+        }
+    });
     </script>
 </html>

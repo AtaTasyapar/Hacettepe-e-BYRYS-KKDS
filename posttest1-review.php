@@ -1,25 +1,25 @@
 <?php
     require_once('config-students.php');
     session_start();
-    $type = $_SESSION['userlogin']['type'];
-    $student_id = $type == 'student' ? $_SESSION['userlogin']['id'] : $_GET['student_id'];
-    if($type === 'student'){
-        $sql = 'SELECT * FROM students WHERE id = :id';
-    }else{
-        $sql = 'SELECT * FROM teachers WHERE id = :id';
-    }
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':id', $student_id);
-    $result = $stmt->execute();
-    if($result){
-        $student = $stmt->fetch(PDO::FETCH_ASSOC);
-        $student_name = $student['name'] . ' ' . $student['surname'];
-        $student_email = $student['email'];
-        $student_group = $student['student_group'];
-    }
-    else{
-        echo 'error';
-    }
+    $type = isset($_SESSION['userlogin']['type']) ? $_SESSION['userlogin']['type'] : '';
+    $student_id = $type == 'student' ? $_SESSION['userlogin']['id'] : $_POST['student_id'];
+    // if($type === 'student'){
+    //     $sql = 'SELECT * FROM students WHERE id = :id';
+    // }else{
+    //     $sql = 'SELECT * FROM teachers WHERE id = :id';
+    // }
+    // $stmt = $db->prepare($sql);
+    // $stmt->bindParam(':id', $student_id);
+    // $result = $stmt->execute();
+    // if($result){
+    //     $student = $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $student_name = $student['name'] . ' ' . $student['surname'];
+    //     $student_email = $student['email'];
+    //     $student_group = $student['student_group'];
+    // }
+    // else{
+    //     echo 'error';
+    // }
     $posttest = '';
     $sql = 'SELECT * FROM posttest1 WHERE student_id = :id';
     $stmt = $db->prepare($sql);
@@ -63,6 +63,7 @@
             border: 1px solid grey;
             background-color: rgb(146, 146, 246);
             color: white;
+            margin-bottom: 20px;
         }
 
     </style>
@@ -337,11 +338,15 @@
 </body>
 
 <script>
-
+    var teacher = <?php echo isset($_POST['student_id']); ?>;
     
     $('#back').click(function (e) { 
         e.preventDefault();
-     $('#content').load('course.php');
+        if(teacher){
+            $('#content').load('students-info.php');
+        } else {
+            $('#content').load('course.php');
+        }
     });
     var posttest = <?php echo json_encode($posttest); ?>;
     if(posttest === ''){
