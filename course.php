@@ -238,7 +238,7 @@
     }
             echo '
                 <div class="activity-container">
-                    <h5>Test-Case </h5>
+                    <h5 id="testcase">Test-Case </h5>
                     <h6 class="completion-indicator">
                         incomplete
                     </h6>
@@ -549,6 +549,12 @@
         e.preventDefault();
         $('#content').load('./posttest2.php')
     });
+
+    $('#testcase').click(function (e) { 
+        e.preventDefault();
+        $('#content').load('./test-case.php')
+    });
+
     // $('#pretest1-comp').click(function (e) { 
     //     e.preventDefault();
 
