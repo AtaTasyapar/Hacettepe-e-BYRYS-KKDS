@@ -495,7 +495,6 @@ if ($('input[name="ulcer_prevention_ability"]:checked').length === 0) {
     var ulcer_prevention_role = $('input[name="ulcer_prevention_role"]:checked').length > 0 ? $('input[name="ulcer_prevention_role"]:checked').val() : '';
     var ulcer_prevention_highrisk = $('input[name="ulcer_prevention_highrisk"]:checked').length > 0 ? $('input[name="ulcer_prevention_highrisk"]:checked').val() : '';
     var ulcer_prevention_ability = $('input[name="ulcer_prevention_ability"]:checked').length > 0 ? $('input[name="ulcer_prevention_ability"]:checked').val() : '';
-    
     $.ajax({
         type: "POST",
         url: "./pretest1-handler.php",

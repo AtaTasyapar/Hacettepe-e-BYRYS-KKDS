@@ -106,7 +106,7 @@
         $('#assignment-container').toggle('medium');
         $('#group-name').text('Current Group: ' + group);
      
-        if(group === 'Control Group 1'){
+        if(group === 'Control Group 1' || group === 'Intervention Group 1'){
             $('#task-options').append('<option value="pretest1">Pretest 1</option>');
             $('#task-options').append('<option value="pretest2">Pretest 2</option>');
             $('#task-options').append('<option value="testCase">Test Case</option>');

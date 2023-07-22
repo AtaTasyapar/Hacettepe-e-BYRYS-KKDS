@@ -23,7 +23,11 @@
     $result = $stmt->execute();
 
     if($result){
-        $pretest1 = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($rows){
+            $pretest1 = $rows;
+        }
     }else{
         echo 'error';
     }
@@ -34,10 +38,30 @@
     $result = $stmt->execute();
 
     if($result){
-        $pretest2 = $stmt->fetch(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($rows){
+            $pretest2 = $rows;
+        }
     }else{
         echo 'error';
     }
+
+    $sql = 'SELECT * FROM task';
+    $stmt = $db->prepare($sql);
+    $result = $stmt->execute();
+    if($result){
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if($rows){
+            $tasks = $rows;
+        }
+        else{
+            echo 'error';
+        }
+    }else{
+        echo 'error';
+    }
+
+    echo $student_group;
 
 ?>
 
@@ -103,40 +127,48 @@
                 <h6 id="heading" class="text-start pt-2">Course Overview</h6>
             </div>
             <div class="container-fluid mb-5 mt-4">            
-                <h2>Week 1: Introduction and Pre-testing</h2>
-                <div class="activity-container">';
-            
-            if (!isset($pretest1)) {
-                echo '
-                    <h5 id="pretest1">Pre-test 1</h5>
-                    <h6 class="completion-indicator">
-                        incomplete
-                    </h6></div>';
-            }else {
-                echo '
-                <h5 id="pretest1-comp">Pre-test 1</h5>
-                    <h6 class="completion-indicator">
-                        complete
-                    </h6></div>';
-            }
-            
-            echo '<div class="activity-container">';
+                <h2>Week 1: Introduction and Pre-testing</h2>';
+            foreach($tasks as $task){
+                if(strtolower($task['task_name']) == strtolower('pretest1') &&  strtolower($task['student_group']) == strtolower($student_group)){
+                    if (!isset($pretest1)) {
+                        echo '
+                        <div class="activity-container">
+                        <h5 id="pretest1">Pre-test 1</h5>
+                        <h6 class="completion-indicator">
+                            incomplete
+                        </h6></div>';
+                    }else {
+                        echo '
+                        <div class="activity-container">
+                        <h5 id="pretest1-comp">Pre-test 1</h5>
+                        <h6 class="completion-indicator">
+                            complete
+                        </h6></div>';
+                    }      
+                }
+            }            
 
-            if (!isset($pretest2)) {
-                echo '
-                    <h5 id="pretest2">Pre-test 2</h5>
-                    <h6 class="completion-indicator">
-                        incomplete
-                    </h6>
-                </div>';
-            }else {
-                echo '
-                <h5 id="pretest2-comp">Pre-test 2</h5>
-                <h6 class="completion-indicator">
-                    complete
-                </h6>
-            </div>';
-            }
+            foreach($tasks as $task){
+                if(strtolower($task['task_name']) == strtolower('pretest2') &&  strtolower($task['student_group']) == strtolower($student_group)){
+                    if (!isset($pretest2)) {
+                        echo '
+                        <div class="activity-container">
+                            <h5 id="pretest2">Pre-test 2</h5>
+                            <h6 class="completion-indicator">
+                                incomplete
+                            </h6>
+                        </div>';
+                    }else {
+                        echo '
+                        <div class="activity-container">
+                            <h5 id="pretest2-comp">Pre-test 2</h5>
+                            <h6 class="completion-indicator">
+                                complete
+                            </h6>
+                        </div>';
+                    }
+        }
+    }
             echo '
                 <div class="activity-container">
                     <h5>Test-Case </h5>
@@ -197,18 +229,18 @@
     $('#content').load('./pretest2.php')
         
     });
-    $('#pretest1-comp').click(function (e) { 
-        e.preventDefault();
+    // $('#pretest1-comp').click(function (e) { 
+    //     e.preventDefault();
 
-    $('#content').load('./pretest1-review.php')
+    // $('#content').load('./pretest1-review.php')
         
-    });
-    $('#pretest2-comp').click(function (e) { 
-        e.preventDefault();
+    // });
+    // $('#pretest2-comp').click(function (e) { 
+    //     e.preventDefault();
 
-    $('#content').load('./pretest2-review.php')
+    // $('#content').load('./pretest2-review.php')
         
-    });
+    // });
 
 
     // $('.activity-container h5').click(function (e) { 
