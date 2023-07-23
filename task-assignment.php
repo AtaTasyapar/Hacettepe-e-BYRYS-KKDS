@@ -15,6 +15,26 @@
         echo 'error';
     }
 
+    $sql = 'SELECT * FROM task WHERE student_group = "Control Group 1"';
+    $stmt = $db->prepare($sql);
+    $result = $stmt->execute();
+    $control1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql = 'SELECT * FROM task WHERE student_group = "Control Group 2"';
+    $stmt = $db->prepare($sql);
+    $result = $stmt->execute();
+    $control2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql = 'SELECT * FROM task WHERE student_group = "Intervention Group 1"';
+    $stmt = $db->prepare($sql);
+    $result = $stmt->execute();
+    $intervention1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql = 'SELECT * FROM task WHERE student_group = "Intervention Group 2"';
+    $stmt = $db->prepare($sql);
+    $result = $stmt->execute();
+    $intervention2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +76,10 @@
             padding: 5px;
             border: 1px dotted grey;
         }
+        #group-selection {
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body>
@@ -85,15 +109,59 @@
                 <div class="w-50 group-container" id="control1" >
                     <h5>Control Group 1</h5>
                 </div>
+                    <?php
+                        $i = 1;
+                        foreach($control1 as $task){
+                            echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px;">';
+                            echo '<p style="margin-right: 20px">' . $task['task_name'] . ' - ' . $task['task_week'] . '</p>';
+                            echo '<button class="btn btn-success delete-btn" id="delete-btn'.$i.'">Delete</button>';
+                            echo '</div>';
+                            $i++;
+                        }
+
+                    ?>
                 <div class="w-50 group-container" id="control2">
                     <h5>Control Group 2</h5>
                 </div>
+                    <?php
+
+                        foreach($control2 as $task){
+                            echo `<div id="{$task["id"]}" style="display: flex; margin-bottom: 10px;">`;
+                            echo '<p style="margin-right: 20px">' . $task['task_name'] . ' - ' . $task['task_week'] . '</p>';
+                            echo '<button class="btn btn-success delete-btn" id="delete-btn'.$i.'">Delete</button>';
+                            echo '</div>';
+                            $i++;
+                        }
+
+                    ?>
                 <div class="w-50 group-container" id="intervention1">
                     <h5>Intervention Group 1</h5>
                 </div>
+                    <?php
+
+                        foreach($intervention1 as $task){
+                            echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px;">';
+                            echo '<p style="margin-right: 20px">' . $task['task_name'] . ' - ' . $task['task_week'] . '</p>';
+                            echo '<button class="btn btn-success delete-btn" id="delete-btn'.$i.'">Delete</button>';
+                            echo '</div>';
+                            $i++;
+                        }
+
+                    ?>
                 <div class="w-50 group-container" id="intervention2" >
                     <h5>Intervention Group 2</h5>
                 </div>
+                    <?php
+
+                        foreach($intervention2 as $task){
+                            echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px;">';
+                            echo '<p style="margin-right: 20px">' . $task['task_name'] . ' - ' . $task['task_week'] . '</p>';
+                            echo '<button class="btn btn-success delete-btn" id="delete-btn'.$i.'">Delete</button>';
+                            echo '</div>';
+                            $i++;
+                        }
+
+                    ?>
             </div>
     </div>
 </body>
@@ -129,6 +197,8 @@
             $('#upload-pdf').toggle('medium');
         }
     });
+
+    var numOfDeleteBtns = <?php echo $i; ?>;
 
     $('#assign-task').click(function (e) {
         e.preventDefault();
@@ -180,7 +250,7 @@
                                 },
                                 success: function (response) {
                                     if(response === 'success'){
-                                        alert('Task assigned successfully');
+                                        // alert('Task assigned successfully');
                                     }else{
                                         alert(response)
                                     }
@@ -213,8 +283,28 @@
                         task_week: $('#week-options').val(),
                     },
             success: function (response) {
-                if(response === 'success'){
-                    alert('Task assigned successfully');
+                if(response !== 'Error'){
+                    // alert('Task assigned successfully');
+                    // add task to the list of tasks using the response for the id and the task name and week for the text
+                    const task = JSON.parse(response);
+                    if (task.student_group == "Control Group 1"){
+                        // append a div after the control group 1 div
+                        $('#control1').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        numOfDeleteBtns++;
+                        triggerDeleteBtn();
+                    } else if (task.student_group == "Control Group 2"){
+                        $('#control2').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        numOfDeleteBtns++;
+                        triggerDeleteBtn();
+                    } else if (task.student_group == "Intervention Group 1"){
+                        $('#intervention1').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        numOfDeleteBtns++;
+                        triggerDeleteBtn();
+                    } else if (task.student_group == "Intervention Group 2") {
+                        $('#intervention2').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        numOfDeleteBtns++;
+                        triggerDeleteBtn();
+                    }
                 }else{
                     alert(response)
                 }
@@ -233,28 +323,61 @@
 
     });
 
+    // make the value of num the first delete button id number
+    var num = $('.delete-btn:first').attr('id').split('btn')[1];
 
-  
+    // turn the value of num into an integer
+    num = parseInt(num);
 
+    triggerDeleteBtn();
 
-        $('#task-options').change(function (e) { 
-            if($(this).val() === 'testCase'){
-                console.log($(this).val());
-                $('#upload-pdf').toggle('medium');
-            }else{
-                $('#upload-pdf').hide('medium');
-            }
-        });
+    function triggerDeleteBtn(){
+        for (i = 1; i < numOfDeleteBtns; i++){
+            console.log(i);
+            $("#delete-btn"+i).click(function () {
+                    var divId = $(this).parent().attr("id");
+                    console.log("Clicked on div with ID:", divId);
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "./delete-task.php",
+                        data: {
+                            task_id: divId,
+                        },
+                        success: function (response) {
+                            if(response === 'success'){
+                                alert('Task deleted successfully');
+                                $("#" + divId).remove();
+                            }else{
+                                alert(response)
+                            }
+                        },
+                        error: function (response) {
+                            alert(response);
+                        }
+                    });
+            });
+        }
+    }
 
-        $('#cancel').click(function (e) { 
-            e.preventDefault();
-            $('body').css('overflow', 'auto');
-            $('.overlay').toggle('medium');
-            $('#assignment-container').toggle('medium');
-            $('#task-options').empty();
-            $('#week-options').empty();
+    $('#task-options').change(function (e) { 
+        if($(this).val() === 'testCase'){
+            console.log($(this).val());
+            $('#upload-pdf').toggle('medium');
+        }else{
             $('#upload-pdf').hide('medium');
-        });
+        }
+    });
+
+    $('#cancel').click(function (e) { 
+        e.preventDefault();
+        $('body').css('overflow', 'auto');
+        $('.overlay').toggle('medium');
+        $('#assignment-container').toggle('medium');
+        $('#task-options').empty();
+        $('#week-options').empty();
+        $('#upload-pdf').hide('medium');
+    });
 
     
 </script>
