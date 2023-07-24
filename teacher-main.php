@@ -36,16 +36,34 @@ if (isset($_GET['logout'])) {
     
     <!-- Customized Bootstrap Stylesheet -->
     <link href="bootstrap.min.css" rel="stylesheet">
+    <style>
+         #renewal-confirmation{
+            position: absolute;
+            z-index: 1000;
+            width: 50%;
+            border: 2px solid black;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 15px;
+            padding-bottom: 30px;
+            border-radius: 10px;
+        }
+    </style>
 
     <!-- Template Stylesheet -->
 
 </head>
 
 <body class="stu-body">
-    <div id="renewal-confirmation">
+    <div id="renewal-confirmation" style="display:none;" class="container-fluid ">
         <h6>Are you sure you want to renew the course</h6>
         <p>*This will delete all student submissions and task assignments!</p>
-        <button id="confirm-renewal">Confirm</button>
+        <div class="d-flex justify-content-around w-50 m-auto">
+            <button id="confirm-renewal" class="btn btn-success">Confirm</button>
+            <button id="cancel-renewal" class="btn btn-danger" >Cancel</button>
+        </div>
     </div>
     <div class="stu-body1">
         <div class="navigation-wrapper">
@@ -171,17 +189,26 @@ if (isset($_GET['logout'])) {
         $('#renew-course').click(function(e){
             e.preventDefault();
 
-            $.ajax({
+            $('#renewal-confirmation').show('medium');
+        })
+        $('#confirm-renewal').click(function(){
+                $.ajax({
                 type: "get",
                 url: "./renew-course.php",
                 success: function (response) {
-                    if(response.trem()==='success'){
+                    if(response.trim()==='success'){
                         alert('Course renewed successfully');
                         window.location.reload();
                     }
+                    else{
+                        alert(response);
+                    }
                 }
             });
-        })
+            })
+            $('#cancel-renewal').click(function(){
+                $('#renewal-confirmation').hide('medium');
+            })
         </script>
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

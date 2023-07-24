@@ -109,8 +109,8 @@
                 <div class="w-50 group-container" id="control1" >
                     <h5>Control Group 1</h5>
                 </div>
-                <div id="Control_group_1">
-                    <?php
+                <?php
+                echo '<div id="Control_group_1">';
                         $i = 1;
                         foreach($control1 as $task){
                             echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px;">';
@@ -120,13 +120,13 @@
                             $i++;
                         }
 
+                    echo '</div>';
                     ?>
-                </div>
                 <div class="w-50 group-container" id="control2">
                     <h5>Control Group 2</h5>
                 </div>
-                <div id="Control_group_2">
-                    <?php
+                <?php
+                echo '<div id="Control_group_2">';
 
                         foreach($control2 as $task){
                             echo `<div id="{$task["id"]}" style="display: flex; margin-bottom: 10px;">`;
@@ -136,14 +136,14 @@
                             $i++;
                         }
 
+                        echo '</div>';
                     ?>
-                <div>
+                    
                 <div class="w-50 group-container" id="intervention1">
                     <h5>Intervention Group 1</h5>
                 </div>
-                <div id="Intervention_group_1">
-                    <?php
-
+                <?php
+                echo '<div id="Intervention_group_1">';
                         foreach($intervention1 as $task){
                             echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px;">';
                             echo '<p style="margin-right: 20px">' . $task['task_name'] . ' - ' . $task['task_week'] . '</p>';
@@ -152,13 +152,15 @@
                             $i++;
                         }
 
+                    echo '</div>';
                     ?>
-                </div>
+
+
                 <div class="w-50 group-container" id="intervention2" >
                     <h5>Intervention Group 2</h5>
                 </div>
-                <div id="Intervention_group_2">
-                    <?php
+                <?php
+                echo '<div id="Intervention_group_2">';
 
                         foreach($intervention2 as $task){
                             echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px;">';
@@ -168,8 +170,8 @@
                             $i++;
                         }
 
+                    echo '</div>';
                     ?>
-                </div>
             </div>
     </div>
 </body>

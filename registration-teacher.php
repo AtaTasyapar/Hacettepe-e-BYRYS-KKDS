@@ -28,7 +28,6 @@ require_once("config-students.php");
 </head>
 
 <body>
-
     <div id="validation-box">
         <form action="" method="post">
             <div class="login-box login-login" style='width : 50%;'>
