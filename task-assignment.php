@@ -109,6 +109,7 @@
                 <div class="w-50 group-container" id="control1" >
                     <h5>Control Group 1</h5>
                 </div>
+                <div id="Control_group_1">
                     <?php
                         $i = 1;
                         foreach($control1 as $task){
@@ -120,9 +121,11 @@
                         }
 
                     ?>
+                </div>
                 <div class="w-50 group-container" id="control2">
                     <h5>Control Group 2</h5>
                 </div>
+                <div id="Control_group_2">
                     <?php
 
                         foreach($control2 as $task){
@@ -134,9 +137,11 @@
                         }
 
                     ?>
+                <div>
                 <div class="w-50 group-container" id="intervention1">
                     <h5>Intervention Group 1</h5>
                 </div>
+                <div id="Intervention_group_1">
                     <?php
 
                         foreach($intervention1 as $task){
@@ -148,9 +153,11 @@
                         }
 
                     ?>
+                </div>
                 <div class="w-50 group-container" id="intervention2" >
                     <h5>Intervention Group 2</h5>
                 </div>
+                <div id="Intervention_group_2">
                     <?php
 
                         foreach($intervention2 as $task){
@@ -162,6 +169,7 @@
                         }
 
                     ?>
+                </div>
             </div>
     </div>
 </body>
@@ -249,10 +257,31 @@
                                     assoc_file : filename,
                                 },
                                 success: function (response) {
-                                    if(response === 'success'){
-                                        // alert('Task assigned successfully');
+                                    if(response !== 'Error'){
+                                        const task = JSON.parse(response);
+                                        if (task.student_group == "Control Group 1"){
+                                            // append a div after the control group 1 div
+                                            $('#control1').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                                            numOfDeleteBtns++;
+                                            triggerDeleteBtn();
+                                        } else if (task.student_group == "Control Group 2"){
+                                            $('#control2').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                                            numOfDeleteBtns++;
+                                            triggerDeleteBtn();
+                                        } else if (task.student_group == "Intervention Group 1"){
+                                            $('#intervention1').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                                            numOfDeleteBtns++;
+                                            triggerDeleteBtn();
+                                        } else if (task.student_group == "Intervention Group 2") {
+                                            $('#intervention2').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                                            numOfDeleteBtns++;
+                                            triggerDeleteBtn();
+                                        }
+                                        if(task === 'exists'){
+                                            alert('task already assigned!');
+                                        }
                                     }else{
-                                        alert(response)
+                                        // alert(response)
                                     }
                                 },
                             error: function (response) {
@@ -289,19 +318,19 @@
                     const task = JSON.parse(response);
                     if (task.student_group == "Control Group 1"){
                         // append a div after the control group 1 div
-                        $('#control1').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        $('#Control_group_1').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                     } else if (task.student_group == "Control Group 2"){
-                        $('#control2').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        $('#Control_group_2').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                     } else if (task.student_group == "Intervention Group 1"){
-                        $('#intervention1').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        $('#Intervention_group_1').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                     } else if (task.student_group == "Intervention Group 2") {
-                        $('#intervention2').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        $('#Intervention_group_2').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                     }
@@ -326,11 +355,11 @@
 
     });
 
-    // make the value of num the first delete button id number
-    var num = $('.delete-btn:first').attr('id').split('btn')[1];
+    // // make the value of num the first delete button id number
+    // var num = $('.delete-btn:first').attr('id').split('btn')[1];
 
-    // turn the value of num into an integer
-    num = parseInt(num);
+    // // turn the value of num into an integer
+    // num = parseInt(num);
 
     triggerDeleteBtn();
 
@@ -339,29 +368,32 @@
             console.log(i);
             $("#delete-btn"+i).click(function () {
                     var divId = $(this).parent().attr("id");
+                    var task_name = $(this).siblings('p').text().split(' - ')[0].trim();
+                    var task_group = $(this).parent().parent().attr("id").split('_').join(' ');
+                    console.log(task_group);
+                    console.log(task_name);
                     console.log("Clicked on div with ID:", divId);
-                    
+
                     $.ajax({
                         type: "POST",
                         url: "./delete-task.php",
                         data: {
                             task_id: divId,
+                            task_name: task_name,
+                            task_group: task_group,
                         },
                         success: function (response) {
-                            if(response === 'success'){
-                                alert('Task deleted successfully');
-                                $("#" + divId).remove();
-                            }else{
-                                alert(response)
-                            }
+                            $("#" + divId).remove();
                         },
                         error: function (response) {
-                            alert(response);
+                            // alert(response);
                         }
                     });
             });
         }
     }
+
+    console.log($('#task-options').val());
 
     $('#task-options').change(function (e) { 
         if($(this).val() === 'testCase'){
