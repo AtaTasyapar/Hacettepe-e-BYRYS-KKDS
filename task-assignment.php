@@ -129,7 +129,7 @@
                 echo '<div id="Control_group_2">';
 
                         foreach($control2 as $task){
-                            echo `<div id="{$task["id"]}" style="display: flex; margin-bottom: 10px;">`;
+                            echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px;">';
                             echo '<p style="margin-right: 20px">' . $task['task_name'] . ' - ' . $task['task_week'] . '</p>';
                             echo '<button class="btn btn-success delete-btn" id="delete-btn'.$i.'">Delete</button>';
                             echo '</div>';

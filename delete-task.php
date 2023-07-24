@@ -3,7 +3,7 @@
     require_once('./config-students.php');
 
     $task_id = $_POST['task_id'];
-    $task_name = $_POST['task_name'];
+    $task_name = strtolower($_POST['task_name']);
     $task_group = $_POST['task_group'];
 
     $sql = "DELETE FROM task WHERE id = ?;";
@@ -27,6 +27,19 @@
     }
     else{
         echo 'Error';
+    }
+
+    if($task_name === 'testcase'){
+        $sql = "DELETE FROM uploads WHERE student_group = \"$task_group\"";
+        $stmt = $db->prepare($sql);
+        $result = $stmt->execute();
+    
+        if($result){
+            echo 'success';
+        }
+        else{
+            echo 'Error';
+        }
     }
 
 ?>

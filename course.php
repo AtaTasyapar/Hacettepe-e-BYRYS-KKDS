@@ -17,9 +17,10 @@
         echo 'error';
     }
 
-    $sql = 'SELECT * FROM pretest1 WHERE student_id = :id';
+    $sql = 'SELECT * FROM pretest1 WHERE student_id = :id AND student_group = :group';
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':id', $student_id);
+    $stmt->bindParam(':group', $student_group);
     $result = $stmt->execute();
 
     if($result){
@@ -32,9 +33,11 @@
         echo 'error';
     }
 
-    $sql = 'SELECT * FROM pretest2 WHERE student_id = :id';
+    $sql = 'SELECT * FROM pretest2 WHERE student_id = :id AND student_group = :group' ;
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':id', $student_id);
+    $stmt->bindParam(':group', $student_group);
+
     $result = $stmt->execute();
 
     if($result){
@@ -45,9 +48,11 @@
     }else{
         echo 'error';
     }
-    $sql = 'SELECT * FROM posttest1 WHERE student_id = :id';
+    $sql = 'SELECT * FROM posttest1 WHERE student_id = :id AND student_group = :group';
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':id', $student_id);
+    $stmt->bindParam(':group', $student_group);
+
     $result = $stmt->execute();
 
     if($result){
@@ -58,9 +63,11 @@
     }else{
         echo 'error';
     }
-    $sql = 'SELECT * FROM posttest2 WHERE student_id = :id';
+    $sql = 'SELECT * FROM posttest2 WHERE student_id = :id AND student_group = :group';
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':id', $student_id);
+    $stmt->bindParam(':group', $student_group);
+
     $result = $stmt->execute();
 
     if($result){
