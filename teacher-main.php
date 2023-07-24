@@ -42,6 +42,11 @@ if (isset($_GET['logout'])) {
 </head>
 
 <body class="stu-body">
+    <div id="renewal-confirmation">
+        <h6>Are you sure you want to renew the course</h6>
+        <p>*This will delete all student submissions and task assignments!</p>
+        <button id="confirm-renewal">Confirm</button>
+    </div>
     <div class="stu-body1">
         <div class="navigation-wrapper">
             <div class="navigation-both">
@@ -63,6 +68,8 @@ if (isset($_GET['logout'])) {
 
                         <a href="task-assignment.php" class="nav-link nav-items btn-success">
                             <i class="fa fa-th me-2"></i>Assign a task</a>
+                        <button class="nav-link btn-success" id='renew-course'>
+                            <i class="fa fa-th me-2"></i>Renew Course</a>
 
                     </div>
                     <div>
@@ -161,6 +168,20 @@ if (isset($_GET['logout'])) {
             })
 
         });
+        $('#renew-course').click(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type: "get",
+                url: "./renew-course.php",
+                success: function (response) {
+                    if(response.trem()==='success'){
+                        alert('Course renewed successfully');
+                        window.location.reload();
+                    }
+                }
+            });
+        })
         </script>
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
