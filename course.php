@@ -75,6 +75,7 @@
     $sql = 'SELECT * FROM task';
     $stmt = $db->prepare($sql);
     $result = $stmt->execute();
+    $tasks = [];
     if($result){
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if($rows){
@@ -236,14 +237,29 @@
                     }
         }
     }
-            echo '
+    foreach($tasks as $task){
+        if(strtolower($task['task_name']) == strtolower('testcase') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week1'){
+            if (!isset($posttest2)) {
+                echo '
                 <div class="activity-container">
-                    <h5 id="testcase">Test-Case </h5>
-                    <h6 class="completion-indicator">
+                    <h5 id="testcase">Test Case</h5>
+                    <h6 class="completion-indicator" style="color: red;">
                         incomplete
                     </h6>
-                </div>
-            </div>';
+                </div>';
+            }else {
+                echo '
+                <div class="activity-container">
+                    <h5 id="testcase-comp">Test Case</h5>
+                    <h6 class="completion-indicator" style="color: green;">
+                        complete
+                    </h6>
+                </div>';
+            }
+}
+}
+echo '</div>';
+
             
 
             echo '
@@ -331,6 +347,27 @@
                         }
             }
         } 
+        foreach($tasks as $task){
+            if(strtolower($task['task_name']) == strtolower('testcase') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week2'){
+                if (!isset($posttest2)) {
+                    echo '
+                    <div class="activity-container">
+                        <h5 id="testcase">Test Case</h5>
+                        <h6 class="completion-indicator" style="color: red;">
+                            incomplete
+                        </h6>
+                    </div>';
+                }else {
+                    echo '
+                    <div class="activity-container">
+                        <h5 id="testcase-comp">Test Case</h5>
+                        <h6 class="completion-indicator" style="color: green;">
+                            complete
+                        </h6>
+                    </div>';
+                }
+    }
+    }
             echo '    
             </div>
             ';
@@ -422,6 +459,27 @@
                         }
             }
         } 
+        foreach($tasks as $task){
+            if(strtolower($task['task_name']) == strtolower('testcase') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week3'){
+                if (!isset($posttest2)) {
+                    echo '
+                    <div class="activity-container">
+                        <h5 id="testcase">Test Case</h5>
+                        <h6 class="completion-indicator" style="color: red;">
+                            incomplete
+                        </h6>
+                    </div>';
+                }else {
+                    echo '
+                    <div class="activity-container">
+                        <h5 id="testcase-comp">Test Case</h5>
+                        <h6 class="completion-indicator" style="color: green;">
+                            complete
+                        </h6>
+                    </div>';
+                }
+    }
+    }
               
             echo '</div>';
 
@@ -512,6 +570,27 @@
                         }
             }
         } 
+        foreach($tasks as $task){
+            if(strtolower($task['task_name']) == strtolower('testcase') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week4'){
+                if (!isset($posttest2)) {
+                    echo '
+                    <div class="activity-container">
+                        <h5 id="testcase">Test Case</h5>
+                        <h6 class="completion-indicator" style="color: red;">
+                            incomplete
+                        </h6>
+                    </div>';
+                }else {
+                    echo '
+                    <div class="activity-container">
+                        <h5 id="testcase-comp">Test Case</h5>
+                        <h6 class="completion-indicator" style="color: green;">
+                            complete
+                        </h6>
+                    </div>';
+                }
+    }
+    }
               
             echo '</div>';
         }

@@ -580,7 +580,8 @@
             theme6q5: theme6q5
         },
         success: function (response) {
-            if(response === "success"){
+            console.log(response)
+            if(response.trim() == "success"){
                 window.alert("Pretest 2 submitted successfully");
                 $('#content').load('course.php');
             } 

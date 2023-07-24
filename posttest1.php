@@ -519,7 +519,7 @@ if ($('input[name="ulcer_prevention_ability"]:checked').length === 0) {
 
         },
         success: function (response) {
-            if(response === "success"){
+            if(response.trim() === "success"){
                 window.alert("Pretest 1 submitted successfully");
                 $('#content').load('course.php');
             } 

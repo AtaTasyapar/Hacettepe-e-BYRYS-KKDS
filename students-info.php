@@ -191,7 +191,7 @@
         for (i = 0; i < <?php echo $i ?>; i++){
         $("#submissions"+i).click(function (e) { 
             e.preventDefault();
-            $('#forms-container').html('<div style="display: flex;"><h5 class="text-center mb-3">Student Forms</h5><h6 id="student_name_forms" class="mb-2"></h6><h6 id="student_id_forms" class="mb-2"></h6><h6 id="student_group_forms" class="mb-2"></h6></div><div id="available-forms" style="text-align: center;"></div><div class="d-flex justify-content-between mt-4"><button class="btn btn-danger" id="cancel-forms">Cancel</button></div>');
+            $('#forms-container').html('<div style=""><h5 class="text-center mb-3">Student Forms</h5><h6 id="student_name_forms" class="mb-2"></h6><h6 id="student_id_forms" class="mb-2"></h6><h6 id="student_group_forms" class="mb-2"></h6></div><div id="available-forms" style="text-align: center;"></div><div class="d-flex justify-content-between mt-4"><button class="btn btn-danger" id="cancel-forms">Cancel</button></div>');
 
             var id = $(this).parent().parent().attr('id');
             var name = $(this).parent().parent().find('.student-info').eq(0).text();
@@ -241,7 +241,6 @@
                     student_id: id
                     },
                     success: function (response) {
-                    console.log(response);
                     $("#forms-container").html(response);
                     },
                     error: function () {
@@ -262,7 +261,6 @@
                     student_id: id
                     },
                     success: function (response) {
-                    console.log(response);
                     $("#forms-container").html(response);
                     },
                     error: function () {
@@ -283,7 +281,6 @@
                     student_id: id
                     },
                     success: function (response) {
-                    console.log(response);
                     $("#forms-container").html(response);
                     },
                     error: function () {
@@ -300,6 +297,25 @@
                 $.ajax({
                     type: "POST",
                     url: "posttest2-review.php",
+                    data: {
+                    student_id: id
+                    },
+                    success: function (response) {
+                    $("#forms-container").html(response);
+                    },
+                    error: function () {
+                    $("#forms-container").html("Error");
+                    }
+                });
+            });
+            $("#available-forms").on('click', '.testcase', function (e) {
+                e.preventDefault();
+                var formId = $(this).data('form-id');
+                var id = $(this).parent().parent().find('#student_id_forms').text();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "testcase-review.php",
                     data: {
                     student_id: id
                     },

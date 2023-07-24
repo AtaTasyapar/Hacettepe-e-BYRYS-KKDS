@@ -26,6 +26,11 @@ if(isset($_POST['student_id'])){
     if (sizeof($result) > 0){
         array_push($tests, "Posttest_2");
     }
+    $sql = "SELECT * FROM testcase where student_id = {$_POST['student_id']}";
+    $result = $db->query($sql)->fetchAll();
+    if (sizeof($result) > 0){
+        array_push($tests, "testcase");
+    }
 
     echo json_encode($tests);
 

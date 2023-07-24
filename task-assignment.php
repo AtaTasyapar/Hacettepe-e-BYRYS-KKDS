@@ -305,6 +305,9 @@
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                     }
+                    if(task === 'exists'){
+                        alert('task already assigned!');
+                    }
                 }else{
                     alert(response)
                 }

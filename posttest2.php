@@ -580,7 +580,7 @@
             theme6q5: theme6q5
         },
         success: function (response) {
-            if(response === "success"){
+            if(response.trim() === "success"){
                 window.alert("Posttest 2 submitted successfully");
                 $('#content').load('course.php');
             } 

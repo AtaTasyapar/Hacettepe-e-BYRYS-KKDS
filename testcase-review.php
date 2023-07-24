@@ -1,49 +1,19 @@
 <?php
 session_start();
-if (!isset($_SESSION['userlogin'])) {
-    header('Location: index.php');
-}
-
-
 require_once('./config-students.php');
-$sql = 'SELECT * FROM task WHERE task_name = "testCase"';
+$type = isset($_SESSION['userlogin']['type']) ? $_SESSION['userlogin']['type'] : '';
+$student_id = $type == 'student' ? $_SESSION['userlogin']['id'] : $_POST['student_id'];
+$testcase = '';
+$sql = 'SELECT * FROM testcase WHERE student_id = :id';
 $stmt = $db->prepare($sql);
-$stmt->execute();
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-if ($rows) {
-    $lastTask = $rows[count($rows) - 1];
-    $sql = 'SELECT * FROM uploads WHERE file_name = :assoc_file';
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(':assoc_file', $lastTask["assoc_file"], PDO::PARAM_STR);
-    $stmt->execute();
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt->bindParam(':id', $student_id);
+$result = $stmt->execute();
 
-    if ($rows) {
-        $testcase = $rows[count($rows) - 1];
-        $base64String = $testcase['base64'];
-    } else {
-        echo 'No matching uploads found.';
-    }
+if($result){
+    $testcase = $stmt->fetch(PDO::FETCH_ASSOC);
+}else{
+    echo 'error';
 }
-    $student_id = $_SESSION['userlogin']['id'];
-    $type = $_SESSION['userlogin']['type'];
-    if($type === 'student'){
-        $sql = 'SELECT * FROM students WHERE id = :id';
-    }else{
-        $sql = 'SELECT * FROM teachers WHERE id = :id';
-    }
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':id', $student_id);
-    $result = $stmt->execute();
-    if($result){
-        $student = $stmt->fetch(PDO::FETCH_ASSOC);
-        $student_name = $student['name'] . ' ' . $student['surname'];
-        $student_email = $student['email'];
-        $student_group = $student['student_group'];
-    }
-    else{
-        echo 'error';
-    }
 ?>
 
 
@@ -55,94 +25,21 @@ if ($rows) {
     <title>Document</title>
 </head>
 <style>
-       #back{
+         #back{
             font-weight: bold;
             border: 1px solid grey;
             background-color: rgb(146, 146, 246);
             color: white;
-        }
-        /* input{
-            width: 20px;
-            height: 20px;
-            margin-right: 5px;
-        } */
-        .overlay{
-            background-color: rgba(0, 0, 0, 0.5);
-            position: absolute;
-            top: 13%;
-            width: 100%;
-            height: 100%;
-            z-index: 999;
-        }
-        #risk-container{
-            position: absolute;
-            z-index: 1000;
-            width: 50%;
-            border: 2px solid black;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 15px;
-            padding-bottom: 30px;
-            border-radius: 10px;
-        }
-        #noc-form{
-            position: absolute;
-            z-index: 1000;
-            width: 50%;
-            border: 2px solid black;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 15px;
-            padding-bottom: 30px;
-            border-radius: 10px;
+            margin-bottom: 20px;
         }
         label{
             margin-left: 5px;
         }
 
-        .input-section{
-            margin-bottom: 20px;
-        }
-        .error{
-            color: red;
-            display: none;
-        }
 </style>
-<body style="background-color: white;">
-    <div id="noc-form" style="display: none;">
-        <div class="mb-2">
-            <h6 class="username-label">Patient Data:</h6>
-            <input type="text" name="patient_data">
-        </div>
-        <div class="mb-2">
-            <h6 class="username-label">NOC:</h6>
-            <input type="text" name="noc">
-        </div>
-        <div class="mb-2">
-            <h6 class="username-label">NIC:</h6>
-            <input type="text" name="nic">
-        </div>
-        <div class="mb-2">
-            <h6 class="username-label">NOC (Assessment)</h6>
-            <input type="text" name="noc_assessment">
-        </div>
-        <input type="button" id="noc-submit" value="submit" class="btn btn-success">
-    </div>
-    <div id="risk-container" style="display: none;">
-        <h5 class="text-center"></h5>
-        <button class="btn btn-success" id="close-risk">Proceed</button>
-    </div>
-    <div class="overlay" style="display: none;"></div>
-
-
-    <div class="container-fluid mt-5 w-75 p-4" style="background-color: white; aspect-ratio: 1;" >
-        <button class="btn mb-4" id="back">Back</button>
-        <iframe src=<?php echo $base64String?> frameborder="0" class='w-100 mb-5' style='height:100%' ></iframe>
-        
+<body>
+<div class="container-fluid mt-5 w-75 p-4" style="background-color: white; aspect-ratio: 1;" >
+        <button class="btn mb-4" id="back">Back</button>        
         <div class="input-section">
         <h5 class="username-label">UYARANIN ALGILANMA¬SI
             Basınca karşı oluşan rahatsızlığın algılanması.
@@ -441,173 +338,43 @@ birazını alabiliyor
                     duruyor.                 
                     </label>
             </div>
+            <div class="align-items-start mb-2">
+                <h5>Total: <?php echo $testcase['total']?></h5>
+                <h5>
+                    <?php
+                        if($testcase['total'] < 12){
+                            echo 'Yüksek Risk';
+                        }
+                        else if($testcase['total'] < 14){
+                            echo 'Orta Risk';
+                        }
+                        else {
+                            echo 'Düşük Risk';
+                        }
+                    ?>
+                </h5>
+            </div>
         </div>
-        
-        <button type="submit" id="submit" class="btn btn-success">Submit</button>
 
 
+        <div class="container-fluid mt-5 w-75 p-4" style="background-color: white; aspect-ratio: 1;">
+            <h2>NOC Cikitlari</h2>
+            <h6 class="mb-2">Patient Data: <?php  echo $testcase['patient_data'] ?></h6>
+            <h6 class="mb-2">NOC: <?php  echo $testcase['noc'] ?></h6>
+            <h6 class="mb-2">NIC: <?php  echo $testcase['nic'] ?></h6>
+            <h6 class="mb-2">NOC (Assessment): <?php  echo $testcase['noc_assessment'] ?></h6>
+        </div>
     </div>
-
-    </body>
+</body>
 <script>
-   $('#back').click(function (e) { 
-        e.preventDefault();
-     $('#content').load('course.php');
-    });
-
-    $('#submit').click(function (e) { 
-        e.preventDefault();
-        $('.error').css('display', 'none');
-
-        if ($('input[name="stimulus_detection"]:checked').length === 0) {
-        // Find the nearest error
-        $('input[name="stimulus_detection"]').closest('.input-section').find('.error').css('display', 'block');
-
-        // Scroll to the error
-        $('html, body').animate({
-            scrollTop: $('input[name="stimulus_detection"]').closest('.input-section').find('.error').offset().top - 200
-        }, 500);
-        return;
-    }
-    if ($('input[name="body_humidity"]:checked').length === 0) {
-        // Find the nearest error
-        $('input[name="body_humidity"]').closest('.input-section').find('.error').css('display', 'block');
-
-        // Scroll to the error
-        $('html, body').animate({
-            scrollTop: $('input[name="body_humidity"]').closest('.input-section').find('.error').offset().top - 200
-        }, 500);
-        return;
-    }
-    if ($('input[name="physical_activity"]:checked').length === 0) {
-        // Find the nearest error
-        $('input[name="physical_activity"]').closest('.input-section').find('.error').css('display', 'block');
-
-        // Scroll to the error
-        $('html, body').animate({
-            scrollTop: $('input[name="physical_activity"]').closest('.input-section').find('.error').offset().top - 200
-        }, 500);
-        return;
-    }
-    if ($('input[name="mobility_confidence"]:checked').length === 0) {
-        // Find the nearest error
-        $('input[name="mobility_confidence"]').closest('.input-section').find('.error').css('display', 'block');
-
-        // Scroll to the error
-        $('html, body').animate({
-            scrollTop: $('input[name="mobility_confidence"]').closest('.input-section').find('.error').offset().top - 200
-        }, 500);
-        return;
-    }
-    if ($('input[name="feeding_habit"]:checked').length === 0) {
-        // Find the nearest error
-        $('input[name="feeding_habit"]').closest('.input-section').find('.error').css('display', 'block');
-
-        // Scroll to the error
-        $('html, body').animate({
-            scrollTop: $('input[name="feeding_habit"]').closest('.input-section').find('.error').offset().top - 200
-        }, 500);
-        return;
-    }
-    if ($('input[name="friction_control"]:checked').length === 0) {
-        // Find the nearest error
-        $('input[name="friction_control"]').closest('.input-section').find('.error').css('display', 'block');
-
-        // Scroll to the error
-        $('html, body').animate({
-            scrollTop: $('input[name="friction_control"]').closest('.input-section').find('.error').offset().top - 200
-        }, 500);
-        return;
-    }
-        
-    
-
-        var student_id = <?php echo $student_id ?>;
-        var student_name = <?php echo json_encode($student_name) ?>;
-        var student_email = <?php echo json_encode($student_email) ?>;
-        var student_group = <?php echo json_encode($student_group) ?>;
-        var stimulus_detection = $('input[name="stimulus_detection"]:checked').val();
-        var body_humidity = $('input[name="body_humidity"]:checked').val();
-        var physical_activity = $('input[name="physical_activity"]:checked').val();
-        var mobility_confidence = $('input[name="mobility_confidence"]:checked').val();
-        var feeding_habit = $('input[name="feeding_habit"]:checked').val();
-        var friction_control = $('input[name="friction_control"]:checked').val();
-        var total = parseInt(stimulus_detection) + parseInt(body_humidity) + parseInt(physical_activity) + parseInt(mobility_confidence) + parseInt(feeding_habit) + parseInt(friction_control);
-        
-        $.ajax({
-            type: "POST",
-            url: "braden-handler.php",
-            data: {
-            student_id: student_id,
-            student_name: student_name,
-            student_email: student_email,
-            student_group: student_group,
-            stimulus_detection: stimulus_detection,
-            body_humidity: body_humidity,
-            physical_activity: physical_activity,
-            mobility_confidence: mobility_confidence,
-            feeding_habit: feeding_habit,
-            friction_control: friction_control,
-            total: total
-            },
-            success: function (response) {
-                alert('success');
-                var riskFactor = '';
-                if(total < 12){
-                    riskFactor = 'Yüksek Risk';
-                }else if(total < 14){
-                    riskFactor = 'Orta Risk';
-                }else{
-                    riskFactor = 'Düşük Risk';
-                }
-                $('#risk-container').find('h5').text(riskFactor);
-                //scroll top
-                $('html, body').animate({
-                    scrollTop: 0
-                }, 500);
-                $('.overlay').show();
-                $('#risk-container').show();
-                $('body').css('overflow', 'hidden');
-            }
-        });
-    });
-
-    $('#close-risk').click(function(e){
-        console.log('risk button clicked')
-        e.preventDefault();
-        $('#risk-container').hide();
-        $('#noc-form').show();
+    $('input[name="stimulus_detection"][value=<?php echo $testcase['stimulus_detection']?>]').prop('checked', true);
+    $('input[name="body_humidity"][value=<?php echo $testcase['body_humidity']?>]').prop('checked', true);
+    $('input[name="physical_activity"][value=<?php echo $testcase['physical_activity']?>]').prop('checked', true);
+    $('input[name="mobility_confidence"][value=<?php echo $testcase['mobility_confidence']?>]').prop('checked', true);
+    $('input[name="feeding_habit"][value=<?php echo $testcase['feeding_habit']?>]').prop('checked', true);
+    $('input[name="friction_control"][value=<?php echo $testcase['friction_control']?>]').prop('checked', true);
+    $('#back').click(function(){
+        $('#content').load('teacher-main.php')
     })
-
-    $('#noc-submit').click(function(e){
-        e.preventDefault();
-        var patient_data = $('input[name="patient_data"]').val() === '' ? 'N/A' : $('input[name="patient_data"]').val();
-        var noc = $('input[name="noc"]').val() === '' ? 'N/A' : $('input[name="noc"]').val();
-        var nic = $('input[name="nic"]').val() === '' ? 'N/A' : $('input[name="nic"]').val();
-        var noc_assessment = $('input[name="noc_assessment"]').val() === '' ? 'N/A' : $('input[name="noc_assessment"]').val();
-        console.log(patient_data, noc, nic, noc_assessment)
-        var student_id = <?php echo $student_id ?>;
-        $.ajax({
-            type: "POST",
-            url: "noc_handler.php",
-            data: {
-                patient_data: patient_data,
-                noc: noc,
-                nic: nic,
-                noc_assessment: noc_assessment,
-                student_id: student_id
-            },
-            success: function (response) {
-                alert(response);
-                $('#noc-form').hide();
-                $('.overlay').hide();
-                $('body').css('overflow', 'auto');
-                $('#content').load('course.php');  
-                $('#content').load('course.php');
-                
-            }
-        });
-    })
-
 </script>
 </html>

@@ -10,7 +10,7 @@
     $task = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if (count($task) > 0) {
-        echo 'Task already exists';
+        echo json_encode('exists');
     } else {
         if(isset($_POST['task_name'])){
             $assoc_file = isset($_POST['assoc_file']) ? $_POST['assoc_file'] : 'unspecified';
