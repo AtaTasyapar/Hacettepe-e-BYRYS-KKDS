@@ -211,9 +211,9 @@
                         html += "<button class='btn btn-success "+forms[i]+"' style='margin-left: 5px;'>"+forms[i].split('_').join(' ')+"</li>";
                     }
                     $("#available-forms").html(html);
-                    $("#student_name_forms").text(name);
-                    $("#student_id_forms").text(id);
-                    $("#student_group_forms").text(group);
+                    $("#student_name_forms").text('Name: ' + name);
+                    $("#student_id_forms").text('ID: ' +id);
+                    $("#student_group_forms").text('Group: '+group);
                     $(".overlay").toggle('');
                     $("#forms-container").toggle('slow');
                     $('body').css('overflow', 'hidden');
