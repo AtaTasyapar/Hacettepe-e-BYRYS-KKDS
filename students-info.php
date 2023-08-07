@@ -232,7 +232,8 @@
             $("#available-forms").on('click', '.Pretest_1', function (e) {
                 e.preventDefault();
                 var formId = $(this).data('form-id');
-                var id = $(this).parent().parent().find('#student_id_forms').text();
+                var id = $(this).parent().parent().find('#student_id_forms').text().split(':')[1];
+                console.log(id);
                 
                 $.ajax({
                     type: "POST",
@@ -252,7 +253,7 @@
             $("#available-forms").on('click', '.Pretest_2', function (e) {
                 e.preventDefault();
                 var formId = $(this).data('form-id');
-                var id = $(this).parent().parent().find('#student_id_forms').text();
+                var id = $(this).parent().parent().find('#student_id_forms').text().split(':')[1];
                 
                 $.ajax({
                     type: "POST",
@@ -272,7 +273,7 @@
             $("#available-forms").on('click', '.Posttest_1', function (e) {
                 e.preventDefault();
                 var formId = $(this).data('form-id');
-                var id = $(this).parent().parent().find('#student_id_forms').text();
+                var id = $(this).parent().parent().find('#student_id_forms').text().split(':')[1];
                 
                 $.ajax({
                     type: "POST",
@@ -292,7 +293,7 @@
             $("#available-forms").on('click', '.Posttest_2', function (e) {
                 e.preventDefault();
                 var formId = $(this).data('form-id');
-                var id = $(this).parent().parent().find('#student_id_forms').text();
+                var id = $(this).parent().parent().find('#student_id_forms').text().split(':')[1];
                 
                 $.ajax({
                     type: "POST",
@@ -311,7 +312,7 @@
             $("#available-forms").on('click', '.testcase', function (e) {
                 e.preventDefault();
                 var formId = $(this).data('form-id');
-                var id = $(this).parent().parent().find('#student_id_forms').text();
+                var id = $(this).parent().parent().find('#student_id_forms').text().split(':')[1];
                 
                 $.ajax({
                     type: "POST",

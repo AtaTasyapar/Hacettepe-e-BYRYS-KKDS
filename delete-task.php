@@ -6,6 +6,12 @@
     $task_name = strtolower($_POST['task_name']);
     $task_group = $_POST['task_group'];
 
+    $sql = "SELECT * FROM task where id = ?;";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$task_id]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $assoc_file = $result['assoc_file'];
+
     $sql = "DELETE FROM task WHERE id = ?;";
     $stmt = $db->prepare($sql);
     $result = $stmt->execute([$task_id]);
@@ -30,10 +36,10 @@
     }
 
     if($task_name === 'testcase'){
-        $sql = "DELETE FROM uploads WHERE student_group = \"$task_group\"";
+        $sql = "DELETE FROM uploads WHERE file_name = \"$assoc_file\";";
         $stmt = $db->prepare($sql);
         $result = $stmt->execute();
-    
+        
         if($result){
             echo 'success';
         }

@@ -78,6 +78,21 @@
     }else{
         echo 'error';
     }
+    $sql = 'SELECT * FROM testcase WHERE student_id = :id AND student_group = :group';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':id', $student_id);
+    $stmt->bindParam(':group', $student_group);
+
+    $result = $stmt->execute();
+
+    if($result){
+        $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($rows){
+            $testcase = $rows;
+        }
+    }else{
+        echo 'error';
+    }
 
     $sql = 'SELECT * FROM task';
     $stmt = $db->prepare($sql);
@@ -95,7 +110,21 @@
         echo 'error';
     }
 
-
+    $sql = 'SELECT * FROM custom_task';
+    $stmt = $db->prepare($sql);
+    $result = $stmt->execute();
+    $custom_tasks = [];
+    if($result){
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if($rows){
+            $custom_tasks = $rows;
+        }
+        else{
+            echo 'error';
+        }
+    }else{
+        echo 'error';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -134,6 +163,7 @@
         }
 
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
         <div class="overlay" style="display: none;">
@@ -246,7 +276,7 @@
     }
     foreach($tasks as $task){
         if(strtolower($task['task_name']) == strtolower('testcase') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week1'){
-            if (!isset($posttest2)) {
+            if (!isset($testcase)) {
                 echo '
                 <div class="activity-container">
                     <h5 id="testcase">Test Case</h5>
@@ -264,6 +294,15 @@
                 </div>';
             }
 }
+}
+foreach ($custom_tasks as $single_custom_task) {
+    if (strtolower($single_custom_task['task_week']) == strtolower('week1') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
+        echo '<div class="activity-container">';
+        echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
+        echo '<p>Description: ' . $single_custom_task['task_desc'] . '</p>';
+        echo '<a href="data:application/octet-stream;base64,' . $single_custom_task['file_data'] . '" download="' . $single_custom_task['file_name'] . '"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</a>';
+        echo '</div>';
+    }
 }
 echo '</div>';
 
@@ -374,6 +413,15 @@ echo '</div>';
                     </div>';
                 }
     }
+    }
+    foreach ($custom_tasks as $single_custom_task) {
+        if (strtolower($single_custom_task['task_week']) == strtolower('week2') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
+            echo '<div class="activity-container">';
+            echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
+            echo '<p>Description: ' . $single_custom_task['task_desc'] . '</p>';
+            echo '<a href="data:application/octet-stream;base64,' . $single_custom_task['file_data'] . '" download="' . $single_custom_task['file_name'] . '"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</a>';
+            echo '</div>';
+        }
     }
             echo '    
             </div>
@@ -487,6 +535,15 @@ echo '</div>';
                 }
     }
     }
+    foreach ($custom_tasks as $single_custom_task) {
+        if (strtolower($single_custom_task['task_week']) == strtolower('week3') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
+            echo '<div class="activity-container">';
+            echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
+            echo '<p>Description: ' . $single_custom_task['task_desc'] . '</p>';
+            echo '<a href="data:application/octet-stream;base64,' . $single_custom_task['file_data'] . '" download="' . $single_custom_task['file_name'] . '"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</a>';
+            echo '</div>';
+        }
+    }
               
             echo '</div>';
 
@@ -598,7 +655,15 @@ echo '</div>';
                 }
     }
     }
-              
+    foreach ($custom_tasks as $single_custom_task) {
+        if (strtolower($single_custom_task['task_week']) == strtolower('week4') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
+            echo '<div class="activity-container">';
+            echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
+            echo '<p>Description: ' . $single_custom_task['task_desc'] . '</p>';
+            echo '<a href="data:application/octet-stream;base64,' . $single_custom_task['file_data'] . '" download="' . $single_custom_task['file_name'] . '"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</a>';
+            echo '</div>';
+        }
+    }
             echo '</div>';
         }
         ?>

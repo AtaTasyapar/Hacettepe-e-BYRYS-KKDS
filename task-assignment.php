@@ -35,6 +35,10 @@
     $result = $stmt->execute();
     $intervention2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $sql = 'SELECT * FROM custom_task';
+    $stmt = $db->prepare($sql);
+    $result = $stmt->execute();
+    $custom_tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,9 +99,18 @@
         <h6 class="mt-3">Select Week:</h6>
         <select name="week-options w-25" id="week-options" style="border: 2px solid rgb(160, 160, 239); padding: 5px; margin-bottom: 20px;">
         </select>
+        <div id="task-name" style="display: none;">
+            <label for="task-nameInput">Task Name:</label>
+            <input type="text" placeholder="Enter task name" id="task-nameInput" name="task-nameInput" class="form-control">
+        </div>
+        <div id="task-descriptions" style="display: none;">
+            <label for="task_desc">Task Description:</label>
+            <textarea name="task_desc"  id="task_desc" cols="30" rows="10" class="form-control" placeholder="Enter Task Description"></textarea>
+        </div>
         <div id="upload-pdf"  style="display: none;">
             <input type="file" accept="application/pdf,application/vnd.ms-excel">
         </div>
+       
         <div class="d-flex justify-content-between mt-4">
             <button class="btn btn-success" id="assign-task">Assign</button>
             <button class="btn btn-danger" id="cancel">Cancel</button>
@@ -119,9 +132,17 @@
                             echo '</div>';
                             $i++;
                         }
-
+                        foreach($custom_tasks as $custom_task){
+                            if($custom_task['student_group'] === 'Control Group 1'){
+                                echo '<div id="task-div' . $custom_task['id'] . '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller">';
+                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $custom_task['task_week'] . '</p>';
+                                    echo '<button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'.$custom_task['id'].'">Delete</button>';
+                                    echo '</div>';
+                                }
+                        }
                     echo '</div>';
                     ?>
+                
                 <div class="w-50 group-container" id="control2">
                     <h5>Control Group 2</h5>
                 </div>
@@ -134,6 +155,14 @@
                             echo '<button class="btn btn-success delete-btn" id="delete-btn'.$i.'">Delete</button>';
                             echo '</div>';
                             $i++;
+                        }
+                        foreach($custom_tasks as $custom_task){
+                            if($custom_task['student_group'] === 'Control Group 2'){
+                                echo '<div id="task-div' . $custom_task['id'] . '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller">';
+                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $custom_task['task_week'] . '</p>';
+                                    echo '<button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'.$custom_task['id'].'">Delete</button>';
+                                    echo '</div>';
+                                }
                         }
 
                         echo '</div>';
@@ -150,6 +179,14 @@
                             echo '<button class="btn btn-success delete-btn" id="delete-btn'.$i.'">Delete</button>';
                             echo '</div>';
                             $i++;
+                        }
+                        foreach($custom_tasks as $custom_task){
+                            if($custom_task['student_group'] === 'Intervention Group 1'){
+                                echo '<div id="task-div' . $custom_task['id'] . '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller">';
+                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $custom_task['task_week'] . '</p>';
+                                    echo '<button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'.$custom_task['id'].'">Delete</button>';
+                                    echo '</div>';
+                                }
                         }
 
                     echo '</div>';
@@ -168,6 +205,14 @@
                             echo '<button class="btn btn-success delete-btn" id="delete-btn'.$i.'">Delete</button>';
                             echo '</div>';
                             $i++;
+                        }
+                        foreach($custom_tasks as $custom_task){
+                            if($custom_task['student_group'] === 'Intervention Group 2'){
+                                echo '<div id="task-div' . $custom_task['id'] . '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller">';
+                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $custom_task['task_week'] . '</p>';
+                                    echo '<button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'.$custom_task['id'].'">Delete</button>';
+                                    echo '</div>';
+                                }
                         }
 
                     echo '</div>';
@@ -190,6 +235,7 @@
             $('#task-options').append('<option value="testCase">Test Case</option>');
             $('#task-options').append('<option value="posttest1">Posttest 1</option>');
             $('#task-options').append('<option value="posttest2">Posttest 2</option>');
+            $('#task-options').append('<option value="Custom-Task">Custom Task</option>');
             $('#week-options').append('<option value="week1">Week 1</option>');
             $('#week-options').append('<option value="week2">Week 2</option>');
             $('#week-options').append('<option value="week3">Week 3</option>');
@@ -197,14 +243,19 @@
             
         }else{
             $('#task-options').append('<option value="testCase">Test Case</option>');
+            $('#task-options').append('<option value="Custom-Task">Custom Task</option>');
             $('#week-options').append('<option value="week1">Week 1</option>');
             $('#week-options').append('<option value="week2">Week 2</option>');
             $('#week-options').append('<option value="week3">Week 3</option>');
             $('#week-options').append('<option value="week4">Week 4</option>');
         }
         if($('#task-options').val() === 'testCase'){
-            console.log($('#task-options').val());
-            $('#upload-pdf').toggle('medium');
+            $('#upload-pdf').show('medium');
+        }
+        if($('#task-options').val() === 'Custom-Task'){
+            $('#upload-pdf').show('medium');
+            $('#task-name').show('medium');
+            $('#task-descriptions').show('medium');
         }
     });
 
@@ -232,12 +283,10 @@
                         alert('File size must be less than 5MB');
                         return;
                     }
-                console.log(file)
                 const reader = new FileReader();
                 reader.onload = function (event) {
                     const base64data = event.target.result;
                     const filename = $('input[type="file"]')[0].files[0].name;
-                    console.log(base64data) 
                     $.ajax({
                         type: "POST",
                         url: "./upload-task-pdf.php",
@@ -247,7 +296,6 @@
                             student_group: $('#group-name').text().split(' ')[2] + ' ' + $('#group-name').text().split(' ')[3] + ' ' + $('#group-name').text().split(' ')[4],
                         },
                         success: function (response) {
-                            console.log(response);
                             if(response === 'success'){
                                 $.ajax({
                                 type: "POST",
@@ -302,6 +350,75 @@
                                 };  
                                 reader.readAsDataURL(file);  
             }
+
+
+ else if ($('#task-options').val() === 'Custom-Task') {
+    if ($('#task-nameInput').val() === '') {
+        alert('Please enter a task name');
+        return;
+    }
+    if ($('#task_desc').val() === '') {
+        alert('Please enter a task description');
+        return;
+    }
+
+    if ($('input[type="file"]').val() === '') {
+        alert('Please upload a file');
+        return;
+    }
+
+    const file = $('input[type="file"]').prop('files')[0];
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+    const task_name = $('#task-nameInput').val();
+    const task_desc = $('#task_desc').val();
+
+    const fileSize = $('input[type="file"]')[0].files[0].size;
+    if (fileSize > 100000000) {
+        alert('File size must be less than 10MB');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        const base64data = event.target.result;
+        const filename = $('input[type="file"]')[0].files[0].name;
+        $.ajax({
+            type: "POST",
+            url: "./upload-custom.php",
+            data: {
+                task_week : week_name,
+                task_name: task_name,
+                task_desc: task_desc,
+                file_name: filename,
+                file_data: base64data,
+                student_group: $('#group-name').text().split(' ')[2] + ' ' + $('#group-name').text().split(' ')[3] + ' ' + $('#group-name').text().split(' ')[4],
+            },
+            success: function (response) {
+                console.log("response : ", response);
+                if (JSON.parse(response).task_id) {
+                    alert('Task assigned successfully');
+                    task_data = JSON.parse(response);
+                    if(task_data.student_group == "Control Group 1"){
+                        $('#Control_group_1').append('<div id="' + task_data.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task_data.task_name + ' - ' + task_data.task_week + '</p><button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'+task_data.task_id+'">Delete</button></div>');
+                    } else if (task_data.student_group == "Control Group 2"){
+                        $('#Control_group_2').append('<div id="' + task_data.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task_data.task_name + ' - ' + task_data.task_week + '</p><button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'+task_data.task_id+'">Delete</button></div>');
+                    } else if (task_data.student_group == "Intervention Group 1"){
+                        $('#Intervention_group_1').append('<div id="' + task_data.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task_data.task_name + ' - ' + task_data.task_week + '</p><button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'+task_data.task_id+'">Delete</button></div>');
+                    } else if (task_data.student_group == "Intervention Group 2") {
+                        $('#Intervention_group_2').append('<div id="' + task_data.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task_data.task_name + ' - ' + task_data.task_week + '</p><button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'+task_data.task_id+'">Delete</button></div>');
+                    }
+                    
+                } else {
+                    alert(response);
+                }
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    };
+    reader.readAsDataURL(file);
+}
             else{
 
                 
@@ -319,7 +436,6 @@
                     // add task to the list of tasks using the response for the id and the task name and week for the text
                     const task = JSON.parse(response);
                     if (task.student_group == "Control Group 1"){
-                        // append a div after the control group 1 div
                         $('#Control_group_1').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
@@ -354,6 +470,8 @@
         $('#task-options').empty();
         $('#week-options').empty();
         $('#upload-pdf').hide('medium');
+        $('#task-name').hide('medium');
+        $('#task-descriptions').hide('medium');
 
     });
 
@@ -367,14 +485,10 @@
 
     function triggerDeleteBtn(){
         for (i = 1; i < numOfDeleteBtns; i++){
-            console.log(i);
             $("#delete-btn"+i).click(function () {
                     var divId = $(this).parent().attr("id");
                     var task_name = $(this).siblings('p').text().split(' - ')[0].trim();
                     var task_group = $(this).parent().parent().attr("id").split('_').join(' ');
-                    console.log(task_group);
-                    console.log(task_name);
-                    console.log("Clicked on div with ID:", divId);
 
                     $.ajax({
                         type: "POST",
@@ -395,14 +509,53 @@
         }
     }
 
-    console.log($('#task-options').val());
+   
+
+$('.custom-delete-btn').click(function (e) {
+    //get the id
+    const task_id = $(this).attr('id').split('-')[3];
+    const student_group = $(this).parent().parent().attr('id').split('_').join(' ');
+
+    $.ajax({
+        type: "POST",
+        url: "./delete-custom-task.php",
+        data: {
+            task_id: task_id,
+            student_group: student_group,
+        },
+        success: function (response) {
+            if(response == 'success'){
+                //remove the div
+                $('#task-div' + task_id).remove();
+            }        
+                else alert(response);
+        },
+        error: function (response) {
+            alert(response);
+        }
+    });
+    
+})
 
     $('#task-options').change(function (e) { 
+        //empty all prev values
+        $('#upload-pdf').hide('medium');
+        $('#task-name').hide('medium');
+        $('#task-descriptions').hide('medium');
+        $('#task-nameInput').val('');
+        $('#task_desc').val('');
+        $('#upload-pdf input').val('');
         if($(this).val() === 'testCase'){
-            console.log($(this).val());
-            $('#upload-pdf').toggle('medium');
-        }else{
+            $('#upload-pdf').show('medium');
+        }else if($(this).val() === 'Custom-Task'){
+            $('#upload-pdf').show('medium');
+            $('#task-name').show('medium');
+            $('#task-descriptions').show('medium');
+        }  
+        else{
             $('#upload-pdf').hide('medium');
+            $('#task-name').hide('medium');
+            $('#task-descriptions').hide('medium');
         }
     });
 
@@ -414,6 +567,8 @@
         $('#task-options').empty();
         $('#week-options').empty();
         $('#upload-pdf').hide('medium');
+        $('#task-name').hide('medium');
+        $('#task-descriptions').hide('medium');
     });
 
     

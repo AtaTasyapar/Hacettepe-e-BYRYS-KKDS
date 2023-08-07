@@ -3,29 +3,11 @@
     session_start();
     $type = isset($_SESSION['userlogin']['type']) ? $_SESSION['userlogin']['type'] : '';
     $student_id = $type == 'student' ? $_SESSION['userlogin']['id'] : $_POST['student_id'];
-    // if($type === 'student'){
-    //     $sql = 'SELECT * FROM students WHERE id = :id';
-    // }else{
-    //     $sql = 'SELECT * FROM teachers WHERE id = :id';
-    // }
-    // $stmt = $db->prepare($sql);
-    // $stmt->bindParam(':id', $student_id);
-    // $result = $stmt->execute();
-    // if($result){
-    //     $student = $stmt->fetch(PDO::FETCH_ASSOC);
-    //     $student_name = $student['name'] . ' ' . $student['surname'];
-    //     $student_email = $student['email'];
-    //     $student_group = $student['student_group'];
-    // }
-    // else{
-    //     echo 'error';
-    // }
     $pretest = '';
     $sql = 'SELECT * FROM pretest1 WHERE student_id = :id';
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':id', $student_id);
     $result = $stmt->execute();
-
     if($result){
         $pretest = $stmt->fetch(PDO::FETCH_ASSOC);
     }else{
@@ -341,7 +323,7 @@
 <script>
 
     var teacher = <?php echo isset($_POST['student_id']); ?>;
-
+    console.log(typeof <?php echo isset($_POST['student_id']); ?>);    
     $('#back').click(function (e) { 
         e.preventDefault();
         if(teacher){
@@ -355,11 +337,11 @@
         alert('You have not submitted the pretest yet');
     }
     else{
-        $('input[name="ulcer_prevention_confidence"][value="'+pretest['ulcer_prevention_confidence']+'"]').prop('checked', true);
-        $('input[name="ulcer_prevention_training"][value="'+pretest['ulcer_prevention_training']+'"]').prop('checked', true);
-        $('input[name="ulcer_prevention_difficulty"][value="'+pretest['ulcer_prevention_difficulty']+'"]').prop('checked', true);
-        $('input[name="ulcer_prevention_attention"][value="'+pretest['ulcer_prevention_attention']+'"]').prop('checked', true);
-        $('input[name="ulcer_prevention_importance"][value="'+pretest['ulcer_prevention_importance']+'"]').prop('checked', true);
+    $('input[name="ulcer_prevention_confidence"][value="'+pretest['ulcer_prevention_confidence']+'"]').prop('checked', true);
+    $('input[name="ulcer_prevention_training"][value="'+pretest['ulcer_prevention_training']+'"]').prop('checked', true);
+    $('input[name="ulcer_prevention_difficulty"][value="'+pretest['ulcer_prevention_difficulty']+'"]').prop('checked', true);
+    $('input[name="ulcer_prevention_attention"][value="'+pretest['ulcer_prevention_attention']+'"]').prop('checked', true);
+    $('input[name="ulcer_prevention_importance"][value="'+pretest['ulcer_prevention_importance']+'"]').prop('checked', true);
     $('input[name="ulcer_prevention_priority"][value="'+pretest['ulcer_prevention_priority']+'"]').prop('checked', true);
     $('input[name="ulcer_prevention_discomfort"][value="'+pretest['ulcer_prevention_discomfort']+'"]').prop('checked', true);
     $('input[name="ulcer_prevention_exagerration"][value="'+pretest['ulcer_prevention_exagerration']+'"]').prop('checked', true);

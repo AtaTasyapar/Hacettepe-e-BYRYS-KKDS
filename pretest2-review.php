@@ -20,6 +20,7 @@
     // else{
     //     echo 'error';
     // }
+    echo $student_id;
     $pretest = '';
     $sql = 'SELECT * FROM pretest2 WHERE student_id = :id';
     $stmt = $db->prepare($sql);
