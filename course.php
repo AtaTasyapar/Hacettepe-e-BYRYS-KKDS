@@ -133,7 +133,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
+        <style>
         .activity-container h5{
             cursor: pointer;
             color: rgb(94, 94, 245);
@@ -166,11 +166,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    
         <div class="overlay" style="display: none;">
         </div>
     
 
     <div id="assignment-container" style="display: none;">
+        <button class="btn btn-success" id='assignment-closer'>close</button>
+        <div id='custom-task-container' style="width: 90%; height: 90%;"></div>
     </div>
 
 
@@ -296,12 +299,14 @@
 }
 }
 foreach ($custom_tasks as $single_custom_task) {
+    $viewCountContainerId = $single_custom_task['id'];
     if (strtolower($single_custom_task['task_week']) == strtolower('week1') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
-        echo '<div class="activity-container">';
+        echo '<a class="custom-task-anchor" href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '" data-task-id="'.$single_custom_task['id'].'"><div class="activity-container" id="custom-container" style="cursor: pointer">';
         echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
         echo '<p>Description: ' . $single_custom_task['task_desc'] . '</p>';
-        echo '<a href="data:application/octet-stream;base64,' . $single_custom_task['file_data'] . '" download="' . $single_custom_task['file_name'] . '"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</a>';
-        echo '</div>';
+        echo '<p><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
+        echo '<h6 id="'.$viewCountContainerId.'"><i class="fas fa-eye"></i> ' . $single_custom_task['view_count'] . '</h6>';
+        echo '</div></a>';
     }
 }
 echo '</div>';
@@ -416,11 +421,16 @@ echo '</div>';
     }
     foreach ($custom_tasks as $single_custom_task) {
         if (strtolower($single_custom_task['task_week']) == strtolower('week2') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
-            echo '<div class="activity-container">';
+            $viewCountContainerId = $single_custom_task['id'] . '-views';
+            echo '<a class="custom-task-anchor" href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '"><div class="activity-container" id="custom-container" style="cursor: pointer">';
             echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
             echo '<p>Description: ' . $single_custom_task['task_desc'] . '</p>';
-            echo '<a href="data:application/octet-stream;base64,' . $single_custom_task['file_data'] . '" download="' . $single_custom_task['file_name'] . '"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</a>';
-            echo '</div>';
+            echo '<p><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
+            
+            // Add an id to the view count container using the unique id created
+            echo '<i class="fas fa-eye" id="' . $viewCountContainerId . '">' . $single_custom_task['view_count'] . '</i>';
+            
+            echo '</div></a>';
         }
     }
             echo '    
@@ -537,11 +547,12 @@ echo '</div>';
     }
     foreach ($custom_tasks as $single_custom_task) {
         if (strtolower($single_custom_task['task_week']) == strtolower('week3') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
-            echo '<div class="activity-container">';
+            echo '<a class="custom-task-anchor" href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '"><div class="activity-container" id="custom-container" style="cursor: pointer">';
             echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
             echo '<p>Description: ' . $single_custom_task['task_desc'] . '</p>';
-            echo '<a href="data:application/octet-stream;base64,' . $single_custom_task['file_data'] . '" download="' . $single_custom_task['file_name'] . '"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</a>';
-            echo '</div>';
+            echo '<p><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
+            echo '<i class="fas fa-eye">' . $single_custom_task['view_count'] . '</i>';
+            echo '</div></a>';
         }
     }
               
@@ -657,11 +668,11 @@ echo '</div>';
     }
     foreach ($custom_tasks as $single_custom_task) {
         if (strtolower($single_custom_task['task_week']) == strtolower('week4') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
-            echo '<div class="activity-container">';
+            echo '<a class="custom-task-anchor" href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '" data-current-views="' . $single_custom_task['view_count'] . '" ><div class="activity-container" id="custom-container" style="cursor: pointer">';
             echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
             echo '<p>Description: ' . $single_custom_task['task_desc'] . '</p>';
-            echo '<a href="data:application/octet-stream;base64,' . $single_custom_task['file_data'] . '" download="' . $single_custom_task['file_name'] . '"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</a>';
-            echo '</div>';
+            echo '<p><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
+            echo '</a>';
         }
     }
             echo '</div>';
@@ -705,6 +716,232 @@ echo '</div>';
         e.preventDefault();
         $('#content').load('./test-case.php')
     });
+
+    $('.custom-task-anchor').click(function(e){
+        e.preventDefault();
+        const fileName = $(this).data('file-name');
+        const fileExtension = fileName.split('.').pop();
+        const file_path = $(this).data('file-path');
+        const task_id = $(this).data('task-id');
+        console.log($('#custom-task-container h6').text());
+
+        if(fileExtension==='pdf'){
+            $('#custom-task-container').append('<p id=' +  task_id + '></p>')
+            $.ajax({
+                            type: "POST",
+                            url: "./viewCount-updater.php",
+                            data: {
+                                task_id: task_id
+                            },
+                            success: function (response) {
+                                console.log(response);
+                            },
+                            error: function (response) {
+                                console.log('unable to send data');
+                            }
+                        });
+            $('#custom-task-container').html('<embed src='+ file_path + ' type="application/pdf" width="100%" height="100%" />');
+        }
+        else if (fileExtension === 'pptx' || fileExtension === 'ppt') {
+            $('#custom-task-container').append('<h1 id="presentation"></h1>');
+            $('#custom-task-container').append('<p id=' +  task_id + '></p>')
+            $('#custom-task-container').append('<p id="loading">Loading..... please wait</p>')
+            $.ajax({
+                            type: "POST",
+                            url: "./viewCount-updater.php",
+                            data: {
+                                task_id: task_id
+                            },
+                            success: function (response) {
+                                console.log(response);
+                            },
+                            error: function (response) {
+                                console.log('unable to send data');
+                            }
+                        });
+            $.ajax({
+                type: "POST",
+                url: "./converter.php",
+                data: {
+                    file_path: file_path,
+                    file_name: fileName
+                },
+                success: function (response) {
+                    if(response === 'conversion successfull'){
+                        $('#custom-task-container #loading').remove();
+                        console.log('helloo')
+                        let newFileName = "uploads/" + fileName.split('.')[0] + '.pdf';
+                        $('#custom-task-container').append('<embed src='+ newFileName + ' type="application/pdf" width="100%" height="100%" />');
+                    }
+                },
+                error: function (response) {
+                    console.log('unable to send data');
+                }
+            });
+}       
+else if(fileExtension === 'word' || fileExtension === 'docx' || fileExtension === 'doc'){
+            $('#custom-task-container').append('<p id=' +  task_id + '></p>')
+            $.ajax({
+                            type: "POST",
+                            url: "./viewCount-updater.php",
+                            data: {
+                                task_id: task_id
+                            },
+                            success: function (response) {
+                                console.log(response);
+                            },
+                            error: function (response) {
+                                console.log('unable to send data');
+                            }
+                        });
+            $.ajax({
+                type: "POST",
+                url: "./converter.php",
+                data: {
+                    file_path: file_path,
+                    file_name: fileName
+                },
+                success: function (response) {
+                    if(response === 'conversion successfull'){
+                        $('#custom-task-container #loading').remove();
+                        console.log('helloo')
+                        let newFileName = "uploads/" + fileName.split('.')[0] + '.pdf';
+                        $('#custom-task-container').append('<embed src='+ newFileName + ' type="application/pdf" width="100%" height="100%" />');
+                    }
+                },
+                error: function (response) {
+                    console.log('unable to send data');
+                }
+            });
+}
+
+        else if(fileExtension==='png' || fileExtension==='jpg' || fileExtension==='jpeg'){
+            $('#custom-task-container').append('<p id=' +  task_id + '></p>')
+            $('#custom-task-container').html('<img src=' + file_data + ' width="100%" height="100%" />');
+            $.ajax({
+                            type: "POST",
+                            url: "./viewCount-updater.php",
+                            data: {
+                                task_id: task_id
+                            },
+                            success: function (response) {
+                                console.log(response);
+                            },
+                            error: function (response) {
+                                console.log('unable to send data');
+                            }
+                        });
+
+        }
+        else if(fileExtension==='mp4' || fileExtension==='webm' || fileExtension==='ogg' || fileExtension==='mov' || fileExtension==='wmv' || fileExtension==='flv' || fileExtension==='avi' || fileExtension==='mkv'){
+            
+            $('#custom-task-container').html('<video width="100%" height="100%" controls autoplay><source src=' + file_path + ' type="video/mp4"></video>');
+            $('#custom-task-container').append('<p id=' +  task_id + '></p>')
+            $('#custom-task-container').append('<h1 id="video"></h1>');
+            $.ajax({
+                            type: "POST",
+                            url: "./viewCount-updater.php",
+                            data: {
+                                task_id: task_id
+                            },
+                            success: function (response) {
+                                console.log(response);
+                            },
+                            error: function (response) {
+                                console.log('unable to send data');
+                            }
+                        });
+        }
+        else if(fileExtension==='mp3'){
+            $('#custom-task-container').append('<p id=' +  task_id + '></p>')
+            $.ajax({
+                            type: "POST",
+                            url: "./viewCount-updater.php",
+                            data: {
+                                task_id: task_id
+                            },
+                            success: function (response) {
+                                console.log(response);
+                            },
+                            error: function (response) {
+                                console.log('unable to send data');
+                            }
+                        });
+            $('#custom-task-container').append('<audio controls><source src=' + file_path + ' type="audio/mp3"></audio>');
+        }
+        else if(fileExtension==='txt'){
+            $('#custom-task-container').append('<p id=' +  task_id + '></p>')
+            $.ajax({
+                            type: "POST",
+                            url: "./viewCount-updater.php",
+                            data: {
+                                task_id: task_id
+                            },
+                            success: function (response) {
+                                console.log(response);
+                            },
+                            error: function (response) {
+                                console.log('unable to send data');
+                            }
+                        });
+            $('#custom-task-container').append('<pre>' + file_data + '</pre>');
+            $.ajax({
+                            type: "POST",
+                            url: "./viewCount-updater.php",
+                            data: {
+                                task_id: task_id
+                            },
+                            success: function (response) {
+                                console.log(response);
+                            },
+                            error: function (response) {
+                                console.log('unable to send data');
+                            }
+                        });
+        }
+        else{
+            $('#custom-task-container').html('<h1>Invalid file format</h1>');
+        }
+        $('#assignment-container').css('display', 'block');
+
+
+    })
+    $('#assignment-closer').click(function (e) { e.preventDefault();
+        const student_id = <?php echo json_encode($student_id); ?>;
+        const student_group = <?php echo json_encode($student_group); ?>;
+        const task_id = $('#custom-task-container p').attr('id');
+        const task_type = $('#custom-task-container h1').attr('id');
+      console.log($('#custom-task-container h6').html());
+        if(task_type === 'video'){
+            let  video = document.querySelector('video');
+            let currentLength = video.currentTime;
+
+            if(video){
+                video.pause();
+                console.log("video paused")
+         $.ajax({
+             type: "POST",
+             url: "./view-updater.php",
+             data: {
+                 currentLength: currentLength,
+                 student_id: student_id,
+                 student_group: student_group,
+                task_id: task_id
+            },
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log('unable to send data');
+            }
+        });
+    }
+}
+
+        $('#custom-task-container').empty();  $('#assignment-container').css('display', 'none');
+        $('#content').load('course.php')
+
+    })
 
     // $('#pretest1-comp').click(function (e) { 
     //     e.preventDefault();

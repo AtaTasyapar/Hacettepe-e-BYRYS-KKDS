@@ -76,6 +76,20 @@
             padding-bottom: 30px;
             border-radius: 10px;
         }
+
+        #details-container{
+            position: absolute;
+            z-index: 1000;
+            width: 75%;
+            border: 2px solid black;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 15px;
+            padding-bottom: 30px;
+            border-radius: 10px;
+        }
         input[type="file"]{
             padding: 5px;
             border: 1px dotted grey;
@@ -89,6 +103,13 @@
 <body>
     <div class="overlay" style="display: none;">
     </div>
+    <div id="details-container" style="display: none;">
+        <h5 class="text-center">Task Details</h5>
+        <div class="mt-4" id="details-inner">
+        </div>
+        <button class="btn btn-success" id="close-details">Close</button>
+    </div>
+
 
     <div id="assignment-container" style="display: none;">
         <h5 class="text-center">Task Selection</h5>
@@ -110,6 +131,9 @@
         <div id="upload-pdf"  style="display: none;">
             <input type="file" accept="application/pdf,application/vnd.ms-excel">
         </div>
+        <div id="upload-custom" style="display: none;">
+            <input type="file" id="custom-file" accept=".pdf, .ppt, .pptx, .doc, .docx, .mp4, .mov, .avi">
+        </div>
        
         <div class="d-flex justify-content-between mt-4">
             <button class="btn btn-success" id="assign-task">Assign</button>
@@ -126,9 +150,10 @@
                 echo '<div id="Control_group_1">';
                         $i = 1;
                         foreach($control1 as $task){
-                            echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px;">';
+                            echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px;" class="simple-task-controller">';
                             echo '<p style="margin-right: 20px">' . $task['task_name'] . ' - ' . $task['task_week'] . '</p>';
                             echo '<button class="btn btn-success delete-btn" id="delete-btn'.$i.'">Delete</button>';
+                            echo '<button class="btn btn-success showTaskDetails" id="task-details-' . $task['id'] . '">Details</button>';
                             echo '</div>';
                             $i++;
                         }
@@ -137,6 +162,7 @@
                                 echo '<div id="task-div' . $custom_task['id'] . '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller">';
                                     echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $custom_task['task_week'] . '</p>';
                                     echo '<button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'.$custom_task['id'].'">Delete</button>';
+                                    echo '<button class="btn btn-success showTaskDetails" id="task-details-' . $custom_task['id'] . '">Details</button>';
                                     echo '</div>';
                                 }
                         }
@@ -221,6 +247,7 @@
     </div>
 </body>
 <script>
+
     $('.group-container').click(function (e) { 
         e.preventDefault();
         const group = $(this).find('h5').text();
@@ -253,7 +280,7 @@
             $('#upload-pdf').show('medium');
         }
         if($('#task-options').val() === 'Custom-Task'){
-            $('#upload-pdf').show('medium');
+            $('#upload-custom').show('medium');
             $('#task-name').show('medium');
             $('#task-descriptions').show('medium');
         }
@@ -309,21 +336,22 @@
                                 success: function (response) {
                                     if(response !== 'Error'){
                                         const task = JSON.parse(response);
+                                        const view_count = task.view_count;
                                         if (task.student_group == "Control Group 1"){
                                             // append a div after the control group 1 div
-                                            $('#control1').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                                            $('#control1').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'">Details</button><button class="btn btn-success" id="task-details-'+ task_id +'" >Details</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                                             numOfDeleteBtns++;
                                             triggerDeleteBtn();
                                         } else if (task.student_group == "Control Group 2"){
-                                            $('#control2').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                                            $('#control2').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'">Details</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                                             numOfDeleteBtns++;
                                             triggerDeleteBtn();
                                         } else if (task.student_group == "Intervention Group 1"){
-                                            $('#intervention1').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                                            $('#intervention1').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'">Details</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                                             numOfDeleteBtns++;
                                             triggerDeleteBtn();
                                         } else if (task.student_group == "Intervention Group 2") {
-                                            $('#intervention2').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                                            $('#intervention2').after('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'">Details</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                                             numOfDeleteBtns++;
                                             triggerDeleteBtn();
                                         }
@@ -362,62 +390,48 @@
         return;
     }
 
-    if ($('input[type="file"]').val() === '') {
+    if ($('#custom-file').val() === '') {
         alert('Please upload a file');
         return;
     }
 
-    const file = $('input[type="file"]').prop('files')[0];
-    const fileExtension = file.name.split('.').pop().toLowerCase();
-    const task_name = $('#task-nameInput').val();
-    const task_desc = $('#task_desc').val();
+    const file = $('#custom-file').prop('files')[0];
+const task_name = $('#task-nameInput').val();
+const task_desc = $('#task_desc').val();
+const fileSize = $('#custom-file')[0].files[0].size;
+const student_group = $('#group-name').text().split(' ')[2] + ' ' + $('#group-name').text().split(' ')[3] + ' ' + $('#group-name').text().split(' ')[4];
+if (fileSize > 1000000000) {
+    alert('File size must be less than 10MB');
+    return;
+}
 
-    const fileSize = $('input[type="file"]')[0].files[0].size;
-    if (fileSize > 100000000) {
-        alert('File size must be less than 10MB');
-        return;
+const formData = new FormData();
+formData.append('file', file);
+formData.append('file_name', file.name);
+formData.append('student_group', student_group);
+formData.append('task_name', task_name);
+formData.append('task_desc', task_desc);
+formData.append('task_week', week_name);
+
+$.ajax({
+    type: "POST",
+    url: "./upload-custom.php",
+    data: formData,
+    processData: false, // Prevent jQuery from processing the data
+    contentType: false, // Set content type to false as FormData handles it
+    success: function (response) {
+        if (JSON.parse(response).task_id) {
+            alert('Task assigned successfully');
+            task_data = JSON.parse(response);
+            $('#content').load('task-assignment.php')
+        } else {
+            alert(response);
+        }
+    },
+    error: function (response) {
+        alert(response);
     }
-
-    const reader = new FileReader();
-    reader.onload = function (event) {
-        const base64data = event.target.result;
-        const filename = $('input[type="file"]')[0].files[0].name;
-        $.ajax({
-            type: "POST",
-            url: "./upload-custom.php",
-            data: {
-                task_week : week_name,
-                task_name: task_name,
-                task_desc: task_desc,
-                file_name: filename,
-                file_data: base64data,
-                student_group: $('#group-name').text().split(' ')[2] + ' ' + $('#group-name').text().split(' ')[3] + ' ' + $('#group-name').text().split(' ')[4],
-            },
-            success: function (response) {
-                console.log("response : ", response);
-                if (JSON.parse(response).task_id) {
-                    alert('Task assigned successfully');
-                    task_data = JSON.parse(response);
-                    if(task_data.student_group == "Control Group 1"){
-                        $('#Control_group_1').append('<div id="' + task_data.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task_data.task_name + ' - ' + task_data.task_week + '</p><button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'+task_data.task_id+'">Delete</button></div>');
-                    } else if (task_data.student_group == "Control Group 2"){
-                        $('#Control_group_2').append('<div id="' + task_data.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task_data.task_name + ' - ' + task_data.task_week + '</p><button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'+task_data.task_id+'">Delete</button></div>');
-                    } else if (task_data.student_group == "Intervention Group 1"){
-                        $('#Intervention_group_1').append('<div id="' + task_data.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task_data.task_name + ' - ' + task_data.task_week + '</p><button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'+task_data.task_id+'">Delete</button></div>');
-                    } else if (task_data.student_group == "Intervention Group 2") {
-                        $('#Intervention_group_2').append('<div id="' + task_data.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task_data.task_name + ' - ' + task_data.task_week + '</p><button class="btn btn-success custom-delete-btn" id="custom-delete-btn-'+task_data.task_id+'">Delete</button></div>');
-                    }
-                    
-                } else {
-                    alert(response);
-                }
-            },
-            error: function (response) {
-                alert(response);
-            }
-        });
-    };
-    reader.readAsDataURL(file);
+});
 }
             else{
 
@@ -432,23 +446,22 @@
                     },
             success: function (response) {
                 if(response !== 'Error'){
-                    // alert('Task assigned successfully');
-                    // add task to the list of tasks using the response for the id and the task name and week for the text
                     const task = JSON.parse(response);
+                    const task_id = task.task_id;
                     if (task.student_group == "Control Group 1"){
-                        $('#Control_group_1').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        $('#Control_group_1').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success" id="task-details-'+ task_id +'" >Details</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                     } else if (task.student_group == "Control Group 2"){
-                        $('#Control_group_2').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        $('#Control_group_2').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success" id="task-details-'+ task_id +'" >Details</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                     } else if (task.student_group == "Intervention Group 1"){
-                        $('#Intervention_group_1').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        $('#Intervention_group_1').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success" id="task-details-'+ task_id +'" >Details</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                     } else if (task.student_group == "Intervention Group 2") {
-                        $('#Intervention_group_2').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
+                        $('#Intervention_group_2').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success" id="task-details-'+ task_id +'" >Details</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Delete</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                     }
@@ -470,6 +483,7 @@
         $('#task-options').empty();
         $('#week-options').empty();
         $('#upload-pdf').hide('medium');
+        $('#upload-custom').hide('medium');
         $('#task-name').hide('medium');
         $('#task-descriptions').hide('medium');
 
@@ -515,7 +529,7 @@ $('.custom-delete-btn').click(function (e) {
     //get the id
     const task_id = $(this).attr('id').split('-')[3];
     const student_group = $(this).parent().parent().attr('id').split('_').join(' ');
-
+    
     $.ajax({
         type: "POST",
         url: "./delete-custom-task.php",
@@ -524,6 +538,7 @@ $('.custom-delete-btn').click(function (e) {
             student_group: student_group,
         },
         success: function (response) {
+            console.log(response);
             if(response == 'success'){
                 //remove the div
                 $('#task-div' + task_id).remove();
@@ -537,6 +552,34 @@ $('.custom-delete-btn').click(function (e) {
     
 })
 
+$('#custom-file').change(function (e) {
+    const fileInput = $(this);
+    const file = fileInput.prop('files')[0];
+    $('#assign-task').prop('disabled', true);
+
+    const fileReader = new FileReader();
+
+    fileReader.onloadend = function () {
+        console.log('hello there');
+        const base64data = fileReader.result;
+        const filename = fileInput.val().split('\\').pop();
+        const fileExtension = filename.split('.').pop().toLowerCase();
+        if (fileExtension !== 'pdf' && fileExtension !== 'ppt' && fileExtension !== 'pptx' && fileExtension !== 'doc' && fileExtension !== 'docx' && fileExtension !== 'mp4' && fileExtension !== 'mov' && fileExtension !== 'avi') {
+            alert('Please upload a pdf, ppt, pptx, doc, docx, mp4, mov, or avi file');
+            return;
+        }
+        const fileSize = fileInput[0].files[0].size;
+        if (fileSize > 1000000000) {
+            alert('File size must be less than 10MB');
+            return;
+        }
+        $('#assign-task').prop('disabled', false);
+    }
+
+    // Read the file as data URL
+    fileReader.readAsDataURL(file);
+});
+
     $('#task-options').change(function (e) { 
         //empty all prev values
         $('#upload-pdf').hide('medium');
@@ -548,12 +591,13 @@ $('.custom-delete-btn').click(function (e) {
         if($(this).val() === 'testCase'){
             $('#upload-pdf').show('medium');
         }else if($(this).val() === 'Custom-Task'){
-            $('#upload-pdf').show('medium');
+            $('#upload-custom').show('medium');
             $('#task-name').show('medium');
             $('#task-descriptions').show('medium');
         }  
         else{
             $('#upload-pdf').hide('medium');
+            $('#upload-custom').hide('medium');
             $('#task-name').hide('medium');
             $('#task-descriptions').hide('medium');
         }
@@ -567,10 +611,75 @@ $('.custom-delete-btn').click(function (e) {
         $('#task-options').empty();
         $('#week-options').empty();
         $('#upload-pdf').hide('medium');
+        $('#upload-custom').hide('medium');
         $('#task-name').hide('medium');
         $('#task-descriptions').hide('medium');
     });
 
-    
+    $('.showTaskDetails').click(function (e) { 
+        e.preventDefault();
+        const type = $(this).parent().attr('class');
+        const task_id = $(this).attr('id').split('-')[2];
+        console.log(type)
+        console.log(task_id)
+        $.ajax({
+            type: "POST",
+            url: "getTaskInfo.php",
+            data: {
+                task_id: task_id,
+                type: type,
+            },
+            success: function (response) {
+                const task = JSON.parse(response);
+                $('.overlay').css('display','block');
+                $('#details-container').css('display','block');
+                $('#details-inner').append('<h6 style="margin-top : 20px">Task Name: ' + task.task_name + '</h6>');
+                $('#details-inner').append('<h6>Task Week: ' + task.task_week + '</h6>');
+                if(task.task_desc)
+                $('#details-inner').append('<h6>Task Description: ' + task.task_desc + '</h6>');
+                if(task.task_file)
+                $('#details-inner').append('<h6>Task File: ' + task.task_file + '</h6>');
+                if(task.view_count)
+                $('#details-inner').append('<h6>Task View Count: ' + task.view_count + '</h6>');
+                if(task.watches){
+                    if(JSON.parse(task.watches).length > 0){
+                    let totalWacthtime = 0;
+                    const watches = JSON.parse(task.watches);
+                    const totalStudents = watches.length;
+                    $('#details-inner').append('<h6>Task Watches: </h6>');
+                    watches.forEach(element => {
+                        totalWacthtime += parseFloat(element.watch_time);
+                        singleWatchTime = parseFloat(element.watch_time);
+                        
+                        $('#details-inner').append('<h6>Student ID: ' + element.student_id + ' Watch Time: ' + formatTime(singleWatchTime.toFixed(3)) + '</h6>');
+                    });
+                    $('#details-inner').append('<h6>Total Students Watched: ' + totalStudents + '</h6>');
+                    $('#details-inner').append('<h6>Total Watch Time: ' + formatTime(totalWacthtime.toFixed(3)) + '</h6>');
+                }
+                }
+            }
+        });
+    });
+
+    $('#close-details').click(function (e) { 
+        e.preventDefault();
+        $('.overlay').css('display','none');
+        $('#details-inner').empty();
+        $('#details-container').css('display','none');
+    });
+
+    function formatTime(totalSeconds) {
+    if (totalSeconds >= 3600) {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        return `${hours} hours ${minutes} minutes`;
+    } else if (totalSeconds >= 60) {
+        const minutes = Math.floor(totalSeconds / 60);
+        return `${minutes} minutes`;
+    } else {
+        return `${totalSeconds} seconds`;
+    }
+}
+
 </script>
 </html>
