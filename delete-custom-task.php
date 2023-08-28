@@ -13,8 +13,9 @@ if(isset($_POST['task_id'])){
             unlink($file_name_pdf);
         }
     }
-
-    unlink($file_path);
+    if(file_exists($file_path)){   
+        unlink($file_path);
+    }
 
 
     $sql = 'DELETE FROM custom_task WHERE id = ?';

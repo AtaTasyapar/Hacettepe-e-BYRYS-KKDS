@@ -34,7 +34,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                 <h1 class="header">e-BYRYS-KKDS</h1>
                 <p class="labels">Permanently delete account? </p>
                 <input type="submit" name="submit" id="delete" value="delete">
-                <a href="main.php" class="lower-buttons"><i class="gg-arrow-left-o"
+                <a href="student-main.php" class="lower-buttons"><i class="gg-arrow-left-o"
                 style="margin: 0; margin-right: 20px;"></i>Ana Sayfaya Dön</a></div>
             </div>
         </form>

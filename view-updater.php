@@ -15,11 +15,13 @@ if (isset($_POST['task_id'])) {
         $task_id = $_POST['task_id'];
         $student_id = $_POST['student_id'];
         $currentLength = $_POST['currentLength'];
+        $student_name = $_POST['student_name'];
         
         // Create a new watch entry
         $newWatch = [
             'student_id' => $student_id,
-            'watch_time' => $currentLength
+            'watch_time' => $currentLength,
+            'student_name' => $student_name
         ];
         $viewCount++;
         
