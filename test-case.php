@@ -6,6 +6,7 @@ if (!isset($_SESSION['userlogin'])) {
 
 
 require_once('./config-students.php');
+$task_id = $_GET['task_id'];
 $sql = 'SELECT * FROM task WHERE task_name = "testCase"';
 $stmt = $db->prepare($sql);
 $stmt->execute();
@@ -90,7 +91,7 @@ if ($rows) {
         #noc-form{
             position: absolute;
             z-index: 1000;
-            width: 50%;
+            width: 75%;
             border: 2px solid black;
             top: 50%;
             left: 50%;
@@ -111,26 +112,35 @@ if ($rows) {
             color: red;
             display: none;
         }
+        @media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
 </style>
 <body style="background-color: white;">
-    <div id="noc-form" style="display: none;">
-        <div class="mb-2">
-            <h6 class="username-label">Patient Data:</h6>
-            <input type="text" name="patient_data">
+    <div id="noc-form" style="display : none">
+        <h5 class="text-center" style="border-bottom : 2px solid grey">Bakım Planı</h5>
+        <div style="display: flex; flex-wrao : wrap" class='flex-container'>    
+            <div class="mb-2 mt-2">
+                <h6 style="">Hemşirelik Tanısı</h6>
+                <textarea name="patient_data" rows="4" cols="20"></textarea>
+            </div>
+            <div class="mb-2 mt-2">
+            <h6 class="username-label">Beklenen Hasta Sonuçları (NOC):</h6>
+            <textarea name="noc" rows="4" cols="20"></textarea>
         </div>
-        <div class="mb-2">
-            <h6 class="username-label">NOC:</h6>
-            <input type="text" name="noc">
+        <div class="mb-2 mt-2">
+            <h6 class="username-label">Hemşirelik Girişimleri (NIC)</h6>
+            <textarea name="nic" rows="4" cols="20"></textarea>
         </div>
-        <div class="mb-2">
-            <h6 class="username-label">NIC:</h6>
-            <input type="text" name="nic">
+        <div class="mb-2 mt-2">
+            <h6 class="username-label">Değerlendirme (NOC)</h6>
+            <textarea name="noc_assessment" rows="4" cols="20"></textarea>
         </div>
-        <div class="mb-2">
-            <h6 class="username-label">NOC (Assessment)</h6>
-            <input type="text" name="noc_assessment">
-        </div>
-        <input type="button" id="noc-submit" value="submit" class="btn btn-success">
+    </div>
+        <input type="button" id="noc-submit" style="margin:0 auto" value="submit" class="btn btn-success">
     </div>
     <div id="risk-container" style="display: none;">
         <h5 class="text-center"></h5>
@@ -538,6 +548,7 @@ birazını alabiliyor
             type: "POST",
             url: "braden-handler.php",
             data: {
+            task_id : <?php echo $task_id ?>,
             student_id: student_id,
             student_name: student_name,
             student_email: student_email,
@@ -581,10 +592,10 @@ birazını alabiliyor
 
     $('#noc-submit').click(function(e){
         e.preventDefault();
-        var patient_data = $('input[name="patient_data"]').val() === '' ? 'N/A' : $('input[name="patient_data"]').val();
-        var noc = $('input[name="noc"]').val() === '' ? 'N/A' : $('input[name="noc"]').val();
-        var nic = $('input[name="nic"]').val() === '' ? 'N/A' : $('input[name="nic"]').val();
-        var noc_assessment = $('input[name="noc_assessment"]').val() === '' ? 'N/A' : $('input[name="noc_assessment"]').val();
+        var patient_data = $('textarea[name="patient_data"]').val().trim() || 'N/A';
+        var noc = $('textarea[name="noc"]').val().trim() || 'N/A';
+        var nic =$('textarea[name="patient_data"]').val().trim() || 'N/A';
+        var noc_assessment = $('textarea[name="noc_assessment"]').val().trim() || 'N/A';
         console.log(patient_data, noc, nic, noc_assessment)
         var student_id = <?php echo $student_id ?>;
         $.ajax({

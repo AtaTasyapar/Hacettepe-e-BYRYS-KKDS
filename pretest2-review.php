@@ -71,12 +71,12 @@
 </head>
 <body>
     <div class="container-fluid mt-5 w-75 p-4 mb-5" style="background-color: white; border-radius: 10px;">
-        <button class="btn" id="back">Back</button>
+        <button class="btn" id="back">Geri</button>
         <h2 class="form-header text-center mb-3">TEMA 1: Etiyoloji ve Gelişme</h2>
 
     <div class="input-section">
         <h5 class="username-label">1.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme1q1">
             <label for="a">Malnütrisyon basınç ülserlerine neden olur.</label>
@@ -93,7 +93,7 @@
    
     <div class="input-section">
         <h5 class="username-label">2.Çok zayıf hastalar obez hastalara göre basınç ülseri gelişimi açısından daha fazla risk altındadır.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme1q2">
             <label for="a">Doğru: Temas alanı küçüldükçe basınç miktarı artar.</label>
@@ -110,7 +110,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">3.Yatakta yarı oturur pozisyonda (60˚) oturan hasta kaydığı zaman neler olur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme1q3">
             <label for="a">Deri yüzeye tutunduğu zaman basınç artar.</label>
@@ -126,7 +126,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">4.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme1q4">
             <label for="a">Sabun cildi dehidrate edebilir ve böylece basınç ülseri riskini artırır.</label>
@@ -142,7 +142,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">5.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme1q5">
             <label for="a">Yakın zamanda hastayı ideal kilosunun altına düşüren kilo kaybı basınç ülseri riskini artırır.</label>
@@ -160,7 +160,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">6.Basınç ülseri riski ve  …………… arasında ilişki yoktur.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme1q6">
             <label for="a">Yaş</label>
@@ -178,7 +178,7 @@
 
     <div class="input-section">
         <h5 class="username-label">1.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme2q1">
             <label for="a">Fasyaya kadar inen bir basınç ülseri, 3. derece basınç ülseridir.</label>
@@ -195,7 +195,7 @@
    
     <div class="input-section">
         <h5 class="username-label">2.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme2q2">
             <label for="a">Hastanın topuğundaki bül her zaman 2. derece basınç ülseridir.</label>
@@ -211,7 +211,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">3.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme2q3">
             <label for="a">Hasta yatak içinde hareket ettirildiği zaman yırtılma ve sürtünme oluşabilir.</label>
@@ -227,7 +227,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">4.Oturma pozisyonunda basınç ülserlerinin gelişebileceği alanlar…</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme2q4">
             <label for="a">Pelvik alan, dirsek ve topuk</label>
@@ -243,7 +243,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">5.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme2q5">
             <label for="a">Basınç ülseri riski olan tüm hastalarda haftada bir sistematik cilt değerlendirmesi yapılmalıdır.</label>
@@ -261,7 +261,7 @@
 
     <div class="input-section">
         <h5 class="username-label">1.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme3q1">
             <label for="a">Risk değerlendirme araçları önlem alınması gereken yüksek riskli hastaların belirlenmesini sağlar.</label>
@@ -279,7 +279,7 @@
    
     <div class="input-section">
         <h5 class="username-label">2.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme3q2">
             <label for="a">Bakım evi hastalarının tümünde basınç ülseri gelişme riski günlük olarak değerlendirilmelidir.</label>
@@ -297,7 +297,7 @@
 
     <div class="input-section">
         <h5 class="username-label">1.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme4q1">
             <label for="a">Malnütrisyon basınç ülserlerine neden olur.</label>
@@ -316,7 +316,7 @@
 
     <div class="input-section">
         <h5 class="username-label">1.Vücut ile oturulan yer arasında en az temas basıncı oluşturan oturma pozisyonu</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme5q1">
             <label for="a">Dik oturma pozisyonu, her iki ayak elevasyonda</label>
@@ -333,7 +333,7 @@
 
     <div class="input-section">
         <h5 class="username-label">2.Hangi pozisyon değiştirme şeması basınç ülseri riskini en çok azaltır?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme5q2">
             <label for="a">Sırt üstü pozisyon - 90˚lateral pozisyon - Sırt üstü pozisyon-90˚lateral pozisyon…</label>
@@ -349,7 +349,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">3.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme5q3">
             <label for="a">Pozisyonunu değiştirebilen hastalara, sandalyede otururken minimum her 60 dakikada bir ağırlıklarını   
@@ -366,7 +366,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">4.Eğer hasta sandalyeden kayıyorsa, oturulan alandaki basıncın büyüklüğü ……….. ile azaltılır.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme5q4">
             <label for="a">İnce bir havalı minder</label>
@@ -382,7 +382,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">5.Basınç ülseri gelişme riski olan hastada, bir viskoelastik köpük şilte…</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme5q5">
             <label for="a">Basınç ülserini azaltmada etkilidir ve beraberinde pozisyon vermeye gerek yoktur.</label>
@@ -398,7 +398,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">6.Sulu şiltenin bir dezavantajı…</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme5q6">
             <label for="a">Kalçadaki yırtılmanın artmasıdır.</label>
@@ -414,7 +414,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">7. Hasta basınç azaltıcı köpük şilte üzerine yattığında</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme5q7">
             <label for="a">Topuk elevasyonu gerekli değildir.</label>
@@ -432,7 +432,7 @@
 
     <div class="input-section">
         <h5 class="username-label">1.Pozisyon değişikliği kesin önleyici bir yöntemdir. Çünkü …</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme6q1">
             <label for="a">Basınç ve yırtılmanın büyüklüğü azalacaktır.</label>
@@ -449,7 +449,7 @@
 
     <div class="input-section">
         <h5 class="username-label">2.Eğer .…… daha az hastada basınç ülseri gelişecektir</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme6q2">
             <label for="a">Beslenme destegi sağlanırsap</label>
@@ -465,7 +465,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">3.Aşağıdaki ifadelerden hangisi doğrudur?/h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme6q3">
             <label for="a">Basınç azaltmayan köpük şiltede yatan riskli hastalara her iki saatte bir pozisyon verilmelidir.</label>
@@ -481,7 +481,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">4.Değişen hava akımlı şiltede yatan hastada topukta basınç ülserinin önlenmesi için</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme6q4">
             <label for="a">Özel bir önleyici önlem yoktur.</label>
@@ -497,7 +497,7 @@
     </div>
     <div class="input-section">
         <h5 class="username-label">5.Pozisyon verilemeyen yatağa bağımlı hastalarda basınç ülseri önlemede en uygun yöntem</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme6q5">
             <label for="a">Basınç dağıtan köpük şilte</label>

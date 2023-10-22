@@ -30,8 +30,6 @@
         <div class="buttons-wrapper">
             <a class="buttons" href="login-teacher.php">Öğretmen Girişi</a>
             <a class="buttons" href="login-student.php">Öğrenci Girişi</a>
-
-            <a class="buttons" href="registration-teacher.php">Öğretmen Kaydı</a>
             <a class="buttons" href="registration-student.php">Öğrenci Kaydı</a>
         </div>
     </div>

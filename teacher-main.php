@@ -59,11 +59,11 @@ if (isset($_GET['logout'])) {
 
 <body class="stu-body">
     <div id="renewal-confirmation" style="display:none;" class="container-fluid ">
-        <h6>Are you sure you want to renew the course</h6>
-        <p>*This will delete all student submissions and task assignments!</p>
+        <h6>Kursu yenilemek istediğinizden emin misiniz?</h6>
+        <p>*Bu, tüm öğrenci gönderimlerini ve görev ödevlerini silecektir!</p>
         <div class="d-flex justify-content-around w-50 m-auto">
-            <button id="confirm-renewal" class="btn btn-success">Confirm</button>
-            <button id="cancel-renewal" class="btn btn-danger" >Cancel</button>
+            <button id="confirm-renewal" class="btn btn-success">Onaylamak</button>
+            <button id="cancel-renewal" class="btn btn-danger" >Iptal</button>
         </div>
     </div>
     <div class="stu-body1">
@@ -83,12 +83,12 @@ if (isset($_GET['logout'])) {
                 <div class="navigation-right" id="navigation-right">
                     <div class="nav-items-wrapper">
                         <a href="students-info.php" id="formlar" class="nav-link nav-items formlar btn-success"> <i
-                                class="fa fa-table me-2 "></i>Students</a>
+                                class="fa fa-table me-2 "></i>Öğrenci</a>
 
                         <a href="task-assignment.php" class="nav-link nav-items btn-success">
-                            <i class="fa fa-th me-2"></i>Assign a task</a>
+                            <i class="fa fa-th me-2"></i>Görev atama</a>
                         <button class="nav-link btn-success" id='renew-course'>
-                            <i class="fa fa-th me-2"></i>Renew Course</a>
+                            <i class="fa fa-th me-2"></i>Kursu Yenile</a>
 
                     </div>
                     <div>

@@ -73,7 +73,7 @@ if (isset($_GET['logout'])) {
 
                         <a class="black logout" href="student-main.php?logout=true">Çıkış Yap</a>
 
-                        <a href="delete-account.php?type=student" id="deleteAccount" class="deleteacc  btn" style="background-color:red; color:white">Sil</a>
+                        <!-- <a href="delete-account.php?type=student" id="deleteAccount" class="deleteacc  btn" style="background-color:red; color:white">Sil</a> -->
 
                     </div>
 

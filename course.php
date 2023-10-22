@@ -14,7 +14,7 @@
         $student_group = $student['student_group'];
     }
     else{
-        echo 'error';
+        echo 'error1';
     }
 
     $sql = 'SELECT * FROM pretest1 WHERE student_id = :id AND student_group = :group';
@@ -30,7 +30,7 @@
             $pretest1 = $rows;
         }
     }else{
-        echo 'error';
+        echo 'error2';
     }
 
     $sql = 'SELECT * FROM pretest2 WHERE student_id = :id AND student_group = :group' ;
@@ -46,7 +46,7 @@
             $pretest2 = $rows;
         }
     }else{
-        echo 'error';
+        echo 'error3';
     }
     $sql = 'SELECT * FROM posttest1 WHERE student_id = :id AND student_group = :group';
     $stmt = $db->prepare($sql);
@@ -61,7 +61,7 @@
             $posttest1 = $rows;
         }
     }else{
-        echo 'error';
+        echo 'error4';
     }
     $sql = 'SELECT * FROM posttest2 WHERE student_id = :id AND student_group = :group';
     $stmt = $db->prepare($sql);
@@ -76,7 +76,7 @@
             $posttest2 = $rows;
         }
     }else{
-        echo 'error';
+        echo 'error5';
     }
     $sql = 'SELECT * FROM testcase WHERE student_id = :id AND student_group = :group';
     $stmt = $db->prepare($sql);
@@ -91,7 +91,7 @@
             $testcase = $rows;
         }
     }else{
-        echo 'error';
+        echo 'error6';
     }
 
     $sql = 'SELECT * FROM task';
@@ -104,10 +104,8 @@
             $tasks = $rows;
         }
         else{
-            echo 'error';
         }
     }else{
-        echo 'error';
     }
 
     $sql = 'SELECT * FROM custom_task';
@@ -120,10 +118,10 @@
             $custom_tasks = $rows;
         }
         else{
-            echo 'error';
+            echo 'error9';
         }
     }else{
-        echo 'error';
+        echo 'error10';
     }
 ?>
 
@@ -191,28 +189,42 @@
     
 
     <div id="assignment-container" style="display: none;">
-        <button class="btn btn-success" id='assignment-closer'>close</button>
+        <button class="btn btn-success" id='assignment-closer'>Kapat</button>
         <div id='custom-task-container' style="width: 90%; height: 90%;"></div>
     </div>
 
 
 
 
-    <div class="send-patient w-75" style="background-color: white; margin-top: 50px; padding-bottom: 20px; margin-bottom: 20px; aspect-ratio: 3;">
+    <div class="send-patient w-75" style="background-color: white; margin-top: 50px; padding-bottom: 20px; padding-top: 20px; margin-bottom: 20px; aspect-ratio: 3; box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.2); border-radius: 10px">
         <?php
         if ($student_group === 'unassigned') {
-            echo '<h3>You have not been assigned to a group yet!</h3>';
+            echo '<h3>Henüz bir gruba atanmadınız!</h3>';
         }else{
             
             echo '
             <div class="container-fluid">
-                <h2 id="heading" class="text-center pt-2 mt-3">' . $student_group . ' Course</h2>
+                <h2 id="heading" class="text-center pt-2 mt-3" style="color : black">' . $student_group . ' Kurs</h2>
             </div>
             <div class="container-fluid">
-                <h6 id="heading" class="text-start pt-2">Course Overview</h6>
+                <h6 id="heading" class="text-start pt-2" style="color : black">Kursa Genel Bakış</h6>
             </div>
-            <div class="container-fluid mb-5 mt-4">            
-                <h2>Week 1: Introduction and Pre-testing</h2>';
+            <div class="container-fluid mb-5 mt-4 pb-4" style="border-bottom : 2px solid black; width: 98%;" >            
+                <h2 style="color : black; border-bottom: 2px solid grey; padding-bottom : 10px">Hafta 1</h2>';
+                $task_count = 0;
+                foreach($tasks as $task){
+                    if($task['task_week'] == 'week1' && strtolower($task['student_group']) == strtolower($student_group)){
+                        $task_count++;
+                    }
+                }
+                foreach($custom_tasks as $custom_task){
+                    if($custom_task['task_week'] == 'week1' && strtolower($custom_task['student_group']) == strtolower($student_group)){
+                        $task_count++;
+                    }
+                }
+                if($task_count == 0){
+                    echo '<h5 style="padding-bottom: 50px;">Bu hafta için henüz bir görev atanmadı!</h5>';
+                }
             foreach($tasks as $task){
                 if(strtolower($task['task_name']) == strtolower('pretest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week1'){
                     if (!isset($pretest1)) {
@@ -220,7 +232,7 @@
                         <div class="activity-container">
                         <h5 id="pretest1" data-task-id="'.$task['id'].'"  >Pre-test 1</h5>
                         <h5 class="completion-indicator" style="color: red;">
-                            incomplete
+                            Eksik
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';
@@ -229,7 +241,7 @@
                         <div class="activity-container">
                         <h5 id="pretest1-comp">Pre-test 1</h5>
                         <h5 class="completion-indicator" style="color: green;"  >
-                            complete
+                            tamamlamak
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';
@@ -244,7 +256,7 @@
                         <div class="activity-container">
                             <h5 id="pretest2" data-task-id="'.$task['id'].'">Pre-test 2</h5>
                             <h5 class="completion-indicator" style="color: red;">
-                                incomplete
+                                Eksik
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -253,7 +265,7 @@
                         <div class="activity-container">
                             <h5 id="pretest2-comp">Pre-test 2</h5>
                             <h5 class="completion-indicator" style="color: green;">
-                                complete
+                                tamamlamak
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
 
@@ -268,7 +280,7 @@
                         <div class="activity-container">
                             <h5 id="posttest1" data-task-id="'.$task['id'].'">Post-test 1</h5>
                             <h5 class="completion-indicator" style="color: red;">
-                                incomplete
+                                Eksik
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
 
@@ -278,7 +290,7 @@
                         <div class="activity-container">
                             <h5 id="posttest1-comp">Post-test 1</h5>
                             <h5 class="completion-indicator" style="color: green;">
-                                complete
+                                tamamlamak
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -292,7 +304,7 @@
                         <div class="activity-container">
                             <h5 id="posttest2" data-task-id="'.$task['id'].'">Post-test 2</h5>
                             <h5 class="completion-indicator" style="color: red;">
-                                incomplete
+                                Eksik
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -301,7 +313,7 @@
                         <div class="activity-container">
                             <h5 id="posttest2-comp">Post-test 2</h5>
                             <h5 class="completion-indicator" style="color: green;">
-                                complete
+                                tamamlamak
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -315,7 +327,7 @@
                 <div class="activity-container">
                     <h5 id="testcase" data-task-id="'.$task['id'].'">Test Case</h5>
                     <h5 class="completion-indicator" style="color: red;">
-                        incomplete
+                        Eksik
                     </h5>
                     <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                 </div>';
@@ -324,19 +336,20 @@
                 <div class="activity-container">
                     <h5 id="testcase-comp">Test Case</h5>
                     <h5 class="completion-indicator" style="color: green;">
-                        complete
+                        tamamlamak
                     </h5>
                     <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                 </div>';
             }
 }
 }
+
 foreach ($custom_tasks as $single_custom_task) {
     $viewCountContainerId = $single_custom_task['id'];
     if (strtolower($single_custom_task['task_week']) == strtolower('week1') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
         echo '<a class="custom-task-anchor" style="text-decoration: none;"  href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '" data-task-id="'.$single_custom_task['id'].'"><div class="activity-container" id="custom-container" >';
-        echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
-        echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Description: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
+        echo '<h5 id="custom-task" class="text-start">Başlık : ' . $single_custom_task['task_name'] . '</h5>';
+        echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
         echo '<p id="file-container"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
         echo '<h6 id="'.$viewCountContainerId.'"><i class="fas fa-eye"></i> ' . $single_custom_task['view_count'] . '</h6>';
         echo '</div></a>';
@@ -344,11 +357,26 @@ foreach ($custom_tasks as $single_custom_task) {
 }
 echo '</div>';
 
+
             
 
             echo '
-            <div class="container-fluid mb-5">            
-                <h2>Week 2: Intermediate Testing</h2>';
+            <div class="container-fluid mb-5 pb-4" style="border-bottom : 2px solid black; width: 98%;">            
+            <h2 style="color : black; border-bottom: 2px solid grey; padding-bottom : 10px">Hafta 2</h2>';
+            $task_count = 0;
+                foreach($tasks as $task){
+                    if($task['task_week'] == 'week2' && strtolower($task['student_group']) == strtolower($student_group)){
+                        $task_count++;
+                    }
+                }
+                foreach($custom_tasks as $custom_task){
+                    if($custom_task['task_week'] == 'week2' && strtolower($custom_task['student_group']) == strtolower($student_group)){
+                        $task_count++;
+                    }
+                }
+                if($task_count == 0){
+                    echo '<h5 style="padding-bottom: 50px;">Bu hafta için henüz bir görev atanmadı!</h5>';
+                }
                 foreach($tasks as $task){
                     if(strtolower($task['task_name']) == strtolower('pretest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week2'){
                         if (!isset($pretest1)) {
@@ -356,7 +384,7 @@ echo '</div>';
                             <div class="activity-container">
                             <h5 id="pretest1" data-task-id="'.$task['id'].'">Pre-test 1</h5>
                             <h5 class="completion-indicator" style="color: red;">
-                                incomplete
+                                Eksik
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -365,7 +393,7 @@ echo '</div>';
                             <div class="activity-container">
                             <h5 id="pretest1-comp">Pre-test 1</h5>
                             <h5 class="completion-indicator" style="color: green;"  >
-                                complete
+                                tamamlamak
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -379,7 +407,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="pretest2" data-task-id="'.$task['id'].'">Pre-test 2</h5>
                                 <h5 class="completion-indicator" style="color: red;">
-                                    incomplete
+                                    Eksik
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -388,7 +416,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="pretest2-comp">Pre-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    complete
+                                    tamamlamak
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -402,7 +430,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest1" data-task-id="'.$task['id'].'">Post-test 1</h5>
                                 <h5 class="completion-indicator" style="color: red;">
-                                    incomplete
+                                    Eksik
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -411,7 +439,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest1-comp">Post-test 1</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    complete
+                                    tamamlamak
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -425,7 +453,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest2" data-task-id="'.$task['id'].'">Post-test 2</h5>
                                 <h5 class="completion-indicator" style="color: red;">
-                                    incomplete
+                                    Eksik
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -434,7 +462,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest2-comp">Post-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    complete
+                                    tamamlamak
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -448,7 +476,7 @@ echo '</div>';
                     <div class="activity-container">
                         <h5 id="testcase" data-task-id="'.$task['id'].'">Test Case</h5>
                         <h5 class="completion-indicator" style="color: red;">
-                            incomplete
+                            Eksik
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';
@@ -457,7 +485,7 @@ echo '</div>';
                     <div class="activity-container">
                         <h5 id="testcase-comp">Test Case</h5>
                         <h5 class="completion-indicator" style="color: green;">
-                            complete
+                            tamamlamak
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';
@@ -468,8 +496,8 @@ echo '</div>';
         $viewCountContainerId = $single_custom_task['id'];
         if (strtolower($single_custom_task['task_week']) == strtolower('week2') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
             echo '<a class="custom-task-anchor" style="text-decoration: none;"  href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '" data-task-id="'.$single_custom_task['id'].'"><div class="activity-container" id="custom-container" >';
-            echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
-            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Description: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
+            echo '<h5 id="custom-task" class="text-start">Başlık : ' . $single_custom_task['task_name'] . '</h5>';
+            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
             echo '<p id="file-container"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
             echo '<h6 id="'.$viewCountContainerId.'"><i class="fas fa-eye"></i> ' . $single_custom_task['view_count'] . '</h6>';
             echo '</div></a>';
@@ -482,8 +510,21 @@ echo '</div>';
 
 
             echo '
-            <div class="container-fluid mb-5">            
-                <h2>Week 3: Syllabus Un-announced</h2>';
+            <div class="container-fluid mb-5 pb-4" style="border-bottom : 2px solid black; width: 98%;">            <h2 style="color : black; border-bottom: 2px solid grey; padding-bottom : 10px">Hafta 3</h2>';
+            $task_count = 0;
+                foreach($tasks as $task){
+                    if($task['task_week'] == 'week3' && strtolower($task['student_group']) == strtolower($student_group)){
+                        $task_count++;
+                    }
+                }
+                foreach($custom_tasks as $custom_task){
+                    if($custom_task['task_week'] == 'week3' && strtolower($custom_task['student_group']) == strtolower($student_group)){
+                        $task_count++;
+                    }
+                }
+                if($task_count == 0){
+                    echo '<h5 style="padding-bottom: 50px;">Bu hafta için henüz bir görev atanmadı!</h5>';
+                }
                 foreach($tasks as $task){
                     if(strtolower($task['task_name']) == strtolower('pretest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week3'){
                         if (!isset($pretest1)) {
@@ -491,7 +532,7 @@ echo '</div>';
                             <div class="activity-container">
                             <h5 id="pretest1" data-task-id="'.$task['id'].'">Pre-test 1</h5>
                             <h5 class="completion-indicator" style="color: red;">
-                                incomplete
+                                Eksik
                                 <h5><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </h6></div>';
                         }else {
@@ -499,7 +540,7 @@ echo '</div>';
                             <div class="activity-container">
                             <h5 id="pretest1-comp">Pre-test 1</h5>
                             <h5 class="completion-indicator" style="color: green;"  >
-                                complete
+                                tamamlamak
                                 <h5><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </h6></div>';
                         }      
@@ -512,7 +553,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="pretest2" data-task-id="'.$task['id'].'">Pre-test 2</h5>
                                 <h5 class="completion-indicator" style="color: red;">
-                                    incomplete
+                                    Eksik
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -521,7 +562,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="pretest2-comp">Pre-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    complete
+                                    tamamlamak
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -535,7 +576,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest1" data-task-id="'.$task['id'].'">Post-test 1</h5>
                                 <h5 class="completion-indicator" style="color: red;">
-                                    incomplete
+                                    Eksik
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -544,7 +585,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest1-comp">Post-test 1</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    complete
+                                    tamamlamak
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -558,7 +599,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest2" data-task-id="'.$task['id'].'">Post-test 2</h5>
                                 <h5 class="completion-indicator" style="color: red;">
-                                    incomplete
+                                    Eksik
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -567,7 +608,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest2-comp">Post-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    complete
+                                    tamamlamak
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -581,7 +622,7 @@ echo '</div>';
                     <div class="activity-container">
                         <h5 id="testcase">Test Case</h5>
                         <h5 class="completion-indicator" style="color: red;">
-                            incomplete
+                            Eksik
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';
@@ -590,7 +631,7 @@ echo '</div>';
                     <div class="activity-container">
                         <h5 id="testcase-comp">Test Case</h5>
                         <h5 class="completion-indicator" style="color: green;">
-                            complete
+                            tamamlamak
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';
@@ -601,8 +642,8 @@ echo '</div>';
         $viewCountContainerId = $single_custom_task['id'];
         if (strtolower($single_custom_task['task_week']) == strtolower('week3') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
             echo '<a class="custom-task-anchor" style="text-decoration: none;"  href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '" data-task-id="'.$single_custom_task['id'].'"><div class="activity-container" id="custom-container" >';
-            echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
-            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Description: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
+            echo '<h5 id="custom-task" class="text-start">Başlık : ' . $single_custom_task['task_name'] . '</h5>';
+            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
             echo '<p id="file-container"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
             echo '<h6 id="'.$viewCountContainerId.'"><i class="fas fa-eye"></i> ' . $single_custom_task['view_count'] . '</h6>';
             echo '</div></a>';
@@ -614,8 +655,21 @@ echo '</div>';
 
 
             echo '
-            <div class="container-fluid mb-5">            
-                <h2>Week 4: Syllabus Un-announced</h2>';
+            <div class="container-fluid mb-5 pb-4" style="border-bottom : 2px solid black; width: 98%;">            <h2 style="color : black; border-bottom: 2px solid grey; padding-bottom : 10px">Hafta 4</h2>';
+            $task_count = 0;
+                foreach($tasks as $task){
+                    if($task['task_week'] == 'week4' && strtolower($task['student_group']) == strtolower($student_group)){
+                        $task_count++;
+                    }
+                }
+                foreach($custom_tasks as $custom_task){
+                    if($custom_task['task_week'] == 'week4' && strtolower($custom_task['student_group']) == strtolower($student_group)){
+                        $task_count++;
+                    }
+                }
+                if($task_count == 0){
+                    echo '<h5 style="padding-bottom: 50px;">Bu hafta için henüz bir görev atanmadı!</h5>';
+                } 
                 foreach($tasks as $task){
                     if(strtolower($task['task_name']) == strtolower('pretest1') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week4'){
                         if (!isset($pretest1)) {
@@ -623,7 +677,7 @@ echo '</div>';
                             <div class="activity-container">
                             <h5 id="pretest1" data-task-id="'.$task['id'].'">Pre-test 1</h5>
                             <h5 class="completion-indicator" style="color: red;">
-                                incomplete
+                                Eksik
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -632,7 +686,7 @@ echo '</div>';
                             <div class="activity-container">
                             <h5 id="pretest1-comp">Pre-test 1</h5>
                             <h5 class="completion-indicator" style="color: green;"  >
-                                complete
+                                tamamlamak
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -646,7 +700,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="pretest2" data-task-id="'.$task['id'].'">Pre-test 2</h5>
                                 <h5 class="completion-indicator" style="color: red;">
-                                    incomplete
+                                    Eksik
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -655,7 +709,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="pretest2-comp">Pre-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    complete
+                                    tamamlamak
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -669,7 +723,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest1" data-task-id="'.$task['id'].'">Post-test 1</h5>
                                 <h5 class="completion-indicator" style="color: red;">
-                                    incomplete
+                                    Eksik
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -678,7 +732,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest1-comp">Post-test 1</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    complete
+                                    tamamlamak
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -692,7 +746,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest2" data-task-id="'.$task['id'].'">Post-test 2</h5>
                                 <h5 class="completion-indicator" style="color: red;">
-                                    incomplete
+                                    Eksik
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -701,7 +755,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest2-comp">Post-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    complete
+                                    tamamlamak
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -715,7 +769,7 @@ echo '</div>';
                     <div class="activity-container">
                         <h5 id="testcase" data-task-id="'.$task['id'].'">Test Case</h5>
                         <h5 class="completion-indicator" style="color: red;">
-                            incomplete
+                            Eksik
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';
@@ -724,7 +778,7 @@ echo '</div>';
                     <div class="activity-container">
                         <h5 id="testcase-comp">Test Case</h5>
                         <h5 class="completion-indicator" style="color: green;">
-                            complete
+                            tamamlamak
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';
@@ -735,8 +789,8 @@ echo '</div>';
         $viewCountContainerId = $single_custom_task['id'];
         if (strtolower($single_custom_task['task_week']) == strtolower('week4') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
             echo '<a class="custom-task-anchor" style="text-decoration: none;"  href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '" data-task-id="'.$single_custom_task['id'].'"><div class="activity-container" id="custom-container" >';
-            echo '<h5 id="custom-task" class="text-start">Title : ' . $single_custom_task['task_name'] . '</h5>';
-            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Description: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
+            echo '<h5 id="custom-task" class="text-start">Başlık : ' . $single_custom_task['task_name'] . '</h5>';
+            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
             echo '<p id="file-container"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
             echo '<h6 id="'.$viewCountContainerId.'"><i class="fas fa-eye"></i> ' . $single_custom_task['view_count'] . '</h6>';
             echo '</div></a>';
@@ -749,6 +803,8 @@ echo '</div>';
 </body>
 
 <script>
+    //scroll to top
+    $('body').css('overflow', 'auto');
     var student_group = <?php echo json_encode($student_group); ?>;
     console.log(student_group)
     if(student_group != 'unassigned'){
@@ -760,7 +816,6 @@ echo '</div>';
     }
     $('#pretest1').click(function (e) { 
         const task_id = $(this).data('task-id');
-        console.log(task_id);
         $.ajax({
             type: "POST",
             url: "./simpleViewUpdater.php",
@@ -769,12 +824,11 @@ echo '</div>';
             },
             success: function (response) {
                 console.log(response);
-    $('#content').load('./testcase.php')
             }
         });
         e.preventDefault();
     
-    $('#content').load('./pretest1.php')
+    $('#content').load('./pretest1.php?task_id=' + task_id)
         
     });
     $('#pretest2').click(function (e) { 
@@ -791,8 +845,8 @@ echo '</div>';
         });
         e.preventDefault();
 
-    $('#content').load('./pretest2.php')
-        
+    $('#content').load('./pretest2.php?task_id=' + task_id)
+                
     });
     $('#posttest1').click(function (e) { 
         const task_id = $(this).data('task-id');
@@ -822,35 +876,38 @@ echo '</div>';
             }
         });
         e.preventDefault();
-        $('#content').load('./posttest2.php')
+        $('#content').load('./posttest2.php?task_id=' + task_id)
     });
-
+   
+   
     $('#testcase').click(function (e) { 
-        const task_id = $(this).data('task-id');
-        $.ajax({
-            type: "POST",
-            url: "./simpleViewUpdater.php",
-            data: {
-                task_id: task_id
-            },
-            success: function (response) {
-                console.log(response);
-                $('#content').load('test-case.php')
-            }
-        });
-        e.preventDefault();
+    const task_id = $(this).data('task-id');
+    $.ajax({
+        type: "POST",
+        url: "./simpleViewUpdater.php",
+        data: {
+            task_id: task_id
+        },
+        success: function (response) {
+            console.log(response);
+            $('#content').load('test-case.php?task_id=' + task_id);
+        }
     });
+    e.preventDefault();
+});
 
     $('.custom-task-anchor').click(function(e){
         e.preventDefault();
         //scroll to top
         $('.overlay').css('display', 'block');
         $('html, body').animate({scrollTop:0}, '0');
+        //scroll disabled
+        $('html, body').css('overflow', 'hidden');
         const fileName = $(this).data('file-name');
         const fileExtension = fileName.split('.').pop();
         const file_path = $(this).data('file-path');
         const task_id = $(this).data('task-id');
-        console.log($('#custom-task-container h6').text());
+        console.log(file_path);
 
         if(fileExtension==='pdf'){
             $('#custom-task-container').append('<p id=' +  task_id + '></p>')
@@ -867,7 +924,7 @@ echo '</div>';
                                 console.log('unable to send data');
                             }
                         });
-            $('#custom-task-container').html('<embed src='+ file_path + ' type="application/pdf" width="100%" height="100%" />');
+            $('#custom-task-container').html('<embed src='+ encodeURI(file_path) + ' type="application/pdf" width="100%" height="100%" />');
         }
         else if (fileExtension === 'pptx' || fileExtension === 'ppt') {
             $('#custom-task-container').append('<h1 id="presentation"></h1>');
@@ -898,7 +955,7 @@ echo '</div>';
                         $('#custom-task-container #loading').remove();
                         console.log('helloo')
                         let newFileName = "uploads/" + fileName.split('.')[0] + '.pdf';
-                        $('#custom-task-container').append('<embed src='+ newFileName + ' type="application/pdf" width="100%" height="100%" />');
+                        $('#custom-task-container').append('<embed src='+ encodeURI(newFileName) + ' type="application/pdf" width="100%" height="100%" />');
                     }
                 },
                 error: function (response) {
@@ -909,6 +966,7 @@ echo '</div>';
 else if(fileExtension === 'word' || fileExtension === 'docx' || fileExtension === 'doc'){
             $('#custom-task-container').append('<p id=' +  task_id + '></p>')
             $('#custom-task-container').append('<p id="loading">Loading..... please wait</p>')
+        
             $.ajax({
                             type: "POST",
                             url: "./viewCount-updater.php",
@@ -930,11 +988,13 @@ else if(fileExtension === 'word' || fileExtension === 'docx' || fileExtension ==
                     file_name: fileName
                 },
                 success: function (response) {
+                    alert(response)
                     if(response === 'conversion successfull'){
+                        
                         $('#custom-task-container #loading').remove();
-                        console.log('helloo')
                         let newFileName = "uploads/" + fileName.split('.')[0] + '.pdf';
-                        $('#custom-task-container').append('<embed src='+ newFileName + ' type="application/pdf" width="100%" height="100%" />');
+                        console.log(newFileName)
+                        $('#custom-task-container').append('<embed src='+ encodeURI(newFileName) + ' type="application/pdf" width="100%" height="100%" />');
                     }
                 },
                 error: function (response) {
@@ -963,7 +1023,7 @@ else if(fileExtension === 'word' || fileExtension === 'docx' || fileExtension ==
         }
         else if(fileExtension==='mp4' || fileExtension==='webm' || fileExtension==='ogg' || fileExtension==='mov' || fileExtension==='wmv' || fileExtension==='flv' || fileExtension==='avi' || fileExtension==='mkv'){
             
-            $('#custom-task-container').html('<video width="100%" height="100%" controls autoplay><source src=' + file_path + ' type="video/mp4"></video>');
+            $('#custom-task-container').html('<video width="100%" height="100%" controls autoplay><source src=' + encodeURI(file_path) + ' type="video/mp4"></video>');
             $('#custom-task-container').append('<p id=' +  task_id + '></p>')
             $('#custom-task-container').append('<h1 id="video"></h1>');
             $.ajax({
@@ -995,7 +1055,7 @@ else if(fileExtension === 'word' || fileExtension === 'docx' || fileExtension ==
                                 console.log('unable to send data');
                             }
                         });
-            $('#custom-task-container').append('<audio controls><source src=' + file_path + ' type="audio/mp3"></audio>');
+            $('#custom-task-container').append('<audio controls><source src=' + encodeURI(file_path) + ' type="audio/mp3"></audio>');
         }
         else if(fileExtension==='txt'){
             $('#custom-task-container').append('<p id=' +  task_id + '></p>')
@@ -1035,6 +1095,7 @@ else if(fileExtension === 'word' || fileExtension === 'docx' || fileExtension ==
     })
     $('#assignment-closer').click(function (e) { e.preventDefault();
         $('.overlay').css('display', 'none');
+        $('html, body').css('overflow', 'auto');
         const student_id = <?php echo json_encode($student_id); ?>;
         const student_name = <?php echo json_encode($student_name); ?>;
         const student_group = <?php echo json_encode($student_group); ?>;

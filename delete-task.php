@@ -23,19 +23,32 @@
         echo 'Error';
     }
 
-    // Delete record from task_name table
-    $sql = "DELETE FROM $task_name WHERE student_group = \"$task_group\"";
-    $stmt = $db->prepare($sql);
-    $result = $stmt->execute();
-
-    if($result){
-        echo 'success';
+    if($task_name === 'pretest1'){
+        $sql = "DELETE FROM pretest1 WHERE task_id = \"$task_id\";";
+        $stmt = $db->prepare($sql);
+        $result = $stmt->execute();
+    }    
+    if($task_name === 'pretest2'){
+        $sql = "DELETE FROM pretest2 WHERE task_id = \"$task_id\";";
+        $stmt = $db->prepare($sql);
+        $result = $stmt->execute();
+    }    
+    if($task_name === 'posttest1'){
+        $sql = "DELETE FROM posttest1 WHERE task_id = \"$task_id\";";
+        $stmt = $db->prepare($sql);
+        $result = $stmt->execute();
     }
-    else{
-        echo 'Error';
-    }
-
+    if($task_name === 'posttest2'){
+        $sql = "DELETE FROM posttest2 WHERE task_id = \"$task_id\";";
+        $stmt = $db->prepare($sql);
+        $result = $stmt->execute();
+    }    
+    
+    
     if($task_name === 'testcase'){
+        $sql = "DELETE FROM testcase WHERE task_id = \"$task_id\";";
+        $stmt = $db->prepare($sql);
+        $result = $stmt->execute();
         $sql = "DELETE FROM uploads WHERE file_name = \"$assoc_file\";";
         $stmt = $db->prepare($sql);
         $result = $stmt->execute();
@@ -43,7 +56,8 @@
         if($result){
             echo 'success';
         }
-        else{
+
+    else{
             echo 'Error';
         }
     }

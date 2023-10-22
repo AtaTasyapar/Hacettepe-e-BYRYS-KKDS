@@ -1,6 +1,7 @@
 <?php
 require_once('./config-students.php');
 if(isset($_POST['task_id'])){
+
     $sql = 'SELECT * FROM custom_task WHERE id = ?';
     $stmt = $db->prepare($sql);
     $stmt->execute([$_POST['task_id']]);

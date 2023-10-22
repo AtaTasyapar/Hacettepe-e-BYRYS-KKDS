@@ -89,51 +89,54 @@
     <div class="overlay" style="display: none;">
     </div>
     <div id="assignment-container" style="display: none;">
-        <h5 class="text-center mb-3">Group Assignment</h5>
+        <h5 class="text-center mb-3">Grup Ödevi</h5>
         <h6 id="student_name" class="mb-2"></h6>
         <h6 id="student_id" class="mb-2"></h6>
         <h6 id="student_group" class="mb-2"></h6>
         <select name="group-options" id="group-options" class="mb-2" style="border: 2px solid rgb(160, 160, 239); padding: 5px;">
             <option>
-                Control group 1
+                Kontrol grubu 1
             </option>
             <option>
-                Control group 2
+                Kontrol grubu 2
             </option>
             <option>
-                Intervention group 1
+                Müdahale grubu 1
             </option>
             <option>
-                Intervention group 2
+                Müdahale grubu 2
             </option>
-        </select>
+        </select>            
+        <div><p style='font-size: 10px; color : red;'>*Uyarı: Grubu değiştirmek, mevcut öğrencinin gönderimlerini silecektir</p></div>
+
         <div class="d-flex justify-content-between mt-4">
-            <button class="btn btn-success" id="assign-group">Assign</button>
-            <button class="btn btn-danger" id="cancel">Cancel</button>
+            <button class="btn btn-success" id="assign-group">atamak</button>
+            <button class="btn btn-danger" id="cancel">iptal</button>
     </div>
     </div>
     <div id="forms-container" style="display: none;">
     </div>
     <div class='mt-5 w-75 p-3' style="background-color: white;">
         <div class="d-flex justify-content-between align-items-center mb-3" style="border-bottom: 2px solid grey;">
-           <div class="w-25"><h5 class="text-left" style="text-align: left;">Name</h5></div>
-        <div class="w-25"><h5 class='text-left'>Group</h5></div>
-    <div class="w-25"><h5 class='text-left'>Assign Group</h5></div>
-<div class="w-25" > <h5 class='text-left'>Links</h5></div> 
+           <div class="w-25"><h5 class="text-left" style="text-align: left;">Ad</h5></div>
+        <div class="w-25"><h5 class='text-left'>Grup</h5></div>
+    <div class="w-25"><h5 class='text-left'>Grup Ata</h5></div>
+<div class="w-25" > <h5 class='text-left'>Bağlantı</h5></div> 
 </div>
         
         <?php
         $i = 0;
         foreach($students as $student){
             echo "<div class='d-flex justify-content-between align-items-center mb-2' style='border-bottom : 0.2px solid grey' id=".$student['id'].">";
+            
                 echo "<div class='w-25 student-info'><h6>".$student['name']." ".$student['surname']."</h6></div>";
                 echo "<div class='w-25 student-info'><h6>".$student['student_group']."</h6></div>";
                 if($student['student_group'] == 'unassigned'){
-                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign$i'>Assign</h6></div>";
+                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign$i'>Atamak</h6></div>";
                 }else{
-                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign$i'>Change</h6></div>";
+                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign$i'>Değiştirmek</h6></div>";
                 }
-                echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='submissions$i'>Forms</h6></div>";
+                echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='submissions$i'>Formlar</h6></div>";
                 $i++;
             echo "</div>";
         }
@@ -151,14 +154,16 @@
                 console.log(name, id);
                 $(".overlay").toggle('');
                 $("#assignment-container").toggle('slow');
-                $("#student_name").text("Student Name: "+name);
-                $("#student_id").text("Student ID: "+id);
-                $("#student_group").text("Current Group: "+group);
+                $("#student_name").text("Öğrenci Adı: "+name);
+                $("#student_id").text("Öğrenci Kimliği: "+id);
+                $("#student_group").text("Mevcut Grup: "+group);
                 $('body').css('overflow', 'hidden');
             });
         }
         $('#assign-group').click(function (e) { 
             e.preventDefault();
+            var current_group = $("#student_group").text().split(":")[1].trim();
+            console.log(current_group);
             var group = $("#group-options").val();
             var id = $("#student_id").text().split(" ")[2];
             console.log(group, id);
@@ -167,13 +172,14 @@
                 url: "assign-group.php",
                 data: {
                     group: group,
-                    id: id
+                    id: id,
+                    current_group: current_group
                 },
                 success: function (response) {
                     console.log(response);
                     if(response == 'success'){
                         $("#"+id).find('.student-info').eq(1).find('h6').text(group);
-                        $("#"+id).find('.student-info').eq(2).find('h6').text('Change');
+                        $("#"+id).find('.student-info').eq(2).find('h6').text('Değiştirmek');
                         $('body').css('overflow', 'auto');
                         $(".overlay").toggle('');
                         $("#assignment-container").toggle('slow');
@@ -191,7 +197,7 @@
         for (i = 0; i < <?php echo $i ?>; i++){
         $("#submissions"+i).click(function (e) { 
             e.preventDefault();
-            $('#forms-container').html('<div style=""><h5 class="text-center mb-3">Student Forms</h5><h6 id="student_name_forms" class="mb-2"></h6><h6 id="student_id_forms" class="mb-2"></h6><h6 id="student_group_forms" class="mb-2"></h6></div><div id="available-forms" style="text-align: center;"></div><div class="d-flex justify-content-between mt-4"><button class="btn btn-danger" id="cancel-forms">Cancel</button></div>');
+            $('#forms-container').html('<div style=""><h5 class="text-center mb-3">Öğrenci Formlar</h5><h6 id="student_name_forms" class="mb-2"></h6><h6 id="student_id_forms" class="mb-2"></h6><h6 id="student_group_forms" class="mb-2"></h6></div><div id="available-forms" style="text-align: center;"></div><div class="d-flex justify-content-between mt-4"><button class="btn btn-danger" id="cancel-forms">Cancel</button></div>');
 
             var id = $(this).parent().parent().attr('id');
             var name = $(this).parent().parent().find('.student-info').eq(0).text();
@@ -211,9 +217,9 @@
                         html += "<button class='btn btn-success "+forms[i]+"' style='margin-left: 5px;'>"+forms[i].split('_').join(' ')+"</li>";
                     }
                     $("#available-forms").html(html);
-                    $("#student_name_forms").text('Name: ' + name);
-                    $("#student_id_forms").text('ID: ' +id);
-                    $("#student_group_forms").text('Group: '+group);
+                    $("#student_name_forms").text('Ad: ' + name);
+                    $("#student_id_forms").text('Kimliği: ' +id);
+                    $("#student_group_forms").text('Grup: '+group);
                     $(".overlay").toggle('');
                     $("#forms-container").toggle('slow');
                     $('body').css('overflow', 'hidden');

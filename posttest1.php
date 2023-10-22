@@ -3,6 +3,7 @@
     session_start();
     $student_id = $_SESSION['userlogin']['id'];
     $type = $_SESSION['userlogin']['type'];
+    $task_id = $_GET['task_id'];
     if($type === 'student'){
         $sql = 'SELECT * FROM students WHERE id = :id';
     }else{
@@ -58,268 +59,268 @@
 </head>
 <body>
     <div class="container-fluid mt-5 w-75 p-4 mb-5" style="background-color: white; border-radius: 10px;">
-        <button class="btn" id="back">Back</button>
+        <button class="btn" id="back">Geri</button>
         <h2 class="form-header text-center mb-3">Basınç Ülserlerini Önlemeye Yönelik Tutum Ölçeği</h2>
 
     <div class="input-section">
         <h5 class="username-label">1.Basınç ülserlerini önlemeye yönelik becerilerime güveniyorum.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_confidence">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_confidence">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_confidence">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_confidence">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
    
     <div class="input-section">
         <h5 class="username-label">2.Basınç ülserlerini önlemek konusunda iyi eğitimliyim.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_training">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_training">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_training">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_training">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
     <div class="input-section">
         <h5 class="username-label">3.	Basınç ülserlerinin önlenmesi oldukça zordur. Diğer hemşireler bu konuda benden daha iyidir.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_difficulty">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_difficulty">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_difficulty">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_difficulty">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
     <div class="input-section">
         <h5 class="username-label">4.	Basınç ülserlerini önlemek çok fazla dikkat gerektirir.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_attention">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_attention">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_attention">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_attention">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
     <div class="input-section">
         <h5 class="username-label">5.	Basınç ülserinin önlenmesi o kadar önemli değildir.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_importance">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_importance">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_importance">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_importance">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
     <div class="input-section">
         <h5 class="username-label">6.	Basınç ülserinin önlenmesi bir öncelik olmalıdır.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_priority">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_priority">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_priority">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_priority">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
     <div class="input-section">
         <h5 class="username-label">7.Basınç ülseri hastaya neredeyse hiç rahatsızlık vermez.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_discomfort">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_discomfort">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_discomfort">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_discomfort">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
     <div class="input-section">
         <h5 class="username-label">8.Basınç ülserlerinin hasta üzerine olan etkisi abartılmamalıdır.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_exagerration">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_exagerration">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_exagerration">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_exagerration">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
     <div class="input-section">
         <h5 class="username-label">9.	Basınç ülserlerinin toplum üzerine olan ekonomik etkisi abartılmamalıdır.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_economy">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_economy">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_economy">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_economy">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
     <div class="input-section">
         <h5 class="username-label">10.	Hastamda basınç ülseri gelişirse kendimi sorumlu hissetmem.	</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_responsibility">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_responsibility">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_responsibility">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_responsibility">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
     <div class="input-section">
         <h5 class="username-label">11.	Yüksek riskli hastalarda basınç ülserleri önlemede önemli bir role sahibim.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_role">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_role">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_role">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_role">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
     <div class="input-section">
         <h5 class="username-label">12.	Yüksek riskli hastalarda basınç ülserleri önlenebilir.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_highrisk">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_highrisk">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_highrisk">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_highrisk">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
     <div class="input-section">
         <h5 class="username-label">13.	Basınç ülserleri asla önlenemez.</h5>
-        <h6 class="error">Please select one option</h6>
+        <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly agree" name="ulcer_prevention_ability">
-            <label for="strongly agree">Strongly Agree</label>
+            <label for="strongly agree">Kesinlikle Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="agree" name="ulcer_prevention_ability">
-            <label for="agree">Agree</label>
+            <label for="agree">Katılıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="disagree" name="ulcer_prevention_ability">
-            <label for="strongly agree">disagree</label>
+            <label for="strongly agree">katılmıyorum</label>
         </div>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="strongly disagree" name="ulcer_prevention_ability">
-            <label for="strongly agree">Strongly disagree</label>
+            <label for="strongly agree">Kesinlikle katılmıyorum</label>
         </div>
     </div>
 
@@ -499,6 +500,7 @@ if ($('input[name="ulcer_prevention_ability"]:checked').length === 0) {
         type: "POST",
         url: "./posttest1-handler.php",
         data: {
+            task_id : <?php echo $task_id ?>,
             student_id: student_id,
             student_name: student_name,
             student_email: student_email,
