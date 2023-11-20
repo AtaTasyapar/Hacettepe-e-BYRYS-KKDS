@@ -107,10 +107,10 @@
                 Müdahale grubu 2
             </option>
         </select>            
-        <div><p style='font-size: 10px; color : red;'>*Uyarı: Grubu değiştirmek, mevcut öğrencinin gönderimlerini silecektir</p></div>
+        <div><p style='font-size: 10px; color : red;'>*Uyarı: Grubu Değiştir, mevcut öğrencinin gönderimlerini silecektir</p></div>
 
         <div class="d-flex justify-content-between mt-4">
-            <button class="btn btn-success" id="assign-group">atamak</button>
+            <button class="btn btn-success" id="assign-group">Ata</button>
             <button class="btn btn-danger" id="cancel">iptal</button>
     </div>
     </div>
@@ -132,9 +132,9 @@
                 echo "<div class='w-25 student-info'><h6>".$student['name']." ".$student['surname']."</h6></div>";
                 echo "<div class='w-25 student-info'><h6>".$student['student_group']."</h6></div>";
                 if($student['student_group'] == 'unassigned'){
-                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign$i'>Atamak</h6></div>";
+                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign$i'>Ata</h6></div>";
                 }else{
-                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign$i'>Değiştirmek</h6></div>";
+                    echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='assign$i'>Değiştir</h6></div>";
                 }
                 echo "<div class='w-25 student-info'><h6 class='btn btn-success' id='submissions$i'>Formlar</h6></div>";
                 $i++;
@@ -179,7 +179,7 @@
                     console.log(response);
                     if(response == 'success'){
                         $("#"+id).find('.student-info').eq(1).find('h6').text(group);
-                        $("#"+id).find('.student-info').eq(2).find('h6').text('Değiştirmek');
+                        $("#"+id).find('.student-info').eq(2).find('h6').text('Değiştir');
                         $('body').css('overflow', 'auto');
                         $(".overlay").toggle('');
                         $("#assignment-container").toggle('slow');

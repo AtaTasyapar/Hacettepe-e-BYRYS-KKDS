@@ -87,7 +87,7 @@ if (isset($_GET['logout'])) {
 
                         <a href="task-assignment.php" class="nav-link nav-items btn-success">
                             <i class="fa fa-th me-2"></i>Görev atama</a>
-                        <button class="nav-link btn-success" id='renew-course'>
+                        <button class="nav-link btn-success" style="border-radius: 20px;" id='renew-course'>
                             <i class="fa fa-th me-2"></i>Kursu Yenile</a>
 
                     </div>

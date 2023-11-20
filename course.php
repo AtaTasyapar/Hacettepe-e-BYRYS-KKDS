@@ -241,7 +241,7 @@
                         <div class="activity-container">
                         <h5 id="pretest1-comp">Pre-test 1</h5>
                         <h5 class="completion-indicator" style="color: green;"  >
-                            tamamlamak
+                            Tamamlandı
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';
@@ -265,7 +265,7 @@
                         <div class="activity-container">
                             <h5 id="pretest2-comp">Pre-test 2</h5>
                             <h5 class="completion-indicator" style="color: green;">
-                                tamamlamak
+                                Tamamlandı
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
 
@@ -290,7 +290,7 @@
                         <div class="activity-container">
                             <h5 id="posttest1-comp">Post-test 1</h5>
                             <h5 class="completion-indicator" style="color: green;">
-                                tamamlamak
+                                Tamamlandı
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -313,7 +313,7 @@
                         <div class="activity-container">
                             <h5 id="posttest2-comp">Post-test 2</h5>
                             <h5 class="completion-indicator" style="color: green;">
-                                tamamlamak
+                                Tamamlandı
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -336,7 +336,7 @@
                 <div class="activity-container">
                     <h5 id="testcase-comp">Test Case</h5>
                     <h5 class="completion-indicator" style="color: green;">
-                        tamamlamak
+                        Tamamlandı
                     </h5>
                     <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                 </div>';
@@ -393,7 +393,7 @@ echo '</div>';
                             <div class="activity-container">
                             <h5 id="pretest1-comp">Pre-test 1</h5>
                             <h5 class="completion-indicator" style="color: green;"  >
-                                tamamlamak
+                                Tamamlandı
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -416,7 +416,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="pretest2-comp">Pre-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    tamamlamak
+                                    Tamamlandı
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -439,7 +439,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest1-comp">Post-test 1</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    tamamlamak
+                                    Tamamlandı
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -462,7 +462,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest2-comp">Post-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    tamamlamak
+                                    Tamamlandı
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -471,7 +471,7 @@ echo '</div>';
         } 
         foreach($tasks as $task){
             if(strtolower($task['task_name']) == strtolower('testcase') &&  strtolower($task['student_group']) == strtolower($student_group) && $task['task_week'] == 'week2'){
-                if (!isset($posttest2)) {
+                if (!isset($testcase)) {
                     echo '
                     <div class="activity-container">
                         <h5 id="testcase" data-task-id="'.$task['id'].'">Test Case</h5>
@@ -485,7 +485,7 @@ echo '</div>';
                     <div class="activity-container">
                         <h5 id="testcase-comp">Test Case</h5>
                         <h5 class="completion-indicator" style="color: green;">
-                            tamamlamak
+                            Tamamlandı
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';
@@ -540,7 +540,7 @@ echo '</div>';
                             <div class="activity-container">
                             <h5 id="pretest1-comp">Pre-test 1</h5>
                             <h5 class="completion-indicator" style="color: green;"  >
-                                tamamlamak
+                                Tamamlandı
                                 <h5><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </h6></div>';
                         }      
@@ -562,7 +562,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="pretest2-comp">Pre-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    tamamlamak
+                                    Tamamlandı
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -585,7 +585,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest1-comp">Post-test 1</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    tamamlamak
+                                    Tamamlandı
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -608,7 +608,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest2-comp">Post-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    tamamlamak
+                                    Tamamlandı
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -631,7 +631,7 @@ echo '</div>';
                     <div class="activity-container">
                         <h5 id="testcase-comp">Test Case</h5>
                         <h5 class="completion-indicator" style="color: green;">
-                            tamamlamak
+                            Tamamlandı
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';
@@ -686,7 +686,7 @@ echo '</div>';
                             <div class="activity-container">
                             <h5 id="pretest1-comp">Pre-test 1</h5>
                             <h5 class="completion-indicator" style="color: green;"  >
-                                tamamlamak
+                                Tamamlandı
                             </h5>
                             <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                         </div>';
@@ -709,7 +709,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="pretest2-comp">Pre-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    tamamlamak
+                                    Tamamlandı
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -732,7 +732,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest1-comp">Post-test 1</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    tamamlamak
+                                    Tamamlandı
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -755,7 +755,7 @@ echo '</div>';
                             <div class="activity-container">
                                 <h5 id="posttest2-comp">Post-test 2</h5>
                                 <h5 class="completion-indicator" style="color: green;">
-                                    tamamlamak
+                                    Tamamlandı
                                 </h5>
                                 <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                             </div>';
@@ -778,7 +778,7 @@ echo '</div>';
                     <div class="activity-container">
                         <h5 id="testcase-comp">Test Case</h5>
                         <h5 class="completion-indicator" style="color: green;">
-                            tamamlamak
+                            Tamamlandı
                         </h5>
                         <h6><i class="fas fa-eye"></i> ' . $task['view_count'] . '</h6>
                     </div>';

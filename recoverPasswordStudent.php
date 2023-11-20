@@ -71,7 +71,7 @@ if (isset($_SESSION['userlogin'])) {
                 <p class="labels">Şifreyi Onayla</p>
                 <input type="text" required name="email" id="confirm-password" placeholder="Mail Giriniz" oninput="sanitizePasswordRecovery()">
                 <p id="password-error" style='color:red;'></p>
-                <input type="submit" name="submit" id="change-password" value="değiştirmek">
+                <input type="submit" name="submit" id="change-password" value="Değiştir">
                 <a href="main.php" class="lower-buttons" style="padding-top:10px"><i class="gg-arrow-left-o"
                         style="margin: 0; margin-right: 20px;"></i>Ana Sayfaya Dön</a>
                 </div>

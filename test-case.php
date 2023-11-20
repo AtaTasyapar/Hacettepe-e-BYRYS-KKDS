@@ -144,20 +144,20 @@ if ($rows) {
     </div>
     <div id="risk-container" style="display: none;">
         <h5 class="text-center"></h5>
-        <button class="btn btn-success" id="close-risk">Proceed</button>
+        <button class="btn btn-success" id="close-risk">İlerlemek</button>
     </div>
     <div class="overlay" style="display: none;"></div>
 
 
     <div class="container-fluid mt-5 w-75 p-4" style="background-color: white; aspect-ratio: 1;" >
-        <button class="btn mb-4" id="back">Back</button>
+        <button class="btn mb-4" id="back">Iptal</button>
         <iframe src=<?php echo $base64String?> frameborder="0" class='w-100 mb-5' style='height:100%' ></iframe>
         
         <div class="input-section">
         <h5 class="username-label">UYARANIN ALGILANMA¬SI
             Basınca karşı oluşan rahatsızlığın algılanması.
             </h5>
-            <h6 class="error">Please select one option</h6>
+            <h6 class="error">Lütfen bir seçenek seçin</h6>
 
             <div class="d-flex flex-row align-items-start mb-2">
                 <input type="radio"  value="1" name="stimulus_detection">
@@ -199,7 +199,7 @@ if ($rows) {
 Vücudun
 Nemliliği.
             </h5>
-            <h6 class="error">Please select one option</h6>
+            <h6 class="error">Lütfen bir seçenek seçin</h6>
 
             <div class="d-flex flex-row align-items-start mb-2">
                 <input type="radio"  value="1" name="body_humidity">
@@ -248,7 +248,7 @@ Nemliliği.
             Aktivitenin
             Derecesi.            
             </h5>
-            <h6 class="error">Please select one option</h6>
+            <h6 class="error">Lütfen bir seçenek seçin</h6>
 
             <div class="d-flex flex-row align-items-start mb-2">
                 <input type="radio"  value="1" name="physical_activity">
@@ -309,7 +309,7 @@ Nemliliği.
             Kontrol edebilme.
             
             </h5>
-            <h6 class="error">Please select one option</h6>
+            <h6 class="error">Lütfen bir seçenek seçin</h6>
 
             <div class="d-flex flex-row align-items-start mb-2">
                 <input type="radio"  value="1" name="mobility_confidence">
@@ -358,7 +358,7 @@ yapabiliyor.Kendiliğinden  Pozisyonunu değiştiremiyor.
         <h5 class="username-label">BESLENME
             Beslenme alışkanlığı.
             </h5>
-            <h6 class="error">Please select one option</h6>
+            <h6 class="error">Lütfen bir seçenek seçin</h6>
 
             <div class="d-flex flex-row align-items-start mb-2">
                 <input type="radio"  value="1" name="feeding_habit">
@@ -413,7 +413,7 @@ birazını alabiliyor
         <h5 class="username-label">SÜRTÜNME
             VETAHRİŞ
             </h5>
-            <h6 class="error">Please select one option</h6>
+            <h6 class="error">Lütfen bir seçenek seçin</h6>
 
             <div class="d-flex flex-row align-items-start mb-2">
                 <input type="radio"  value="1" name="friction_control">
@@ -453,7 +453,7 @@ birazını alabiliyor
             </div>
         </div>
         
-        <button type="submit" id="submit" class="btn btn-success">Submit</button>
+        <button type="submit" id="submit" class="btn btn-success">Gönder</button>
 
 
     </div>
@@ -562,7 +562,6 @@ birazını alabiliyor
             total: total
             },
             success: function (response) {
-                alert('success');
                 var riskFactor = '';
                 if(total < 12){
                     riskFactor = 'Yüksek Risk';
@@ -596,7 +595,6 @@ birazını alabiliyor
         var noc = $('textarea[name="noc"]').val().trim() || 'N/A';
         var nic =$('textarea[name="patient_data"]').val().trim() || 'N/A';
         var noc_assessment = $('textarea[name="noc_assessment"]').val().trim() || 'N/A';
-        console.log(patient_data, noc, nic, noc_assessment)
         var student_id = <?php echo $student_id ?>;
         $.ajax({
             type: "POST",
@@ -609,7 +607,6 @@ birazını alabiliyor
                 student_id: student_id
             },
             success: function (response) {
-                alert(response);
                 $('#noc-form').hide();
                 $('.overlay').hide();
                 $('body').css('overflow', 'auto');

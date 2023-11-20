@@ -62,4 +62,6 @@
         }
     }
 
+    echo $task_name;    
+
 ?>

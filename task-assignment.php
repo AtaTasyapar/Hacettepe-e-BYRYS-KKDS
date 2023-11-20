@@ -1,6 +1,19 @@
 <?php
     session_start();
     require_once('config-teachers.php');
+    $week_translation = [
+        'week1' => 'Hafta 1',
+        'week2' => 'Hafta 2',
+        'week3' => 'Hafta 3',
+        'week4' => 'Hafta 4',
+    ];
+    $task_name_proper = [
+        'pretest1' => 'Pretest 1',
+        'pretest2' => 'Pretest 2',
+        'testCase' => 'Test Case',
+        'posttest1' => 'Posttest 1',
+        'posttest2' => 'Posttest 2',
+    ];
     $teacher_id = $_SESSION['userlogin']['id'];
     $sql = 'SELECT * FROM teachers WHERE id = :id';
     $stmt = $db->prepare($sql);
@@ -107,7 +120,7 @@
         <h5 class="text-center">Görev Ayrıntıları</h5>
         <div class="mt-4" id="details-inner">
         </div>
-        <button class="btn btn-success" id="close-details">Close</button>
+        <button class="btn btn-success" id="close-details">Iptal</button>
     </div>
 
 
@@ -136,7 +149,7 @@
         </div>
        
         <div class="d-flex justify-content-between mt-4">
-            <button class="btn btn-success" id="assign-task">Atamak</button>
+            <button class="btn btn-success" id="assign-task">Ata</button>
             <button class="btn btn-danger" id="cancel">İptal</button>
     </div>
     </div>
@@ -151,18 +164,18 @@
                         $i = 1;
                         foreach($control1 as $task){
                             echo '<div id="' . $task['id'] . '" style="display: flex; align-items:center; margin-bottom: 10px; border-bottom : 2px solid grey"; class="simple-task-controller">';
-                            echo '<p style="margin-right: 20px">' . $task['task_name'] . ' - ' . $task['task_week'] . '</p>';
+                            echo '<p style="margin-right: 20px">' . $task_name_proper[$task['task_name']] . ' - ' . $week_translation[$task['task_week']] . '</p>';
                             echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success delete-btn" id="delete-btn'.$i.'">Sil</button>';
-                            echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $task['id'] . '">Şey</button>';
+                            echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $task['id'] . '">Ayrııntılar</button>';
                             echo '</div>';
                             $i++;
                         }
                         foreach($custom_tasks as $custom_task){
                             if($custom_task['student_group'] === 'Kontrol Grubu 1'){
                                 echo '<div id="task-div' . $custom_task['id'] . '" style="display: flex; align-items:center; margin-bottom: 10px; border-bottom : 2px solid grey" class="custom-task-controller">';
-                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $custom_task['task_week'] . '</p>';
+                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $week_translation[$custom_task['task_week']] . '</p>';
                                     echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success custom-delete-btn" id="custom-delete-btn-'.$custom_task['id'].'">Sil</button>';
-                                    echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $custom_task['id'] . '">Şey</button>';
+                                    echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $custom_task['id'] . '">Ayrııntılar</button>';
                                     echo '</div>';
                                 }
                         }
@@ -177,9 +190,10 @@
 
                         foreach($control2 as $task){
                             echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px; border-bottom : 2px solid grey" class="simple-task-controller">';
-                            echo '<p style="margin-right: 20px">' . $task['task_name'] . ' - ' . $task['task_week'] . '</p>';
+                            echo '<p style="margin-right: 20px">' . $task_name_proper[$task['task_name']] . ' - ' . $week_translation[$task['task_week']]
+                            . '</p>';
                             echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success delete-btn" id="delete-btn'.$i.'">Sil</button>';
-                            echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $task['id'] . '">Şey</button>';
+                            echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $task['id'] . '">Ayrııntılar</button>';
 
                             echo '</div>';
                             $i++;
@@ -187,9 +201,9 @@
                         foreach($custom_tasks as $custom_task){
                             if($custom_task['student_group'] === 'Kontrol Grubu 2'){
                                 echo '<div id="task-div' . $custom_task['id'] . '" style="display: flex; margin-bottom: 10px; border-bottom : 2px solid grey" class="custom-task-controller">';
-                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $custom_task['task_week'] . '</p>';
+                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $week_translation[$custom_task['task_week']] . '</p>';
                                     echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success custom-delete-btn" id="custom-delete-btn-'.$custom_task['id'].'">Sil</button>';
-                                    echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $custom_task['id'] . '">Şey</button>';
+                                    echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $custom_task['id'] . '">Ayrııntılar</button>';
 
                                     echo '</div>';
                                 }
@@ -205,18 +219,19 @@
                 echo '<div id="Intervention_group_1">';
                         foreach($intervention1 as $task){
                             echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px; border-bottom : 2px solid grey"" class="simple-task-controller">';
-                            echo '<p style="margin-right: 20px">' . $task['task_name'] . ' - ' . $task['task_week'] . '</p>';
+                            echo '<p style="margin-right: 20px">' . $task_name_proper[$task['task_name']] . ' - ' . $week_translation[$task['task_week']]
+                            . '</p>';
                             echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success delete-btn" id="delete-btn'.$i.'">Sil</button>';
-                            echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $task['id'] . '">Şey</button>';
+                            echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $task['id'] . '">Ayrııntılar</button>';
                             echo '</div>';
                             $i++;
                         }
                         foreach($custom_tasks as $custom_task){
                             if($custom_task['student_group'] === 'Müdahale Grubu 1'){
                                 echo '<div id="task-div' . $custom_task['id'] . '" style="display: flex; margin-bottom: 10px; border-bottom : 2px solid grey"" class="custom-task-controller">';
-                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $custom_task['task_week'] . '</p>';
+                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $week_translation[$custom_task['task_week']] . '</p>';
                                     echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success custom-delete-btn" id="custom-delete-btn-'.$custom_task['id'].'">Sil</button>';
-                                    echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $custom_task['id'] . '">Şey</button>';
+                                    echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $custom_task['id'] . '">Ayrııntılar</button>';
                                     echo '</div>';
                                 }
                         }
@@ -233,18 +248,19 @@
 
                         foreach($intervention2 as $task){
                             echo '<div id="' . $task['id'] . '" style="display: flex; margin-bottom: 10px; border-bottom : 2px solid grey"" class="simple-task-controller">';
-                            echo '<p style="margin-right: 20px">' . $task['task_name'] . ' - ' . $task['task_week'] . '</p>';
+                            echo '<p style="margin-right: 20px">' . $task_name_proper[$task['task_name']] . ' - ' . $week_translation[$task['task_week']]
+                            . '</p>';
                             echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success delete-btn" id="delete-btn'.$i.'">Sil</button>';
-                            echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $task['id'] . '">Şey</button>';
+                            echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $task['id'] . '">Ayrııntılar</button>';
                             echo '</div>';
                             $i++;
                         }
                         foreach($custom_tasks as $custom_task){
                             if($custom_task['student_group'] === 'Müdahale Grubu 2'){
                                 echo '<div id="task-div' . $custom_task['id'] . '" style="display: flex; margin-bottom: 10px; border-bottom : 2px solid grey"" class="custom-task-controller">';
-                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $custom_task['task_week'] . '</p>';
+                                    echo '<p style="margin-right: 20px">' . $custom_task['task_name'] . ' - ' . $week_translation[$custom_task['task_week']] . '</p>';
                                     echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success custom-delete-btn" id="custom-delete-btn-'.$custom_task['id'].'">Sil</button>';
-                                    echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $custom_task['id'] . '">Şey</button>';
+                                    echo '<button style="margin-left:10px; font-size: 10px;" class="btn btn-success showTaskDetails" id="task-details-' . $custom_task['id'] . '">Ayrııntılar</button>';
                                     echo '</div>';
                                 }
                         }
@@ -263,6 +279,8 @@
         $('.overlay').toggle('medium');
         $('#assignment-container').toggle('medium');
         $('#group-name').text('Current Group: ' + group);
+        //scroll to top
+        $('html, body').animate({scrollTop: '0px'}, 300);
      
         if(group === 'Kontrol Grubu 1' || group === 'Müdahale Grubu 1'){
             $('#task-options').append('<option value="pretest1">Pretest 1</option>');
@@ -270,7 +288,7 @@
             $('#task-options').append('<option value="testCase">Test Case</option>');
             $('#task-options').append('<option value="posttest1">Posttest 1</option>');
             $('#task-options').append('<option value="posttest2">Posttest 2</option>');
-            $('#task-options').append('<option value="Custom-Task">Custom Task</option>');
+            $('#task-options').append('<option value="Custom-Task">Günlük Çalışma</option>');
             $('#week-options').append('<option value="week1">Hafta 1</option>');
             $('#week-options').append('<option value="week2">Hafta 2</option>');
             $('#week-options').append('<option value="week3">Hafta 3</option>');
@@ -278,7 +296,7 @@
             
         }else{
             $('#task-options').append('<option value="testCase">Test Case</option>');
-            $('#task-options').append('<option value="Custom-Task">Custom Task</option>');
+            $('#task-options').append('<option value="Custom-Task">Günlük Çalışma</option>');
             $('#week-options').append('<option value="week1">Hafta 1</option>');
             $('#week-options').append('<option value="week2">Hafta 2</option>');
             $('#week-options').append('<option value="week3">Hafta 3</option>');
@@ -349,22 +367,22 @@
                                         const task = JSON.parse(response);
                                         const view_count = task.view_count;
                                         if (task.student_group == "Kontrol Grubu 1"){
-                                            $('#control1').append('<div id="' + task.task_id + '" style="display: flex; align-items: end; margin-bottom: 10px; border-bottom: 2px solid grey" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button style="margin-left:10px" class="btn btn-success showTaskDetails" id="task-details-'+ task.task_id +'">Şey</button><button class="btn btn-success" id="task-details-'+ task.task_id +'" >Details</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
+                                            $('#control1').append('<div id="' + task.task_id + '" style="display: flex; align-items: end; margin-bottom: 10px; border-bottom: 2px solid grey" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button style="margin-left:10px" class="btn btn-success showTaskDetails" id="task-details-'+ task.task_id +'">Ayrııntılar</button><button class="btn btn-success" id="task-details-'+ task.task_id +'" >Details</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
                                             numOfDeleteBtns++;
                                             triggerDeleteBtn();
                                             $('#content').load('task-assignment.php')
                                         } else if (task.student_group == "Kontrol Grubu 2"){
-                                            $('#control2').append('<div id="' + task.task_id + '" style="display: flex; align-items: end; margin-bottom: 10px; border-bottom: 2px solid grey" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button style="margin-left:10px" class="btn btn-success showTaskDetails" id="task-details-'+ task.task_id +'">Şey</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
+                                            $('#control2').append('<div id="' + task.task_id + '" style="display: flex; align-items: end; margin-bottom: 10px; border-bottom: 2px solid grey" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button style="margin-left:10px" class="btn btn-success showTaskDetails" id="task-details-'+ task.task_id +'">Ayrııntılar</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
                                             numOfDeleteBtns++;
                                             triggerDeleteBtn();
                                             $('#content').load('task-assignment.php')
                                         } else if (task.student_group == "Müdahale Grubu 1"){
-                                            $('#intervention1').append('<div id="' + task.task_id + '" style="display: flex; align-items: end; margin-bottom: 10px; border-bottom: 2px solid grey" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button style="margin-left:10px" class="btn btn-success showTaskDetails" id="task-details-'+ task.task_id +'">Şey</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
+                                            $('#intervention1').append('<div id="' + task.task_id + '" style="display: flex; align-items: end; margin-bottom: 10px; border-bottom: 2px solid grey" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button style="margin-left:10px" class="btn btn-success showTaskDetails" id="task-details-'+ task.task_id +'">Ayrııntılar</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
                                             numOfDeleteBtns++;
                                             triggerDeleteBtn();
                                             $('#content').load('task-assignment.php')
                                         } else if (task.student_group == "Müdahale Grubu 2") {
-                                            $('#intervention2').append('<div id="' + task.task_id + '" style="display: flex; align-items: end; margin-bottom: 10px; border-bottom: 2px solid grey" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button style="margin-left:10px" class="btn btn-success showTaskDetails" id="task-details-'+ task.task_id +'">Şey</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
+                                            $('#intervention2').append('<div id="' + task.task_id + '" style="display: flex; align-items: end; margin-bottom: 10px; border-bottom: 2px solid grey" class="simple-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button style="margin-left:10px" class="btn btn-success showTaskDetails" id="task-details-'+ task.task_id +'">Ayrııntılar</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
                                             numOfDeleteBtns++;
                                             triggerDeleteBtn();
                                             $('#content').load('task-assignment.php')
@@ -462,24 +480,24 @@ $.ajax({
                     const task = JSON.parse(response);
                     const task_id = task.task_id;
                     if (task.student_group == "Kontrol Grubu 1"){
-                        $('#Control_group_1').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'" >Şey</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
+                        $('#Control_group_1').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'" >Ayrııntılar</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                         $('#content').load('task-assignment.php');
                     } else if (task.student_group == "Kontrol Grubu 2"){
-                        $('#Control_group_2').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'" >Şey</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
+                        $('#Control_group_2').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'" >Ayrııntılar</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                         $('#content').load('task-assignment.php');
 
                     } else if (task.student_group == "Müdahale Grubu 1"){
-                        $('#Intervention_group_1').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'" >Şey</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
+                        $('#Intervention_group_1').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'" >Ayrııntılar</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                         $('#content').load('task-assignment.php');
 
                     } else if (task.student_group == "Müdahale Grubu 1") {
-                        $('#Intervention_group_2').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'" >Şey</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
+                        $('#Intervention_group_2').append('<div id="' + task.task_id + '" style="display: flex; margin-bottom: 10px;" class="custom-task-controller"><p style="margin-right: 20px">' + task.task_name + ' - ' + task.task_week + '</p><button class="btn btn-success showTaskDetails" id="task-details-'+ task_id +'" >Ayrııntılar</button><button class="btn btn-success delete-btn" id="delete-btn'+numOfDeleteBtns+'">Sil</button></div>');
                         numOfDeleteBtns++;
                         triggerDeleteBtn();
                         $('#content').load('task-assignment.php');
@@ -521,9 +539,9 @@ $.ajax({
         for (i = 1; i < numOfDeleteBtns; i++){
             $("#delete-btn"+i).click(function () {
                     var divId = $(this).parent().attr("id");
-                    var task_name = $(this).siblings('p').text().split(' - ')[0].trim();
+                    var task_name = $(this).siblings('p').text().split(' - ')[0].trim().toLowerCase().replace(/\s/g, '');
                     var task_group = $(this).parent().parent().attr("id").split('_').join(' ');
-
+                    console.log(task_name,  task_group,     divId)
                     $.ajax({
                         type: "POST",
                         url: "./delete-task.php",
@@ -645,6 +663,8 @@ $('#custom-file').change(function (e) {
         
         $('.showTaskDetails').click(function (e) { 
             e.preventDefault();
+            //scroll to top
+            $('html, body').animate({scrollTop: '0px'}, 300);
             console.log($(this).parent().attr('id'));
             const type = $(this).parent().attr('class');
             const task_id = $(this).attr('id').split('-')[2];
@@ -683,6 +703,7 @@ $('#custom-file').change(function (e) {
                     });
                     $('#details-inner').append('<h6>Toplam İzlenen Öğrenci Sayısı: ' + totalStudents + '</h6>');
                     $('#details-inner').append('<h6>Toplam İzlenme Süresi: ' + formatTime(totalWacthtime.toFixed(3)) + '</h6>');
+                    //scroll to top
                 }
             }
         }

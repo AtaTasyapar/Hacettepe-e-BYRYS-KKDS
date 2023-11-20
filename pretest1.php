@@ -324,7 +324,7 @@
         </div>
     </div>
 
-    <button type="submit" id="submit" class="btn btn-success">Submit</button>
+    <button type="submit" id="submit" class="btn btn-success">Gönder</button>
     </div>
 </body>
 
@@ -522,7 +522,7 @@ if ($('input[name="ulcer_prevention_ability"]:checked').length === 0) {
         },
         success: function (response) {
             if(response === "success"){
-                window.alert("Pretest 1 submitted successfully");
+                window.alert("Pre test 1 başarıyla gönderildi");
                 $('#content').load('course.php');
             } 
              else{
