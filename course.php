@@ -850,6 +850,7 @@ echo '</div>';
     });
     $('#posttest1').click(function (e) { 
         const task_id = $(this).data('task-id');
+        console.log(task_id)
         $.ajax({
             type: "POST",
             url: "./simpleViewUpdater.php",
@@ -860,8 +861,7 @@ echo '</div>';
                 
             }
         });
-        console.log(task_id);
-        $('#content').load('./posttest1.php')
+        $('#content').load('./posttest1.php?task_id=' + task_id)
     });
     $('#posttest2').click(function (e) { 
         const task_id = $(this).data('task-id');

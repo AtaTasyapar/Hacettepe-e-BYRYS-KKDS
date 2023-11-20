@@ -321,11 +321,11 @@ input[type="email"] {
 }
 
 .form-control {
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
     margin-bottom: 20px;
     /* width: 50%; */
     align-self: center;
     max-width: 300px;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .patient-info {

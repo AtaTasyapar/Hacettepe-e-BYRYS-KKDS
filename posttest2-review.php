@@ -61,7 +61,7 @@
         #back{
             font-weight: bold;
             border: 1px solid grey;
-            background-color: rgb(146, 146, 246);
+            background: linear-gradient(
             color: white;
             margin-bottom: 20px;
         }

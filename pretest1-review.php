@@ -44,7 +44,7 @@
         #back{
             font-weight: bold;
             border: 1px solid grey;
-            background-color: rgb(146, 146, 246);
+            background: linear-gradient(to bottom, #ff944c 0%, #ff944c 100%);
             color: white;
             margin-bottom: 20px;
         }

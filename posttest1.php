@@ -324,7 +324,7 @@
         </div>
     </div>
 
-    <button type="submit" id="submit" class="btn btn-success">Submit</button>
+    <button type="submit" id="submit" class="btn btn-success">Gönder</button>
     </div>
 </body>
 
