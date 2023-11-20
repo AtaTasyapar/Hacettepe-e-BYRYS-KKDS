@@ -3172,20 +3172,60 @@ fieldset:disabled .btn {
 
 .btn-success {
     color: #fff;
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
 }
 
 .btn-success:hover {
     color: #fff;
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
 }
 
 .btn-check:focus+.btn-success,
 .btn-success:focus {
     color: #fff;
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
 }
 
 .btn-check:checked+.btn-success,
@@ -3194,7 +3234,15 @@ fieldset:disabled .btn {
 .btn-success.active,
 .show>.btn-success.dropdown-toggle {
     color: #fff;
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
 }
 
 .btn-check:checked+.btn-success:focus,
@@ -3202,13 +3250,29 @@ fieldset:disabled .btn {
 .btn-success:active:focus,
 .btn-success.active:focus,
 .show>.btn-success.dropdown-toggle:focus {
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
 }
 
 .btn-success:disabled,
 .btn-success.disabled {
     color: #fff;
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
 }
 
 .btn-info {
@@ -3516,7 +3580,15 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-success {
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
     #198754
 }
 

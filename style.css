@@ -28,8 +28,15 @@ body {
 
 .btn-success {
     color: #fff;
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
-    border-color: unset !important;
+    background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );    border-color: unset !important;
 }
 
 a {
@@ -89,7 +96,15 @@ a {
     color: #fff;
     text-decoration: none;
     padding-top: 18px;
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
 }
 
 .buttons:hover {
@@ -190,7 +205,15 @@ a {
 .nav-items {
     text-decoration: none;
     margin-right: 20px;
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
     border-radius: 20px;
     color: white !important;
 }
@@ -341,7 +364,15 @@ input[type="email"] {
 .submit {
     height: 75px;
     width: 50% !important;
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+     background: linear-gradient(
+        45deg,
+        rgba(64, 93, 230, 0.9),
+        rgba(88, 81, 219, 0.9),
+        rgba(131, 58, 180, 0.9),
+        rgba(193, 53, 132, 0.9),
+        rgba(225, 48, 108, 0.9),
+        rgba(253, 29, 29, 0.9)
+    );
     color: white !important;
 }
 
