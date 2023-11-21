@@ -140,7 +140,7 @@ if ($rows) {
             <textarea name="noc_assessment" rows="4" cols="20"></textarea>
         </div>
     </div>
-        <input type="button" id="noc-submit" style="margin:0 auto" value="submit" class="btn btn-success">
+    <input type="button" id="noc-submit" style="margin:0 auto" value="Gönder" class="btn btn-success">
     </div>
     <div id="risk-container" style="display: none;">
         <h5 class="text-center"></h5>
