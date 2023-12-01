@@ -452,7 +452,7 @@
         </div>
     </div>
     <div class="input-section">
-        <h5 class="username-label">3.Aşağıdaki ifadelerden hangisi doğrudur?/h5>
+        <h5 class="username-label">3.Aşağıdaki ifadelerden hangisi doğrudur?</h5>
         <h6 class="error">Lütfen bir seçenek seçin</h6>
         <div class="d-flex flex-row align-items-center">
             <input type="radio" value="a" name="theme6q3">
@@ -513,6 +513,289 @@
         e.preventDefault();
         //validation
         $('.error').css('display', 'none');
+        if ($('input[name="theme1q1"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme1q1"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme1q1"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+    if ($('input[name="theme1q2"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme1q2"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme1q2"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+    if ($('input[name="theme1q3"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme1q3"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme1q3"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+    if ($('input[name="theme1q4"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme1q4"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme1q4"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+    if ($('input[name="theme1q5"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme1q5"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme1q5"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+    if ($('input[name="theme1q6"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme1q6"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme1q6"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+    if ($('input[name="theme2q1"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme2q1"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme2q1"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+    if ($('input[name="theme2q2"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme2q2"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme2q2"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+    if ($('input[name="theme2q3"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme2q3"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme2q3"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+    if ($('input[name="theme2q4"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme2q4"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme2q4"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+    if ($('input[name="theme2q5"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme2q5"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme2q5"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+    if ($('input[name="theme3q1"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme3q1"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme3q1"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+    if ($('input[name="theme3q2"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme3q2"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({ 
+            scrollTop: $('input[name="theme3q2"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+    if ($('input[name="theme4q1"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme4q1"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({ 
+            scrollTop: $('input[name="theme4q1"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+    if ($('input[name="theme5q1"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme5q1"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({ 
+            scrollTop: $('input[name="theme5q1"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+    if ($('input[name="theme5q2"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme5q2"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({ 
+            scrollTop: $('input[name="theme5q2"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+    if ($('input[name="theme5q3"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme5q3"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({ 
+            scrollTop: $('input[name="theme5q3"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+    if ($('input[name="theme5q4"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme5q4"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({ 
+            scrollTop: $('input[name="theme5q4"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+    if ($('input[name="theme5q5"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme5q5"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({ 
+            scrollTop: $('input[name="theme5q5"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+    if ($('input[name="theme5q6"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme5q6"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({ 
+            scrollTop: $('input[name="theme5q6"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+
+    if ($('input[name="theme5q7"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme5q7"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({ 
+            scrollTop: $('input[name="theme5q7"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+
+    if ($('input[name="theme6q1"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme6q1"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({ 
+            scrollTop: $('input[name="theme6q1"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+
+    if ($('input[name="theme6q2"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme6q2"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({ 
+            scrollTop: $('input[name="theme6q2"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+
+    if ($('input[name="theme6q3"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme6q3"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme6q3"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+
+    if ($('input[name="theme6q4"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme6q4"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme6q4"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+
+
+    if ($('input[name="theme6q5"]:checked').length === 0) {
+        // Find the nearest error
+        $('input[name="theme6q5"]').closest('.input-section').find('.error').css('display', 'block');
+
+        // Scroll to the error
+        $('html, body').animate({
+            scrollTop: $('input[name="theme6q5"]').closest('.input-section').find('.error').offset().top - 200
+        }, 500);
+        return;
+    }
+        
+
         
     var student_id = "<?php echo $student_id; ?>"; 
     var student_name = "<?php echo $student_name; ?>";
@@ -584,7 +867,7 @@
         success: function (response) {
             console.log(response)
             if(response.trim() == "success"){
-                window.alert("Pretest 2 submitted successfully");
+                window.alert("Pretest 2 başarıyla gönderildi");
                 $('#content').load('course.php');
             } 
              else{

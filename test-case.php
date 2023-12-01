@@ -122,29 +122,34 @@ if ($rows) {
 <body style="background-color: white;">
     <div id="noc-form" style="display : none">
         <h5 class="text-center" style="border-bottom : 2px solid grey">Bakım Planı</h5>
+        
         <div style="display: flex; flex-wrao : wrap" class='flex-container'>    
-            <div class="mb-2 mt-2">
+            <div class="mb-2 mt-2 overlay-error-find">
                 <h6 style="">Hemşirelik Tanısı</h6>
                 <textarea name="patient_data" rows="4" cols="20"></textarea>
+                <p class="error" style="font-size : 10px">Hemşirelik Tanısı boş bırakılamaz</p>
             </div>
-            <div class="mb-2 mt-2">
-            <h6 class="username-label">Beklenen Hasta Sonuçları (NOC):</h6>
-            <textarea name="noc" rows="4" cols="20"></textarea>
+            <div class="mb-2 mt-2 overlay-error-find">
+                <h6 class="username-label">Beklenen Hasta Sonuçları (NOC):</h6>
+                <textarea name="noc" rows="4" cols="20"></textarea>
+                <p class="error"style="font-size : 10px">Beklenen Hasta Sonuçları (NOC) boş bırakılamaz</p>
         </div>
-        <div class="mb-2 mt-2">
+        <div class="mb-2 mt-2 overlay-error-find">
             <h6 class="username-label">Hemşirelik Girişimleri (NIC)</h6>
             <textarea name="nic" rows="4" cols="20"></textarea>
+            <p class="error" style="font-size : 10px">Hemşirelik Girişimleri (NIC) boş bırakılamaz</p>
         </div>
-        <div class="mb-2 mt-2">
+        <div class="mb-2 mt-2 overlay-error-find">
             <h6 class="username-label">Değerlendirme (NOC)</h6>
             <textarea name="noc_assessment" rows="4" cols="20"></textarea>
+            <p class="error" style="font-size : 10px">Değerlendirme (NOC) boş bırakılamaz</p>
         </div>
     </div>
     <input type="button" id="noc-submit" style="margin:0 auto" value="Gönder" class="btn btn-success">
     </div>
     <div id="risk-container" style="display: none;">
         <h5 class="text-center"></h5>
-        <button class="btn btn-success" id="close-risk">İlerlemek</button>
+        <button class="btn btn-success" id="close-risk">İlerle</button>
     </div>
     <div class="overlay" style="display: none;"></div>
 
@@ -591,9 +596,26 @@ birazını alabiliyor
 
     $('#noc-submit').click(function(e){
         e.preventDefault();
+        $('.error').css('display', 'none');
+        if($('textarea[name="patient_data"]').val().trim() === ''){
+            $('textarea[name="patient_data"]').closest('.overlay-error-find').find('.error').css('display', 'block');
+            return;
+        }
+        if($('textarea[name="noc"]').val().trim() === ''){
+            $('textarea[name="noc"]').closest('.overlay-error-find').find('.error').css('display', 'block');
+            return;
+        }
+        if($('textarea[name="nic"]').val().trim() === ''){
+            $('textarea[name="nic"]').closest('.overlay-error-find').find('.error').css('display', 'block');
+            return;
+        }
+        if($('textarea[name="noc_assessment"]').val().trim() === ''){
+            $('textarea[name="noc_assessment"]').closest('.overlay-error-find').find('.error').css('display', 'block');
+            return;
+        }
         var patient_data = $('textarea[name="patient_data"]').val().trim() || 'N/A';
         var noc = $('textarea[name="noc"]').val().trim() || 'N/A';
-        var nic =$('textarea[name="patient_data"]').val().trim() || 'N/A';
+        var nic =$('textarea[name="nic"]').val().trim() || 'N/A';
         var noc_assessment = $('textarea[name="noc_assessment"]').val().trim() || 'N/A';
         var student_id = <?php echo $student_id ?>;
         $.ajax({

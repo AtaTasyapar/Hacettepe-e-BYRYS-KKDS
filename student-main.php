@@ -60,9 +60,9 @@ if (isset($_GET['logout'])) {
 
                 </div>
                 <div class="navigation-right" id="navigation-right">
-                    <div class="nav-items-wrapper">
+                    <!-- <div class="nav-items-wrapper">
                         <a href="course.php" id="course" class="nav-link nav-items formlar btn-success"> <i class="fa fa-table me-2 "></i>Course</a>
-                    </div>
+                    </div> -->
                     <div>
 
                         <a href="#" class="nav-link username-wrapper" data-bs-toggle="dropdown">

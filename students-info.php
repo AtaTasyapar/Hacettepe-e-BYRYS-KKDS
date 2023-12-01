@@ -197,7 +197,7 @@
         for (i = 0; i < <?php echo $i ?>; i++){
         $("#submissions"+i).click(function (e) { 
             e.preventDefault();
-            $('#forms-container').html('<div style=""><h5 class="text-center mb-3">Öğrenci Formlar</h5><h6 id="student_name_forms" class="mb-2"></h6><h6 id="student_id_forms" class="mb-2"></h6><h6 id="student_group_forms" class="mb-2"></h6></div><div id="available-forms" style="text-align: center;"></div><div class="d-flex justify-content-between mt-4"><button class="btn btn-danger" id="cancel-forms">Cancel</button></div>');
+            $('#forms-container').html('<div style=""><h5 class="text-center mb-3">Öğrenci Formlar</h5><h6 id="student_name_forms" class="mb-2"></h6><h6 id="student_id_forms" class="mb-2"></h6><h6 id="student_group_forms" class="mb-2"></h6></div><div id="available-forms" style="text-align: center;"></div><div class="d-flex justify-content-between mt-4"><button class="btn btn-danger" id="cancel-forms">Iptal</button></div>');
 
             var id = $(this).parent().parent().attr('id');
             var name = $(this).parent().parent().find('.student-info').eq(0).text();

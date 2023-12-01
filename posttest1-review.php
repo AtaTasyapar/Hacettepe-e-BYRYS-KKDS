@@ -350,7 +350,7 @@
     });
     var posttest = <?php echo json_encode($posttest); ?>;
     if(posttest === ''){
-        alert('You have not submitted the posttest yet');
+        alert('Posttest bulunamadı');
     }
     else{
         $('input[name="ulcer_prevention_confidence"][value="'+posttest['ulcer_prevention_confidence']+'"]').prop('checked', true);

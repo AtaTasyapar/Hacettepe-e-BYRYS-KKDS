@@ -118,10 +118,8 @@
             $custom_tasks = $rows;
         }
         else{
-            echo 'error9';
         }
     }else{
-        echo 'error10';
     }
 ?>
 
@@ -203,9 +201,6 @@
         }else{
             
             echo '
-            <div class="container-fluid">
-                <h2 id="heading" class="text-center pt-2 mt-3" style="color : black">' . $student_group . ' Kurs</h2>
-            </div>
             <div class="container-fluid">
                 <h6 id="heading" class="text-start pt-2" style="color : black">Kursa Genel Bakış</h6>
             </div>
@@ -349,7 +344,7 @@ foreach ($custom_tasks as $single_custom_task) {
     if (strtolower($single_custom_task['task_week']) == strtolower('week1') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
         echo '<a class="custom-task-anchor" style="text-decoration: none;"  href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '" data-task-id="'.$single_custom_task['id'].'"><div class="activity-container" id="custom-container" >';
         echo '<h5 id="custom-task" class="text-start">Başlık : ' . $single_custom_task['task_name'] . '</h5>';
-        echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
+        echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . '</textarea>';
         echo '<p id="file-container"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
         echo '<h6 id="'.$viewCountContainerId.'"><i class="fas fa-eye"></i> ' . $single_custom_task['view_count'] . '</h6>';
         echo '</div></a>';
@@ -497,7 +492,7 @@ echo '</div>';
         if (strtolower($single_custom_task['task_week']) == strtolower('week2') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
             echo '<a class="custom-task-anchor" style="text-decoration: none;"  href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '" data-task-id="'.$single_custom_task['id'].'"><div class="activity-container" id="custom-container" >';
             echo '<h5 id="custom-task" class="text-start">Başlık : ' . $single_custom_task['task_name'] . '</h5>';
-            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
+            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . '</textarea>';
             echo '<p id="file-container"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
             echo '<h6 id="'.$viewCountContainerId.'"><i class="fas fa-eye"></i> ' . $single_custom_task['view_count'] . '</h6>';
             echo '</div></a>';
@@ -643,7 +638,7 @@ echo '</div>';
         if (strtolower($single_custom_task['task_week']) == strtolower('week3') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
             echo '<a class="custom-task-anchor" style="text-decoration: none;"  href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '" data-task-id="'.$single_custom_task['id'].'"><div class="activity-container" id="custom-container" >';
             echo '<h5 id="custom-task" class="text-start">Başlık : ' . $single_custom_task['task_name'] . '</h5>';
-            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
+            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . '</textarea>';
             echo '<p id="file-container"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
             echo '<h6 id="'.$viewCountContainerId.'"><i class="fas fa-eye"></i> ' . $single_custom_task['view_count'] . '</h6>';
             echo '</div></a>';
@@ -790,7 +785,7 @@ echo '</div>';
         if (strtolower($single_custom_task['task_week']) == strtolower('week4') && strtolower($single_custom_task['student_group']) == strtolower($student_group)) {
             echo '<a class="custom-task-anchor" style="text-decoration: none;"  href="#" data-task-desc="' . $single_custom_task['task_desc'] . '" data-file-name="' . $single_custom_task['file_name'] . '" data-file-path="' . $single_custom_task['file_path'] . '" data-task-id="'.$single_custom_task['id'].'"><div class="activity-container" id="custom-container" >';
             echo '<h5 id="custom-task" class="text-start">Başlık : ' . $single_custom_task['task_name'] . '</h5>';
-            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . 'asdasdjadkjaskjdjkasdkjaskjdjkakjdkjsadkjasjkdjkasjdkjaskdasdasdansdnmsadmnsa</textarea>';
+            echo '<textarea name="" id="" cols="30" rows="10" disabled style="width: 80%; padding: 10px;"> Tarif: ' . $single_custom_task['task_desc'] . '</textarea>';
             echo '<p id="file-container"><i class="fas fa-file"></i> ' . $single_custom_task['file_name'] . '</p>';
             echo '<h6 id="'.$viewCountContainerId.'"><i class="fas fa-eye"></i> ' . $single_custom_task['view_count'] . '</h6>';
             echo '</div></a>';
@@ -929,7 +924,7 @@ echo '</div>';
         else if (fileExtension === 'pptx' || fileExtension === 'ppt') {
             $('#custom-task-container').append('<h1 id="presentation"></h1>');
             $('#custom-task-container').append('<p id=' +  task_id + '></p>')
-            $('#custom-task-container').append('<p id="loading">Loading..... please wait</p>')
+            $('#custom-task-container').append('<p id="loading">Yükleniyor...Lütfen bekleyin</p>')
             $.ajax({
                             type: "POST",
                             url: "./viewCount-updater.php",
@@ -953,7 +948,6 @@ echo '</div>';
                 success: function (response) {
                     if(response === 'conversion successfull'){
                         $('#custom-task-container #loading').remove();
-                        console.log('helloo')
                         let newFileName = "uploads/" + fileName.split('.')[0] + '.pdf';
                         $('#custom-task-container').append('<embed src='+ encodeURI(newFileName) + ' type="application/pdf" width="100%" height="100%" />');
                     }
@@ -965,7 +959,7 @@ echo '</div>';
 }       
 else if(fileExtension === 'word' || fileExtension === 'docx' || fileExtension === 'doc'){
             $('#custom-task-container').append('<p id=' +  task_id + '></p>')
-            $('#custom-task-container').append('<p id="loading">Loading..... please wait</p>')
+            $('#custom-task-container').append('<p id="loading">Yükleniyor...Lütfen bekleyin</p>')
         
             $.ajax({
                             type: "POST",
@@ -988,7 +982,6 @@ else if(fileExtension === 'word' || fileExtension === 'docx' || fileExtension ==
                     file_name: fileName
                 },
                 success: function (response) {
-                    alert(response)
                     if(response === 'conversion successfull'){
                         
                         $('#custom-task-container #loading').remove();

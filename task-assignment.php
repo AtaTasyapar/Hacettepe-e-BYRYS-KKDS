@@ -452,7 +452,7 @@ $.ajax({
     contentType: false, // Set content type to false as FormData handles it
     success: function (response) {
         if (JSON.parse(response).task_id) {
-            alert('Task assigned successfully');
+            alert('Görev başarıyla atandı');
             task_data = JSON.parse(response);
             $('#content').load('task-assignment.php')
         } else {
