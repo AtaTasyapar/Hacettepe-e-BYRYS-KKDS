@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['userlogin'])) {
+if (isset($_SESSION['ebyrysUserLogin'])) {
     header("Location: student-main.php");
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['userlogin'])) {
+if (!isset($_SESSION['ebyrysUserLogin'])) {
     header("Location: login-student.php");
 }
 
@@ -375,7 +375,7 @@ if (isset($_GET['patient_id'])) {
             e.preventDefault();
             let id = <?php
 
-                        $userid = $_SESSION['userlogin']['id'];
+                        $userid = $_SESSION['ebyrysUserLogin']['id'];
                         echo $userid
                         ?>;
             let uyaran = $('input[name=uyaranradio]:checked').val();

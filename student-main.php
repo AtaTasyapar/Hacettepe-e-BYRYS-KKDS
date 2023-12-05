@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['userlogin'])) {
+if (!isset($_SESSION['ebyrysUserLogin'])) {
     header("Location: login-student.php");
 }
 
@@ -67,7 +67,7 @@ if (isset($_GET['logout'])) {
 
                         <a href="#" class="nav-link username-wrapper" data-bs-toggle="dropdown">
                             <span class=" d-lg-inline-flex username"><?php
-                                                                        echo '' . $_SESSION['userlogin']['name'] . ' ' . $_SESSION['userlogin']['surname'] . '';
+                                                                        echo '' . $_SESSION['ebyrysUserLogin']['name'] . ' ' . $_SESSION['ebyrysUserLogin']['surname'] . '';
                                                                         ?></span></a>
                         <span class="status">Öğrenci</span>
 

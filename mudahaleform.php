@@ -1,7 +1,7 @@
 <?php
 session_start();
 $base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/Hacettepe-KDSE-BPYS';
-if (!isset($_SESSION['userlogin'])) {
+if (!isset($_SESSION['ebyrysUserLogin'])) {
     header("Location: login-student.php");
 }
 
@@ -384,7 +384,7 @@ $family_history = isset($_GET['family_history']) ? $_GET['family_history'] : 'Na
             e.preventDefault()
             console.log("submit clicked")
             var id = <?php
-                            $userid = $_SESSION['userlogin']['id'];
+                            $userid = $_SESSION['ebyrysUserLogin']['id'];
                             echo $userid
                             ?>;
             var name = $('#name').val();

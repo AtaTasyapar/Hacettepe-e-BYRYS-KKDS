@@ -12,7 +12,7 @@ $result = $smtmselect->execute([$email, $password]);
 if ($result) {
     $user = $smtmselect->fetch(PDO::FETCH_ASSOC);
     if ($smtmselect->rowCount() > 0) {
-        $_SESSION['userlogin'] = $user;
+        $_SESSION['ebyrysUserLogin'] = $user;
         echo 'Başarılı';
     } else {
         echo ' Şifre veya mail yanlış';

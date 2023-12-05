@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['userlogin'])) {
+if (!isset($_SESSION['ebyrysUserLogin'])) {
     header('Location: index.php');
 }
 
@@ -26,8 +26,8 @@ if ($rows) {
         echo 'No matching uploads found.';
     }
 }
-    $student_id = $_SESSION['userlogin']['id'];
-    $type = $_SESSION['userlogin']['type'];
+    $student_id = $_SESSION['ebyrysUserLogin']['id'];
+    $type = $_SESSION['ebyrysUserLogin']['type'];
     if($type === 'student'){
         $sql = 'SELECT * FROM students WHERE id = :id';
     }else{

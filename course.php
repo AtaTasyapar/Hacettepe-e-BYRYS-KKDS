@@ -2,7 +2,7 @@
 <?php
     require_once('config-students.php');
     session_start();
-    $student_id = $_SESSION['userlogin']['id'];
+    $student_id = $_SESSION['ebyrysUserLogin']['id'];
     $sql = 'SELECT * FROM students WHERE id = :id';
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':id', $student_id);

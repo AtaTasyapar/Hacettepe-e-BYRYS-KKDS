@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['userlogin'])) {
+if (!isset($_SESSION['ebyrysUserLogin'])) {
     header("Location: login-teacher.php");
 }
 
@@ -44,7 +44,7 @@ if (isset($_GET['logout'])) {
     <div class="container-fluid pt-4 px-4">
         <?php
         require_once('config-students.php');
-        $userid = $_SESSION['userlogin']['id'];
+        $userid = $_SESSION['ebyrysUserLogin']['id'];
         //echo $userid;
         $sql = "SELECT * FROM  students";
         $smtmselect = $db->prepare($sql);
@@ -313,7 +313,7 @@ if (isset($_GET['logout'])) {
                     if (valid) {
                         var id = <?php
 
-                                    $userid = $_SESSION['userlogin']['id'];
+                                    $userid = $_SESSION['ebyrysUserLogin']['id'];
                                     echo $userid
                                     ?>;
                         var name = $('#name').val();

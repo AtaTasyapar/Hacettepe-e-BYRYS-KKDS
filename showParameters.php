@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['userlogin'])) {
+if (!isset($_SESSION['ebyrysUserLogin'])) {
     header("Location: login-student.php");
 }
 
@@ -79,7 +79,7 @@ if (isset($_GET['patient_id'])) {
                     }
 
 
-                    $userid = $_SESSION['userlogin']['id'];
+                    $userid = $_SESSION['ebyrysUserLogin']['id'];
                     //echo $userid;
                     $sql = "SELECT * FROM  students  WHERE id =" . $userid;
                     $smtmselect = $db->prepare($sql);
@@ -467,7 +467,7 @@ if (isset($_GET['patient_id'])) {
     $(function() {
         $("#addpatientcare").on("click", function(e) {
             e.preventDefault();
-            var studentgroup = "<?php echo $_SESSION['userlogin']['student_group']; ?>"
+            var studentgroup = "<?php echo $_SESSION['ebyrysUserLogin']['student_group']; ?>"
 
             console.log(studentgroup);
             if (studentgroup == "mudahale") {

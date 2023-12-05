@@ -1,8 +1,8 @@
 <?php
     require_once('config-students.php');
     session_start();
-    $student_id = $_SESSION['userlogin']['id'];
-    $type = $_SESSION['userlogin']['type'];
+    $student_id = $_SESSION['ebyrysUserLogin']['id'];
+    $type = $_SESSION['ebyrysUserLogin']['type'];
     $task_id = $_GET['task_id'];
 
     if($type === 'student'){

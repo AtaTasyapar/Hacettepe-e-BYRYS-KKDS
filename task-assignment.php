@@ -14,7 +14,7 @@
         'posttest1' => 'Posttest 1',
         'posttest2' => 'Posttest 2',
     ];
-    $teacher_id = $_SESSION['userlogin']['id'];
+    $teacher_id = $_SESSION['ebyrysUserLogin']['id'];
     $sql = 'SELECT * FROM teachers WHERE id = :id';
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':id', $teacher_id);

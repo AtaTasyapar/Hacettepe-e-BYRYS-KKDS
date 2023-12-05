@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['userlogin'])) {
+if (!isset($_SESSION['ebyrysUserLogin'])) {
     header("Location: main.php");
 }
 $type = isset($_GET['type']) ? $_GET['type'] : '';
@@ -54,8 +54,8 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
                 type: 'POST',
                 url: 'process-delete.php',
                 data: {
-                    id: "<?php echo $_SESSION["userlogin"]["id"]?>",
-                    email: "<?php echo $_SESSION["userlogin"]["email"]?>", 
+                    id: "<?php echo $_SESSION["ebyrysUserLogin"]["id"]?>",
+                    email: "<?php echo $_SESSION["ebyrysUserLogin"]["email"]?>", 
                     type: "<?php echo $type?>", 
                 },
                 success: function(data) {

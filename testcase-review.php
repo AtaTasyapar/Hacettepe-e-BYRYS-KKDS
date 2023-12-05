@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once('./config-students.php');
-$type = isset($_SESSION['userlogin']['type']) ? $_SESSION['userlogin']['type'] : '';
-$student_id = $type == 'student' ? $_SESSION['userlogin']['id'] : $_POST['student_id'];
+$type = isset($_SESSION['ebyrysUserLogin']['type']) ? $_SESSION['ebyrysUserLogin']['type'] : '';
+$student_id = $type == 'student' ? $_SESSION['ebyrysUserLogin']['id'] : $_POST['student_id'];
 $testcase = '';
 $sql = 'SELECT * FROM testcase WHERE student_id = :id';
 $stmt = $db->prepare($sql);
