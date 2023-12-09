@@ -1,7 +1,13 @@
 <?php
 session_start();
+
+if (isset($_SESSION['ebyrysUserLogin'])) {
+    if($_SESSION['ebyrysUserLogin']['type'] == 'student'){
+        header("Location: student-main.php");
+    }
+}
 if (!isset($_SESSION['ebyrysUserLogin'])) {
-    header("Location: login-student.php");
+    header("Location: main.php");
 }
 
 if (isset($_GET['logout'])) {

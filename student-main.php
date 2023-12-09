@@ -1,5 +1,12 @@
 <?php
 session_start();
+echo  json_encode($_SESSION['ebyrysUserLogin']['type']);
+if (isset($_SESSION['ebyrysUserLogin'])) {
+    if($_SESSION['ebyrysUserLogin']['type'] == 'teacher'){
+        header("Location: teacher-main.php");
+    }
+}
+
 if (!isset($_SESSION['ebyrysUserLogin'])) {
     header("Location: login-student.php");
 }

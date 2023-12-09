@@ -4,7 +4,7 @@ $inputFilePath = $_POST['file_path'];
 // Define the absolute path to the output PDF file
 $outputFile = __DIR__ . '/uploads/output.pdf';
 
-$libreOfficePath = 'C:\Program Files\LibreOffice\program\soffice.exe';
+$libreOfficePath = '/usr/bin/libreoffice';
 
 // Construct the command
 $command = "\"$libreOfficePath\" --headless --convert-to pdf \"$inputFilePath\" --outdir \"" . __DIR__ . '/uploads"';

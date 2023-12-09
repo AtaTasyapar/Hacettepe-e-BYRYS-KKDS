@@ -1,3 +1,15 @@
+<?php 
+session_start();
+if (isset($_SESSION['ebyrysUserLogin'])) {
+    if($_SESSION['ebyrysUserLogin']['type'] == 'teacher'){
+        header("Location: teacher-main.php");
+    }
+    else if($_SESSION['ebyrysUserLogin']['type'] == 'student'){
+        header("Location: student-main.php");
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
